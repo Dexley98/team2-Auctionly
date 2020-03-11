@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import StripeCheckout from 'react-stripe-checkout';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class TakeMoney extends React.Component {
+  onToken = (token) => {
+    fetch('/save-stripe-token', {
+      method: 'POST',
+      body: JSON.stringify(token),
+    }).then(response => {
+      response.json().then(data => {
+        alert(`We are in business, ${data.email}`);
+      });
+    });
+  }
 
-export default App;
+  // ...
+
+
+  render() {
+    return (
+      // ...
+      <StripeCheckout
+        token={this.onToken}
+        stripeKey="pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN"
+        name = "Auctionly"
+        amount = {1000000000000}
+      />
+    )
+  }
