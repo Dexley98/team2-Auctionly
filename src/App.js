@@ -1,29 +1,20 @@
-import React from 'react'
-import StripeCheckout from 'react-stripe-checkout';
+import CheckoutButton from "./CheckoutButton.js";
+import React, {Component} from 'react';
+export default function App (){
+    return(
 
-export default class TakeMoney extends React.Component {
-  onToken = (token) => {
-    fetch('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify(token),
-    }).then(response => {
-      response.json().then(data => {
-        alert(`We are in business, ${data.email}`);
-      });
-    });
-  }
-
-  // ...
+    <CheckoutButton
+    name = "Pearls"
+    amount = {5000}>
+    </CheckoutButton>
+    
+    );
+}
 
 
-  render() {
-    return (
-      // ...
-      <StripeCheckout
-        token={this.onToken}
-        stripeKey="pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN"
-        name = "Auctionly"
-        amount = {1000000000000}
-      />
-    )
-  }
+
+// TEMPLATE FOR BUTTONS
+{/* <CheckoutButton
+name = "Josh"
+amount = {5000}>
+</CheckoutButton> */}
