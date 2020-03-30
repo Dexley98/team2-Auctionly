@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+
+// for formating of higher order components
 import { compose } from 'recompose';
 
-import { SignUpLink } from '../SignUp/';
+import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -46,6 +48,7 @@ const Layout = ({ children, contentCenter }) => {
 Layout.propTypes = propTypes;
 Layout.defaultProps = defaultProps;
 
+// use this to reset state after successful sign in
 const INITIAL_STATE = {
     email: '',
     password: '',

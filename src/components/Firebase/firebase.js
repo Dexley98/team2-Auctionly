@@ -1,4 +1,6 @@
 import app from 'firebase/app';
+
+// import package from Firebase API responsible for all the authentication.
 import 'firebase/auth';
 import 'firebase/database';
 
@@ -16,6 +18,8 @@ class Firebase {
 
     constructor() {
         app.initializeApp(config);
+
+        // instatiate package from Firebase API responsible for all the authentication.
         this.auth = app.auth();
         this.db = app.database();
         this.emailAuthProvider = app.auth.EmailAuthProvider;
@@ -24,12 +28,15 @@ class Firebase {
 
     // Auth Api
 
+    // Firebase API Endpoint creates user with email and password provided. 
     doCreateUserWithEmailAndPassword = (email, password) =>
         this.auth.createUserWithEmailAndPassword(email, password);
 
     doSignInWithPhoneNumber = (phoneNumber, appVerifier) =>
         this.auth.signInWithPhoneNumber(phoneNumber, appVerifier);
 
+    
+    // Firebase API Endpont logs user in with provided email and password. 
     doSignInWithEmailAndPassword = (email, password) =>
         this.auth.signInWithEmailAndPassword(email, password);
         
