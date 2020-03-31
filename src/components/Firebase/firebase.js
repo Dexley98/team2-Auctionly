@@ -62,6 +62,7 @@ class Firebase {
 
     users = () => this.db.ref('users');
 
+    items = () => this.db.ref('items');
     // *** Merge Auth and DB User API *** //
 
 
