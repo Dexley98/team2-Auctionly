@@ -26,7 +26,6 @@ componentDidMount() {
 
     this.props.firebase.items().on('value', snapshot => {
         const itemsObject = snapshot.val();
-        console.log(itemsObject);
         const itemsList = Object.keys(itemsObject).map(key => ({
             ...itemsObject[key],
             id: key,
@@ -52,11 +51,13 @@ render(){
 }
 }
 
+// this was just for debugging. Can be removed. 
 const ConsoleLog = ({ children }) => {
     console.log(children);
     return false;
   };
 
+// this function takes an item name from the item component and creates a url formatted like firstword-secondword-lastword
 const itemNametoUrlString = (itemName) => {
     let splitNameList = itemName.split(' ');
     let itemNameUrl = '';
@@ -76,7 +77,7 @@ const itemNametoUrlString = (itemName) => {
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
-            <Link to={`/item/${itemNametoUrlString(item.name)}`}>
+            <Link to={`${itemNametoUrlString(item.name)}`}>
                 <li key={item.name}>
                     <span>
                         <img src={item.imageUrl} width="200px" height = "200px"/>
