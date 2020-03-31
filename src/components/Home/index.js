@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+//import routing from react router dom
+import {Link, BrowserRouter as Router, Route } from 'react-router-dom'
+
 import { compose } from 'recompose';
 import Firebase from 'firebase';
 
@@ -22,6 +26,7 @@ componentDidMount() {
 
     this.props.firebase.items().on('value', snapshot => {
         const itemsObject = snapshot.val();
+        console.log(itemsObject);
         const itemsList = Object.keys(itemsObject).map(key => ({
             ...itemsObject[key],
             id: key,
@@ -47,21 +52,43 @@ render(){
 }
 }
 
+const ConsoleLog = ({ children }) => {
+    console.log(children);
+    return false;
+  };
+
+const itemNametoUrlString = (itemName) => {
+    let splitNameList = itemName.split(' ');
+    let itemNameUrl = '';
+
+    for(let i=0; i<splitNameList.length; i++){
+        if( i == splitNameList.length - 1){
+            itemNameUrl += splitNameList[i];
+        }
+        else{
+            itemNameUrl += `${splitNameList[i]}-`;
+        }
+    }
+    return itemNameUrl
+}
+
 
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
-            <li key={item.name}>
-                <span>
-                    <img src={item.imageUrl} width="200px" height = "200px"/>
-                    <br />
-                    {item.name}
-                    <strong> Buy Now: </strong> {item.buyItNow}
-                    <strong> Starting Price: </strong> {item.startPrice}
-                    <br></br> {item.description}
-
-                </span>
-            </li>
+            <Link to={`/item/${itemNametoUrlString(item.name)}`}>
+                <li key={item.name}>
+                    <span>
+                        <img src={item.imageUrl} width="200px" height = "200px"/>
+                        <br />
+                        {item.name}
+                        <strong> Buy Now: </strong> {item.buyItNow}
+                        <strong> Starting Price: </strong> {item.startPrice}
+                        <br></br> {item.description}
+                
+                    </span>
+                </li>
+            </Link>
         ))}
     </ul>
 );
