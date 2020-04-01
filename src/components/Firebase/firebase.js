@@ -63,6 +63,10 @@ class Firebase {
     users = () => this.db.ref('users');
 
     items = () => this.db.ref('items');
+
+    // have to add write and update access to items in db.
+
+    auctionData = () => this.db.ref('auctionData');
     // *** Merge Auth and DB User API *** //
 
 

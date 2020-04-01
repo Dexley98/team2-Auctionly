@@ -45,7 +45,7 @@ class ItemPage extends Component{
          * 
          * 
         *******************************************************************************************************/ 
-        this.props.firebase.db.ref("items")
+        this.props.firebase.items()
             .orderByChild("name")
             .equalTo(dbItemKey)
             .once('value', snapshot =>{
