@@ -12,6 +12,7 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import ItemPage from '../Item';
+import CartPage from '../Cart';
 import * as ROUTES from '../../constants/routes';
 
 import { WithAuthentication } from '../Session';
@@ -31,6 +32,7 @@ const App = () => (
             <Route path={ROUTES.ACCOUNT} component={AccountPage} />
             <Route path={ROUTES.ADMIN} component={AdminPage} />
             <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
+            <Route path={ROUTES.DYNAMIC_CART} component={CartPage}/>
         </div>
 
     </Router>

@@ -8,3 +8,4 @@ export const PASSWORD_FORGET = '/pw-forget';
 
 // Wild Card Works for Items! yay!
 export const DYNAMIC_ITEMS = '/item/*';
+export const DYNAMIC_CART = '/cart/*';
