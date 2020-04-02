@@ -31,6 +31,7 @@ const App = () => (
             <Route path={ROUTES.ACCOUNT} component={AccountPage} />
             <Route path={ROUTES.ADMIN} component={AdminPage} />
             <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
+            <Route path={ROUTES.DYNAMIC_CART} component={CartPage}/>
         </div>
 
     </Router>
