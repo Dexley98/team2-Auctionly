@@ -12,6 +12,7 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import ItemPage from '../Item';
+import CartPage from '../Cart';
 import * as ROUTES from '../../constants/routes';
 
 import { WithAuthentication } from '../Session';
