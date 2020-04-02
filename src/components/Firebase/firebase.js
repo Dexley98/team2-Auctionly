@@ -1,3 +1,11 @@
+/***************************************************************************************
+ * Title: Refactoring Changes. 
+ * Date: 04/02/2020
+ * Author: Dom Exley
+ * Description: Added auctionData API
+ **************************************************************************************/
+
+
 import app from 'firebase/app';
 
 // import package from Firebase API responsible for all the authentication.
@@ -62,11 +70,14 @@ class Firebase {
 
     users = () => this.db.ref('users');
 
+    // *** Item API ***
+
     items = () => this.db.ref('items');
 
-    // have to add write and update access to items in db.
+    // *** Auction Data API ***
 
     auctionData = () => this.db.ref('auctionData');
+   
     // *** Merge Auth and DB User API *** //
 
 

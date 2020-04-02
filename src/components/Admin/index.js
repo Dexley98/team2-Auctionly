@@ -1,9 +1,22 @@
+/***************************************************************************************
+ * Title: Refactoring Changes. 
+ * Date: 04/02/2020
+ * Author: Dom Exley
+ * Description: added in imports from react-router-dom.
+ * added links to Admin Functionality.
+ *****************************************************************************************/
+
 import React, { Component } from 'react';
 import { compose } from 'recompose';
+
+// added imports ref: Refactoring Changes 04/02/2020
+import {Link, BrowserRouter as Router, Route } from 'react-router-dom';
+
 
 import { withFirebase } from '../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 import * as ROLES from '../../constants/roles';
+import * as ROUTES from '../../constants/routes';
 
 class AdminPage extends Component {
     constructor(props) {
@@ -38,6 +51,19 @@ class AdminPage extends Component {
                 <p>
                     The Admin Page is accessible by every signed in admin user.
                 </p>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to={ROUTES.ADMIN_ADD_ITEM}>Add an Item</Link>
+                        </li>
+                        <li>
+                            <Link to={ROUTES.ADMIN_WINNER_LOG}>Winner Log</Link>
+                        </li>
+                        <li>
+                            <Link to={ROUTES.ADMIN_REPORT}>Report Log</Link>
+                        </li>
+                </ul>
+                </nav>
 
                 {loading && <div>Loading ...</div>}
 
