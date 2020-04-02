@@ -15,29 +15,38 @@ import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
 import * as ROLES from '../../../constants/roles';
 // Just in case you need to route to stuff.
-import * as ROUTES from '../../../constants/routes';
+  //import * as ROUTES from '../../../constants/routes';
 
 class AddItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemName: "",
-      itemDescription: "",
-      startPrice: "",
-      buyPrice: "",
-      itemImage: "",
+      available: true,
+      bidList: {
+        uid: 0,
+      },
+      buyItNow: 0,
+      description: "",
+      imageUrl: "",
+      name: "",
+      startPrice: 0,
 
       itemNameError: "",
       itemDescriptionError: "",
       startPriceError: "",
       buyPriceError: ""
     };
+
+    this.change = this.change.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  change = e => {
+  change(e){
+    console.log('e.target.name', e.target.name);
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(this.state);
   };
 
   validate = () => {
@@ -46,9 +55,11 @@ class AddItemForm extends Component {
     let startPriceError = "";
     let buyPriceError = "";
 
-    if (!this.setState.itemName.includes("[a-z]")) {
+
+    /* I couldn't figure this out. 
+    if (!this.setState.name.includes("[a-z]")) {
       itemNameError = "Invalid characters";
-    }
+    } */ 
 
     if (itemNameError) {
       this.setState({ itemNameError });
@@ -65,17 +76,18 @@ class AddItemForm extends Component {
     }
   };
 
-  onSubmit = e => {
+  onSubmit(e){
     e.preventDefault();
-    const isValid = this.validate();
-    if (isValid) {
-      this.props.firebase.db.ref("items").set({
-        itemName: this.itemName.state,
-        itemDescription: this.itemDescription.state,
-        startPrice: this.startPrice.state,
-        buyPrice: this.buyPrice.state,
-        itemImage: this.itemImage.state
-      });
+    // const isValid = this.validate();
+    if (true) {
+      // get a key for a new post.
+      let newItemKey = this.props.firebase.db.ref().child("itemss").push().key;
+      console.log('new item key', newItemKey);
+
+      let item = {};
+      item[newItemKey] = this.state;
+      console.log(item);
+      this.props.firebase.db.ref().set({item});
       // alert item add sucessful
     } else {
       console.log("invalid attempt");
@@ -86,47 +98,47 @@ class AddItemForm extends Component {
     return (
       <form>
         <input
-          name="itemName"
+          name="name"
           placeholder="Item Name"
-          value={this.state.itemName}
-          onChange={e => this.change(e)}
+          value={this.state.name}
+          onChange={this.change}
         />
         <div style={{ color: "red" }}>{this.state.itemNameError}</div>
         <br />
         <input
-          name="itemDescription"
+          name="description"
           placeholder="Item Description"
-          value={this.state.itemDescription}
-          onChange={e => this.change(e)}
+          value={this.state.description}
+          onChange={this.change}
         />
         <div style={{ color: "red" }}>{this.state.itemDescriptionError}</div>
         <br />
         <input
           name="startPrice"
-          type="currecny"
+          type="currency"
           placeholder="Starting Bid Price"
           value={this.state.startPrice}
-          onChange={e => this.change(e)}
+          onChange={this.change}
         />
         <div style={{ color: "red" }}>{this.state.startPriceError}</div>
         <br />
         <input
-          name="buyPrice"
+          name="buyItNow"
           type="currency"
           placeholder="Buy Now Price"
-          value={this.state.buyPrice}
-          onChange={e => this.change(e)}
+          value={this.state.buyItNow}
+          onChange={this.change}
         />
         <div style={{ color: "red" }}>{this.state.buyPriceError}</div>
         <br />
         <input
-          name="itemImage"
+          name="imageUrl"
           type="file"
-          value={this.state.itemImage}
-          onChange={e => this.change(e)}
+          value={this.state.imageUrl}
+          onChange={this.change}
         />
         <br />
-        <button onClick={() => this.onSubmit()}>Submit</button>
+        <button onClick={this.onSubmit}>Submit</button>
       </form>
     );
   }

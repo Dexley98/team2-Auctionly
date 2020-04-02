@@ -21,6 +21,7 @@ class ItemPage extends Component{
 
     componentDidMount(){
         this.setState({ loading: true });
+        console.log(this.props.match.params[0]);
         let dbItemKey = urlStringToItemName(this.props.match.params[0]);
 
         /***************************************************************************************************
