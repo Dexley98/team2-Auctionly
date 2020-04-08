@@ -89,10 +89,6 @@ class AddItemForm extends Component {
           buyItNow,
           imageUrl,
 
-          itemNameError,
-          itemDescriptionError,
-          startPriceError,
-          buyPriceError,
       } = this.state;
 
       return (
@@ -125,7 +121,7 @@ class AddItemForm extends Component {
         <br />
         <input
                name="startPrice"
-               type="currecny"
+               type="text"
                placeholder="Starting Bid Price"
                value={startPrice}
                onChange={this.onChange}
@@ -134,8 +130,8 @@ class AddItemForm extends Component {
         <br />
         <input
                name="buyItNow"
-               type="currency"
-               placeholder="Buy Now Price"
+               type="text"
+               placeholder="Buy It Now Price"
                value={buyItNow}
                onChange={this.onChange}
         />

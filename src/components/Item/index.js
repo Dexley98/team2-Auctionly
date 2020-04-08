@@ -149,7 +149,7 @@ class ItemPage extends Component{
 
 const urlStringToItemName = (param) => {
     //split url on - delim
-    let splitUrlList = param.split('-');
+    let splitUrlList = param.split("-");
     let itemNameString = '';
 
     // create name string to ref to db. if index is last in array don't add space.

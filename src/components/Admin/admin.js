@@ -15,7 +15,7 @@ const AdminPage = () => (
         <AddAnItemRedirect />
         <ViewWinnerLogRedirect />
         <ViewReportLogRedirect />
-        
+        <EditItemRedirect />
     </div>
 );
 
@@ -113,6 +113,29 @@ class ViewReportLog extends Component {
     }
 }
 
+class EditItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { error: null };
+    }
+    onSubmit = event => {
+        this.props.history.push(ROUTES.EDIT_ITEM);
+        event.preventDefault();
+    };
+
+    render() {
+        return (
+            <form onSubmit={this.onSubmit}>
+
+                <button>
+                    Edit Auction Items
+                </button>
+
+            </form>
+        );
+    }
+}
+
 const condition = authUser =>
     authUser && !!authUser.roles[ROLES.ADMIN];
 
@@ -135,6 +158,11 @@ const ViewReportLogRedirect = compose(
     withRouter,
     withFirebase,
 )(ViewReportLog);
+
+const EditItemRedirect = compose(
+    withRouter,
+    withFirebase,
+)(EditItem);
 
 export default compose(
     WithEmailVerification,

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+
+// for formating of higher order components
 import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
@@ -14,6 +16,7 @@ const SignUpPage = () => (
     </div>
 );
 
+// use this to reset state after successful sign up.
 const INITIAL_STATE = {
     username: '',
     email: '',
@@ -41,28 +44,32 @@ class SignUpFormBase extends Component {
     }
 
     onSubmit = event => {
-        const { username, email, passwordOne } = this.state;
+        const { username, email, passwordOne, phoneNumber } = this.state;
         const roles = {};
 
         roles[ROLES.USER] = ROLES.USER;
 
         this.props.firebase
             .doCreateUserWithEmailAndPassword(email, passwordOne)
-            .then(() => {
-                return this.props.firebase.doSendEmailVerification();
-            })
             .then(authUser => {
                 // Create a user in your Firebase realtime database
                 return this.props.firebase
                     .user(authUser.user.uid)
                     .set({
                         username,
+                        phoneNumber,
                         email,
                         roles,
                     });
             })
             .then(() => {
+                // send email to user based on provided email verification.
+                return this.props.firebase.doSendEmailVerification();
+            })
+            .then(() => {
+                // after user is created reset state of form back to empty fields
                 this.setState({ ...INITIAL_STATE });
+                // send user to home route after successfully authenticated.
                 this.props.history.push(ROUTES.HOME);
             })
             .catch(error => {
@@ -95,6 +102,10 @@ class SignUpFormBase extends Component {
             error,
         } = this.state;
 
+        /*******************************************************************************
+        *  POTENTIAL REVISION: Maybe we move this function to a ../utils/file.js.
+        * We should do this later toincrease security by inforcing stricter password rules.
+        *******************************************************************************/
         const isInvalid =
             passwordOne !== passwordTwo ||
             passwordOne === '' ||
@@ -167,6 +178,7 @@ const RedirectLinkToSignIn = () => (
     </p>
 );
 
+// passes in router and firebase instance to SignUpFormBase
 const SignUpForm = compose(
     withRouter,
     withFirebase,
