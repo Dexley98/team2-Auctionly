@@ -66,26 +66,26 @@ render(){
 }
 
 // this function takes an item name from the item component and creates a url formatted like firstword-secondword-lastword
-const itemNametoUrlString = (itemName) => {
-    let splitNameList = itemName.split(' ');
-    let itemNameUrl = '';
+// const itemNametoUrlString = (itemName) => {
+//     let splitNameList = itemName.split(' ');
+//     let itemNameUrl = '';
 
-    for(let i=0; i<splitNameList.length; i++){
-        if( i == splitNameList.length - 1){
-            itemNameUrl += splitNameList[i];
-        }
-        else{
-            itemNameUrl += `${splitNameList[i]}-`;
-        }
-    }
-    return itemNameUrl
-}
+//     for(let i=0; i<splitNameList.length; i++){
+//         if( i == splitNameList.length - 1){
+//             itemNameUrl += splitNameList[i];
+//         }
+//         else{
+//             itemNameUrl += `${splitNameList[i]}-`;
+//         }
+//     }
+//     return itemNameUrl
+// }
 
 
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
-            <Link to={`item/${itemNametoUrlString(item.name)}`}>
+            <Link to={`item/${item.id}`}>
                     <li key={item.name}>
                         <span>
                             <img src={item.imageUrl} width="200px" height = "200px"/>
