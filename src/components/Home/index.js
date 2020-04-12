@@ -114,7 +114,6 @@ const CountdownTimer = (props) => {
 
     const calculateTimeLeft = (auctionTimes) => {
       // I set this to show that actual data was passed to this. 
-      console.log('If I do not have data I suck: ', auctionTimes)
       let startDate = auctionTimes.startDate;
       let stopDate = auctionTimes.stopDate;
 
