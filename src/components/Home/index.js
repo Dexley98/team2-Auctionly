@@ -108,24 +108,24 @@ class ItemList extends Component{
         let currentDate = new Date();
         let startDate = new Date(createDateString(this.props.data.startDate));
         let stopDate = new Date(createDateString(this.props.data.stopDate));
-
         let diffOfNowFromStart = currentDate - startDate;
         let diffOfNowFromStop = currentDate - stopDate;
-        console.log('now - start ', diffOfNowFromStart);
-        console.log('now - stop ', diffOfNowFromStop);
 
         if(diffOfNowFromStart < 0){
-            preAuction = true
+            preAuction = true;
+        }
+        else if(diffOfNowFromStop < 0){
+            preAuction = false;
+            console.log('auction is ongoign');
+        }
+        else if(diffOfNowFromStop >= 0){
+            postAuction = true;
         }
         
-        
-
-        
-
-        return(
-            <ul>
+        if(preAuction || postAuction){
+            return(
+                <ul>
                 {this.props.items.map(item => (
-                <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
                         <span>
                             <img src={item.imageUrl} width="200px" height = "200px"/>
@@ -137,10 +137,30 @@ class ItemList extends Component{
                     
                         </span>
                     </li>
-                </Link>
                 ))}
-            </ul>
-        )
+                </ul>
+            )
+        }else{
+            return(
+                <ul>
+                    {this.props.items.map(item => (
+                    <Link to={`item/${itemNametoUrlString(item.name)}`}>
+                        <li key={item.name}>
+                            <span>
+                                <img src={item.imageUrl} width="200px" height = "200px"/>
+                                <br />
+                                {item.name}
+                                <strong> Buy Now: </strong> {item.buyItNow}
+                                <strong> Starting Price: </strong> {item.startPrice}
+                                <br></br> {item.description}
+                        
+                            </span>
+                        </li>
+                    </Link>
+                    ))}
+                </ul>
+            )
+        }
     }
     
 }
