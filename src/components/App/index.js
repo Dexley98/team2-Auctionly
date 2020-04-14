@@ -30,7 +30,7 @@ import Report from '../Admin/Report';
 import WinnerLog from '../Admin/WinnerLog';
 
 // Auction Management Page Components
-import HomePage from '../Home';
+import HomePage from '../Home/index';
 import ItemPage from '../Item';
 import CartPage from '../Cart';
 import * as ROUTES from '../../constants/routes';
