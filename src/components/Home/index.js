@@ -85,7 +85,7 @@ const itemNametoUrlString = (itemName) => {
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
-                <Link to={`item/${itemNametoUrlString(item.name)}`}>
+                <Link to={`item/${item.id}`}>
                     <li key={item.name}>
                         <span>
                             <img src={item.imageUrl} width="200px" height = "200px"/>
