@@ -9,6 +9,9 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
+// add nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
+
 // added imports ref: Refactoring Changes 04/02/2020
 import {Link} from 'react-router-dom';
 
@@ -47,6 +50,8 @@ class AdminPage extends Component {
 
         return (
             <div>
+                <Navigation />
+                <hr />
                 <h1>Admin</h1>
                 <p>
                     The Admin Page is accessible by every signed in admin user.

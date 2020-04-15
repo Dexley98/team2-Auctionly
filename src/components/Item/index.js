@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+// add nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
+
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
@@ -91,24 +95,26 @@ class ItemPage extends Component{
         // this.setState({highestBid:highestBidd})
         return(
             // same thing as React.Fragment / different syntax. May not need but here for now.
-            <>
             <div>
-                <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                <h1>{item.name}</h1>
-                <p>{item.description}</p>
-                <p>Start Price: ${(item.startPrice/1).toFixed(2)}</p>
-                <p> Highest Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
-                <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
+                <Navigation />
+                <hr />
+                <div>
+                    <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
+                    <h1>{item.name}</h1>
+                    <p>{item.description}</p>
+                    <p>Start Price: ${(item.startPrice/1).toFixed(2)}</p>
+                    <p> Highest Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
+                    <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
 
-                <form onSubmit={this.handleBid}>
-                $<input type="number" step="5" min={Number(this.state.highestBid) + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
-                </form>
+                    <form onSubmit={this.handleBid}>
+                    $<input type="number" step="5" min={Number(this.state.highestBid) + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
+                    </form>
 
-                <form onSubmit={this.handleBuyout}>
-                <input type ="submit" value="Buyout"/>
-                </form>
+                    <form onSubmit={this.handleBuyout}>
+                    <input type ="submit" value="Buyout"/>
+                    </form>
+                </div>
             </div>
-            </>
         )
     }
 

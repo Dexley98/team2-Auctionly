@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 //import routing from react router dom
+
+// added Nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
+
 import {Link} from 'react-router-dom'
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
@@ -49,6 +53,8 @@ render(){
     return(
 
         <React.Fragment>
+            <Navigation />
+            <hr />
         {auctionDataReceived && 
             <CountdownTimer data = {auctionData}/>
         }

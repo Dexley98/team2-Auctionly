@@ -10,6 +10,7 @@ export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
 export const HOME = '/home';
 export const ACCOUNT = '/account';
+export const ACCOUNT_PW_CHANGED = '/account/password-changed'
 export const ADMIN = '/admin';
 // added all paths to items
 export const ADMIN_REPORT = '/admin/report';

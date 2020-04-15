@@ -11,6 +11,9 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
+// added Nav Dom Exley 04/15/2020
+import Navigation from '../../Navigation';
+
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
 import * as ROLES from '../../../constants/roles';
@@ -28,9 +31,13 @@ class WinnerLog extends Component {
 
   render(){
     return(
-      <h1>
-        This is the Winner Log Page.
-      </h1>
+      <div>
+        <Navigation />
+        <hr />
+        <h1>
+          This is the Winner Log Page.
+        </h1>
+      </div>
     )
   }
   
