@@ -117,17 +117,15 @@ const ItemList = ({ items, uid }) => (
         {items.map(item => (
                 // <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
-                        <span>
-                            <img src={item.imageUrl} width="200px" height = "200px"/>
-                            <div style="font-size:x-large">
-                            {item.name}
-                            <p><strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}</p>
-                            <p><strong> Current leading bid: </strong> ${(item.highestBid / 1).toFixed(2)}</p>
-                            <p><strong>{item.currentUser}</strong></p>
-                            <p><strong> Description: </strong> {item.description}</p>
+                        <span style="font-size:x-large">
+                            <p><img src={item.imageUrl} width="200px" height = "200px" style="float:left"/>
+                            <strong> {item.name} </strong><br />
+                            <strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}<br />
+                            <strong> Current leading bid: </strong> ${(item.highestBid / 1).toFixed(2)}<br />
+                            <strong>{item.currentUser}</strong><br />
+                            <strong> Description: </strong> {item.description}<br />
                             <br></br>
-                            {item.checkoutAvailable}
-                    	    </div>
+                            {item.checkoutAvailable}</p>
                         </span>
                     </li>
                 // </Link>
