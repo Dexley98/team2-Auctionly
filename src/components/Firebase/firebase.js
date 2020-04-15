@@ -71,7 +71,7 @@ class Firebase {
     users = () => this.db.ref('users');
 
     // *** Item API ***
-
+    item = uid => this.db.ref(`items/${uid}`);
     items = () => this.db.ref('items');
 
     // *** Auction Data API ***

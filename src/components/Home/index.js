@@ -85,7 +85,7 @@ const itemNametoUrlString = (itemName) => {
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
-                <Link to={`item/${item.id}`}>
+            <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
                         <span>
                             <img src={item.imageUrl} width="200px" height = "200px"/>
@@ -114,6 +114,7 @@ const CountdownTimer = (props) => {
 
     const calculateTimeLeft = (auctionTimes) => {
       // I set this to show that actual data was passed to this. 
+      console.log('If I do not have data I suck: ', auctionTimes)
       let startDate = auctionTimes.startDate;
       let stopDate = auctionTimes.stopDate;
 

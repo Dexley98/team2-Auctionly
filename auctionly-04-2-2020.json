@@ -1,0 +1,82 @@
+{
+  "auctionData" : {
+    "startDate" : {
+      "month" : "April",
+      "date" : 30,
+      "year" : 2020,
+      "time" : {
+        "hour" : 17,
+        "minute" : 30
+      }
+    },
+    "stopDate" : {
+      "month" : "April",
+      "date" : 30,
+      "year" : 2020,
+      "time" : {
+        "hour" : 23,
+        "minute" : 0
+      }
+    }
+  },
+  "users" : {
+    "CGGEFjrsNPMG3rpAoxZcix1eZJg2" : {
+      "email" : "dominique.exley@gmail.com",
+      "roles" : {
+        "ADMIN" : "ADMIN",
+        "USER" : "USER"
+      },
+      "username" : "Dom Exley"
+    },
+    "UiIQBxaHnsYcGWma1f3GoxhZ8fr1" : {
+      "email" : "allthingspossibleauctionly@gmail.com",
+      "roles" : {
+        "ADMIN" : "ADMIN",
+        "USER" : "USER"
+      },
+      "username" : "All Things Possible"
+    },
+    "yFYG8wVJijfsXsw1xO674L61IqW2" : {
+      "email" : "tenaciousdomino@gmail.com",
+      "roles" : {
+        "USER" : "USER"
+      },
+      "username" : "Domenique Exley"
+    }
+  },
+  "items": {
+    "one" : {
+      "available" : true,
+      "name" : "Red Bull 12 Pack",
+      "buyItNow" : 75,
+      "startPrice" : 5,
+      "description" : "A pack of energy drinks to satsify your quench",
+      "imageUrl" : "https://cdn.pixabay.com/photo/2018/04/08/14/46/red-bull-3301415_960_720.jpg",
+      "bidList" : {
+        "CGGEFjrsNPMG3rpAoxZcix1eZJg2" : 10
+      }
+    },
+    "two" : {
+      "available" : true,
+      "name" : "Football Tickets to Jamica",
+      "buyItNow" : 500,
+      "startPrice" : 50,
+      "description" : "Two 50-Yard Line Tickets for A Charlotte Panthers Game.",
+      "imageUrl" : "https://cdn.pixabay.com/photo/2013/07/19/20/24/stadium-165406_960_720.jpg",
+      "bidList" : {
+        "CGGEFjrsNPMG3rpAoxZcix1eZJg2" : 65
+      }
+    },
+    "three" : {
+      "available" : true,
+      "name" : "Brewery Tour",
+      "buyItNow" : 200,
+      "startPrice" : 40,
+      "description" : "A chance for you and a guest of your choosing to tour the Carolina Brewery!",
+      "imageUrl" : "https://cdn.pixabay.com/photo/2015/07/10/17/53/cheers-839865__340.jpg",
+      "bidList" : {
+        "CGGEFjrsNPMG3rpAoxZcix1eZJg2" : 50
+      }
+    }
+  }
+}
