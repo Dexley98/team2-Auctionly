@@ -87,14 +87,13 @@ const ItemList = ({ items }) => (
         {items.map(item => (
                 <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}; style="padding:10px">
-                        <span>
-                            <img src={item.imageUrl} width="200px" height = "200px"/>
-                            <div style="font-size:x-large">
-                            {item.name}
-                            <p><strong> Buy Now: </strong> {item.buyItNow}</p>
-                            <p><strong> Starting Price: </strong> {item.startPrice}</p>
-                            <p><strong> Description: </strong> {item.description}</p>
-                    	    </div>
+                        <span style="font-size:x-large">
+                            <p><img src={item.imageUrl} width="200px" height = "200px" style="float:left"/>
+                            <strong> {item.name} </strong> <br />
+                            <strong> Buy Now: </strong> {item.buyItNow}<br />
+                            <strong> Starting Price: </strong> {item.startPrice}<br />
+                            <strong> Description: </strong> {item.description}<br />
+                    	    </p>
                         </span>
                     </li>
                 </Link>
