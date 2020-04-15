@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+// add nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
+
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
@@ -92,6 +96,8 @@ class CartPage extends Component{
             for(x in keyList)
             return(
                 <div>
+                    <Navigation />
+                    <hr />
                     <ItemList items={activeBidList} uid={uid}></ItemList>
                 </div>
             )
@@ -99,9 +105,13 @@ class CartPage extends Component{
         else
         {
             return(
-                <h2>
-                loading...
-                </h2>
+                <div>
+                    <Navigation />
+                    <hr />
+                    <h2>
+                    loading...
+                    </h2>
+                </div>
             )
         }
         // console.log(item)

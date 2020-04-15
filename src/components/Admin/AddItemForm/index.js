@@ -11,6 +11,9 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 
+// added Nav Dom Exley 04/15/2020
+import Navigation from '../../Navigation';
+
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
 import * as ROLES from '../../../constants/roles';
@@ -97,50 +100,54 @@ class AddItemForm extends Component {
 
   render() {
     return (
-      <form>
-        <input
-          name="name"
-          placeholder="Item Name"
-          value={this.state.name}
-          onChange={this.change}
-        />
-        <div style={{ color: "red" }}>{this.state.itemNameError}</div>
-        <br />
-        <input
-          name="description"
-          placeholder="Item Description"
-          value={this.state.description}
-          onChange={this.change}
-        />
-        <div style={{ color: "red" }}>{this.state.itemDescriptionError}</div>
-        <br />
-        <input
-          name="startPrice"
-          type="currency"
-          placeholder="Starting Bid Price"
-          value={this.state.startPrice}
-          onChange={this.change}
-        />
-        <div style={{ color: "red" }}>{this.state.startPriceError}</div>
-        <br />
-        <input
-          name="buyItNow"
-          type="currency"
-          placeholder="Buy Now Price"
-          value={this.state.buyItNow}
-          onChange={this.change}
-        />
-        <div style={{ color: "red" }}>{this.state.buyPriceError}</div>
-        <br />
-        <input
-          name="imageUrl"
-          type="file"
-          value={this.state.imageUrl}
-          onChange={this.change}
-        />
-        <br />
-        <button onClick={this.onSubmit}>Submit</button>
-      </form>
+      <div>
+        <Navigation />
+        <hr />
+        <form>
+          <input
+            name="name"
+            placeholder="Item Name"
+            value={this.state.name}
+            onChange={this.change}
+          />
+          <div style={{ color: "red" }}>{this.state.itemNameError}</div>
+          <br />
+          <input
+            name="description"
+            placeholder="Item Description"
+            value={this.state.description}
+            onChange={this.change}
+          />
+          <div style={{ color: "red" }}>{this.state.itemDescriptionError}</div>
+          <br />
+          <input
+            name="startPrice"
+            type="currency"
+            placeholder="Starting Bid Price"
+            value={this.state.startPrice}
+            onChange={this.change}
+          />
+          <div style={{ color: "red" }}>{this.state.startPriceError}</div>
+          <br />
+          <input
+            name="buyItNow"
+            type="currency"
+            placeholder="Buy Now Price"
+            value={this.state.buyItNow}
+            onChange={this.change}
+          />
+          <div style={{ color: "red" }}>{this.state.buyPriceError}</div>
+          <br />
+          <input
+            name="imageUrl"
+            type="file"
+            value={this.state.imageUrl}
+            onChange={this.change}
+          />
+          <br />
+          <button onClick={this.onSubmit}>Submit</button>
+        </form>
+      </div>
     );
   }
 }
