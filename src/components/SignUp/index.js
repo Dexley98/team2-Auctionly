@@ -43,8 +43,9 @@ class SignUpFormBase extends Component {
         this.state = { ...INITIAL_STATE };
     }
 
+
     onSubmit = event => {
-        const { username, email, passwordOne } = this.state;
+        const { username, email, passwordOne, phoneNumber } = this.state;
         const roles = {};
 
         roles[ROLES.USER] = ROLES.USER;
@@ -57,6 +58,7 @@ class SignUpFormBase extends Component {
                     .user(authUser.user.uid)
                     .set({
                         username,
+                        phoneNumber,
                         email,
                         roles,
                     });
@@ -80,7 +82,7 @@ class SignUpFormBase extends Component {
             });
 
         event.preventDefault();
-        
+
     }
 
     onChange = event => {
@@ -105,11 +107,19 @@ class SignUpFormBase extends Component {
         *  POTENTIAL REVISION: Maybe we move this function to a ../utils/file.js.
         * We should do this later toincrease security by inforcing stricter password rules.
         *******************************************************************************/
+        // variables 
+        var specialChar = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+        var number = /^[0-9]+$/;
+        var letters = /^[A-Za-z]+$/;
+
         const isInvalid =
             passwordOne !== passwordTwo ||
             passwordOne === '' ||
             email === '' ||
-            username === '';
+            username === '' ||
+            username.includes(specialChar) ||
+            !(passwordOne.includes(specialChar)) ||
+            !(passwordOne.includes(number));
 
 
         return (

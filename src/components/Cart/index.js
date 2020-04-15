@@ -47,8 +47,8 @@ class CartPage extends Component{
             let uid = this.props.firebase.auth.W;
             let keyList = this.state.keys;
             let x = 0;
-            for(x in keyList){
-                if(itemList[keyList[x]]["bidList"][this.props.firebase.auth.W]){
+            for (x in keyList) {
+                if (itemList[keyList[x]]["bidList"][uid]) {
                     console.log(keyList[x] + " exists!")
                     activeBidList.push(itemList[keyList[x]])               }
             }
@@ -78,10 +78,9 @@ class CartPage extends Component{
                 }
                 activeBidList[x]["currentUser"] = currentUser;
                 activeBidList[x]["highestBid"] = highestBid;
-                const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
                 if((activeBidList[x]["available"] == false) && (activeBidList[x]["currentUser"] == " You have the current highest bid! "))
                 {
-                    activeBidList[x]["checkoutAvailable"] =  <button onClick = { ()=> handleClick(stripe, activeBidList[x])}>Checkout</button>
+                    activeBidList[x]["checkoutAvailable"] = <CheckoutButton name={activeBidList[x]["name"]} amount={highestBid*100}></CheckoutButton>;
                 }
             }
             // console.log(highestBid + " " + currentUser)
@@ -112,28 +111,6 @@ class CartPage extends Component{
 
     
 }
-
-const handleClick = (stripe, item) => {
-    // console.log(item)
-    let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
-    fetch('http://localhost:8000/processJSON.php', {
-        headers: {
-          // Accept: 'application/json',
-          'Content-Type': 'text/plain',
-        },
-        // credentials: "include",
-        method: 'POST',
-        body: string
-      })
-      .then(response => {
-        response.text().then(text=> {
-            console.log(text.trim())
-            stripe.redirectToCheckout({
-                sessionId: text.trim()
-                })
-        })
-        });
-      }
 
 const ItemList = ({ items, uid }) => (
     <ul>

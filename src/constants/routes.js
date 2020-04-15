@@ -11,10 +11,14 @@ export const SIGN_IN = '/signin';
 export const HOME = '/home';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
+export const USERS = '/users';
+
 // added all paths to items
 export const ADMIN_REPORT = '/admin/report';
 export const ADMIN_WINNER_LOG = '/admin/winnerlog';
 export const ADMIN_ADD_ITEM = '/admin/add-item';
+export const EDIT_ITEM = '/editItems'
+
 
 // Refactoring changes made here.
 export const PASSWORD_FORGET = '/pw-forget';
@@ -22,4 +26,4 @@ export const PASSWORD_FORGET = '/pw-forget';
 // Wild Card Works for Items! yay!
 export const DYNAMIC_ITEMS = '/item/*';
 export const DYNAMIC_CART = '/cart/*';
-
+export const EDIT_ITEM_PAGE = '/edit/*';
