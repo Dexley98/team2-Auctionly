@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
-
-// commented these out for warning in browser
-//import { renderIntoDocument, act } from 'react-dom/test-utils';
-//import CheckoutButton from '../Checkout/CheckoutButton.js'
+import { renderIntoDocument, act } from 'react-dom/test-utils';
+import CheckoutButton from '../Checkout/CheckoutButton.js'
 
 
 
@@ -42,7 +40,7 @@ class CartPage extends Component{
 
 
     render(){
-        if(this.state.loading === false)
+        if(this.state.loading == false)
         {
             let itemList = this.state.item;
             let activeBidList = [];
@@ -68,7 +66,7 @@ class CartPage extends Component{
                     if(bidList[y] > highestBid)
                     {
                         highestBid = bidList[y]
-                        if(y===uid)
+                        if(y==uid)
                         {
                             currentUser = " You have the current highest bid! ";
                         }
@@ -80,10 +78,9 @@ class CartPage extends Component{
                 }
                 activeBidList[x]["currentUser"] = currentUser;
                 activeBidList[x]["highestBid"] = highestBid;
-                const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
-                if((activeBidList[x]["available"] === false) && (activeBidList[x]["currentUser"] === " You have the current highest bid! "))
+                if((activeBidList[x]["available"] == false) && (activeBidList[x]["currentUser"] == " You have the current highest bid! "))
                 {
-                    activeBidList[x]["checkoutAvailable"] =  <button onClick = { ()=> handleClick(stripe, activeBidList[x])}>Checkout</button>
+                    activeBidList[x]["checkoutAvailable"] = <CheckoutButton name={activeBidList[x]["name"]} amount={highestBid*100}></CheckoutButton>;
                 }
             }
             // console.log(highestBid + " " + currentUser)
@@ -115,45 +112,22 @@ class CartPage extends Component{
     
 }
 
-const handleClick = (stripe, item) => {
-    // console.log(item)
-    let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
-    fetch('http://localhost:8000/processJSON.php', {
-        headers: {
-          // Accept: 'application/json',
-          'Content-Type': 'text/plain',
-        },
-        // credentials: "include",
-        method: 'POST',
-        body: string
-      })
-      .then(response => {
-        response.text().then(text=> {
-            console.log(text.trim())
-            stripe.redirectToCheckout({
-                sessionId: text.trim()
-                })
-        })
-        });
-      }
-
 const ItemList = ({ items, uid }) => (
     <ul>
         {items.map(item => (
                 // <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
                         <span>
-                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                            <br />
+                            <img src={item.imageUrl} width="200px" height = "200px"/>
+                            <div style="font-size:x-large">
                             {item.name}
-                            <strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}
-                            <strong> Current leading bid: </strong> ${(item.highestBid / 1).toFixed(2)}
-                            <strong>{item.currentUser}</strong>
-                            <br /> 
-                            {item.description}
+                            <p><strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}</p>
+                            <p><strong> Current leading bid: </strong> ${(item.highestBid / 1).toFixed(2)}</p>
+                            <p><strong>{item.currentUser}</strong></p>
+                            <p><strong> Description: </strong> {item.description}</p>
                             <br></br>
                             {item.checkoutAvailable}
-                    
+                    	    </div>
                         </span>
                     </li>
                 // </Link>
