@@ -1,0 +1,84 @@
+section {
+    display: grid;
+    grid-template-columns: 1fr minmax(360px, 991px) 1fr;
+    grid-template-areas: '. h .' '. c .' '. f .';
+    grid-gap: 5px;
+    margin-top: 20px;
+}
+
+header {
+    grid-area: h;
+    text-align: center;
+}
+
+main {
+    grid-area: c;
+}
+
+    main.content-center {
+        display: grid;
+        justify-items: center;
+    }
+
+footer {
+    grid-area: f;
+    display: grid;
+    justify-items: end;
+    border-top: 1px solid rgba(34, 36, 38, 0.15);
+    margin-top: 20px;
+}
+
+body {
+    background-color: #282c34;
+    color: white;
+    padding: 40px;
+    font-family: Arial;
+    text-align: center;
+    justify-items: center;
+}
+
+a {
+    color: hotpink;
+}
+
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+    border-radius: 25px;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+}
+
+    /* Add a hover effect for buttons */
+    button:hover {
+        opacity: 0.8;
+    }
+
+
+/* Add padding to containers */
+.container {
+    padding: 16px;
+}
+
+
+
+
