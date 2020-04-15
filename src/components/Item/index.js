@@ -21,9 +21,9 @@ class ItemPage extends Component{
 
     componentDidMount(){
         this.setState({ loading: true });
-        console.log(this.props.match.params[0]);
-        let dbItemKey = urlStringToItemName(this.props.match.params[0]);
-
+        let dbItemKey = this.props.match.params[0];
+        // console.log((this.props.match.params[0]))
+    
         /***************************************************************************************************
          * There is quite a lot going on in here so I'll try and explain it the best I can. 
          * I Only called this once
@@ -50,33 +50,38 @@ class ItemPage extends Component{
          * I sure do now. 
          * 
          * 
-        *******************************************************************************************************/ 
-        this.props.firebase.items()
-            .orderByChild("name")
-            .equalTo(dbItemKey)
-            .on('value', snapshot =>{
+        *******************************************************************************************************/
+        this.props.firebase.db.ref(`/items/${dbItemKey}`)
+            .on('value', snapshot => {
                 const itemObject = snapshot.val();
-                console.log('item object ', itemObject["three"]);
+                console.log(itemObject)
+                //console.log('item object ', itemObject["three"]);
                 const keyList = Object.keys(itemObject);
-                console.log('key ', keyList)
-                console.log('item to assign to state ', itemObject[keyList[0]])
+                // console.log(itemObject)
+                //console.log('key ', keyList)
+                //console.log('item to assign to state ', itemObject[keyList[0]])
                 this.setState({
-                    item: itemObject[keyList[0]],
-                    key: keyList[0],
-                    loading: false
+                    item: itemObject,
+                    key: dbItemKey,
+                    loading: false,
+                    highestBid: (itemObject.startPrice)
                 });
-            });
-        console.log('state.item ',this.state.item);
+            })
+        //console.log('state.item ',this.state.item);
+
     }
+    
 
     
     render(){
         const item = this.state.item;
         const bidList = this.state.item['bidList']
-        let x = 0
+        let x
         for(x in bidList){
             if(bidList[x] > this.state.highestBid)
             {
+                console.log("BIDLIST")
+                console.log(bidList[x])
                 this.setState({highestBid:bidList[x]})
                 // highestBid = bidList[x]
                 this.setState({highestBidder : x}) 
@@ -96,7 +101,7 @@ class ItemPage extends Component{
                 <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
 
                 <form onSubmit={this.handleBid}>
-                $<input type="number" step="5" min={this.state.highestBid + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
+                $<input type="number" step="5" min={Number(this.state.highestBid) + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
                 </form>
 
                 <form onSubmit={this.handleBuyout}>
@@ -146,23 +151,23 @@ class ItemPage extends Component{
 }
 
 
-const urlStringToItemName = (param) => {
-    //split url on - delim
-    let splitUrlList = param.split('-');
-    let itemNameString = '';
+// const urlStringToItemName = (param) => {
+//     //split url on - delim
+//     let splitUrlList = param.split("-");
+//     let itemNameString = '';
 
-    // create name string to ref to db. if index is last in array don't add space.
-    // if there are dashes in the name this WILL FUCK UP. Probably going to have to account for that in item upload.
-    for(let i=0; i<splitUrlList.length; i++){
-        if(i != splitUrlList.length - 1){
-            itemNameString += `${splitUrlList[i]} `;
-        }else{
-            itemNameString += splitUrlList[i];
-        }
-    }
-    // return string to name ref in db.
-    return itemNameString;
-};
+//     // create name string to ref to db. if index is last in array don't add space.
+//     // if there are dashes in the name this WILL FUCK UP. Probably going to have to account for that in item upload.
+//     for(let i=0; i<splitUrlList.length; i++){
+//         if(i != splitUrlList.length - 1){
+//             itemNameString += `${splitUrlList[i]} `;
+//         }else{
+//             itemNameString += splitUrlList[i];
+//         }
+//     }
+//     // return string to name ref in db.
+//     return itemNameString;
+// };
 
 const condition = authUser => !!authUser;
 
