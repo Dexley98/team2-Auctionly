@@ -19,11 +19,10 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import AccountPage from '../Account';
-// password Redirect new component
-import PasswordRedirect from '../PasswordRedirect'
 
 // Admin Page Components
-import AdminPage from '../Admin';
+import PasswordRedirect from '../PasswordRedirect'
+import { AdminPage, UsersPage, EditItemPage, setTime } from '../Admin';
 import AddItemForm from '../Admin/AddItemForm';
 import Report from '../Admin/Report';
 import WinnerLog from '../Admin/WinnerLog';
@@ -32,6 +31,8 @@ import WinnerLog from '../Admin/WinnerLog';
 import HomePage from '../Home';
 import ItemPage from '../Item';
 import CartPage from '../Cart';
+import EditItemForm from '../EditItem';
+
 import * as ROUTES from '../../constants/routes';
 
 import { WithAuthentication } from '../Session';
@@ -46,14 +47,18 @@ const App = () => (
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
             {/* These Don't need nav bar. */}
             <Route path={ROUTES.HOME} component={HomePage} />
-            <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+            <Route path={ROUTES.ACCOUNT} component={AccountPage} />
             <Route path={ROUTES.ACCOUNT_PW_CHANGED} component={PasswordRedirect} />
             <Route exact path={ROUTES.ADMIN} component={AdminPage} />
+            <Route path={ROUTES.USERS} component={UsersPage} />
             <Route path={ROUTES.ADMIN_ADD_ITEM} component={AddItemForm} />
+            <Route path={ROUTES.EDIT_ITEM} component={EditItemPage} />
             <Route path={ROUTES.ADMIN_REPORT} component={Report} />
             <Route path={ROUTES.ADMIN_WINNER_LOG} component={WinnerLog} />
             <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
-            <Route path={ROUTES.DYNAMIC_CART} component={CartPage}/>
+            <Route path={ROUTES.DYNAMIC_CART} component={CartPage} />
+            <Route path={ROUTES.EDIT_ITEM_PAGE} component={EditItemForm} />
+            <Route path={ROUTES.SET_DATE} component={setTime} />
         </div>
 
     </Router>

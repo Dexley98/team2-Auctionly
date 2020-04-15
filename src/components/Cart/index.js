@@ -156,10 +156,8 @@ const handleClick = (stripe, item) => {
 const ItemList = ({ items, uid, itemKey}) => (
     <ul>
         {items.map(item => (
-                // <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
                         <span>
-                            {/* <Link to={`../item/${itemKey}`}> */}
                             <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                             <br />
                             {item.name}
@@ -169,7 +167,6 @@ const ItemList = ({ items, uid, itemKey}) => (
                             <br /> 
                             {item.description}
                             <br></br>
-                            {/* </Link> */}
                             {item.checkoutAvailable === true && 
                                 <button onClick = { ()=> handleClick(stripe, item)}>Checkout</button>
                             }

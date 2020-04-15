@@ -11,6 +11,7 @@ import app from 'firebase/app';
 // import package from Firebase API responsible for all the authentication.
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -30,6 +31,7 @@ class Firebase {
         // instatiate package from Firebase API responsible for all the authentication.
         this.auth = app.auth();
         this.db = app.database();
+        this.storage = app.storage();
         this.emailAuthProvider = app.auth.EmailAuthProvider;
         this.googleProvider = new app.auth.GoogleAuthProvider();
     }
@@ -58,7 +60,8 @@ class Firebase {
 
     doSignOut = () => this.auth.signOut();
 
-    doPasswordRest = email => this.auth.sendPasswordResetEmail(email);
+    doPasswordRest = email =>
+        this.auth.sendPasswordResetEmail(email);
 
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
@@ -71,7 +74,7 @@ class Firebase {
     users = () => this.db.ref('users');
 
     // *** Item API ***
-
+    item = uid => this.db.ref(`items/${uid}`);
     items = () => this.db.ref('items');
 
     // *** Auction Data API ***

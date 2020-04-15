@@ -44,7 +44,7 @@ class SignUpFormBase extends Component {
     }
 
     onSubmit = event => {
-        const { username, email, passwordOne } = this.state;
+        const { username, email, passwordOne, phoneNumber } = this.state;
         const roles = {};
 
         roles[ROLES.USER] = ROLES.USER;
@@ -57,6 +57,7 @@ class SignUpFormBase extends Component {
                     .user(authUser.user.uid)
                     .set({
                         username,
+                        phoneNumber,
                         email,
                         roles,
                     });
