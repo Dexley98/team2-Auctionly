@@ -23,8 +23,8 @@ class RedirectToSignIn extends Component {
     };
 
     render() {
-        const { email, password, error } = this.state;
-        const isInvalid = password === '' || email === '';
+        //const { email, password, error } = this.state;
+        //const isInvalid = password === '' || email === '';
 
         return (
             <form onSubmit={this.onSubmit}>

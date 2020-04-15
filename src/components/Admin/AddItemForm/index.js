@@ -49,11 +49,12 @@ class AddItemForm extends Component {
     console.log(this.state);
   };
 
+  // Commented the two Error Messages for warnings in Browser. (Dom Exley April 15th)
   validate = () => {
     let itemNameError = "";
-    let itemDescriptionError = "";
+    // let itemDescriptionError = "";
     let startPriceError = "";
-    let buyPriceError = "";
+    //let buyPriceError = "";
 
 
     /* I couldn't figure this out. 

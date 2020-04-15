@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
-import { renderIntoDocument, act } from 'react-dom/test-utils';
-import CheckoutButton from '../Checkout/CheckoutButton.js'
+
+// commented these out for warning in browser
+//import { renderIntoDocument, act } from 'react-dom/test-utils';
+//import CheckoutButton from '../Checkout/CheckoutButton.js'
 
 
 
@@ -40,7 +42,7 @@ class CartPage extends Component{
 
 
     render(){
-        if(this.state.loading == false)
+        if(this.state.loading === false)
         {
             let itemList = this.state.item;
             let activeBidList = [];
@@ -66,7 +68,7 @@ class CartPage extends Component{
                     if(bidList[y] > highestBid)
                     {
                         highestBid = bidList[y]
-                        if(y==uid)
+                        if(y===uid)
                         {
                             currentUser = " You have the current highest bid! ";
                         }
@@ -79,7 +81,7 @@ class CartPage extends Component{
                 activeBidList[x]["currentUser"] = currentUser;
                 activeBidList[x]["highestBid"] = highestBid;
                 const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
-                if((activeBidList[x]["available"] == false) && (activeBidList[x]["currentUser"] == " You have the current highest bid! "))
+                if((activeBidList[x]["available"] === false) && (activeBidList[x]["currentUser"] === " You have the current highest bid! "))
                 {
                     activeBidList[x]["checkoutAvailable"] =  <button onClick = { ()=> handleClick(stripe, activeBidList[x])}>Checkout</button>
                 }
@@ -141,7 +143,7 @@ const ItemList = ({ items, uid }) => (
                 // <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
                         <span>
-                            <img src={item.imageUrl} width="200px" height = "200px"/>
+                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                             <br />
                             {item.name}
                             <strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}

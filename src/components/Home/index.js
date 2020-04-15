@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import routing from react router dom
-import {Link, BrowserRouter as Router, Route } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
@@ -64,8 +64,8 @@ render(){
 }
 }
 
-// this function takes an item name from the item component and creates a url formatted like firstword-secondword-lastword
-const itemNametoUrlString = (itemName) => {
+// Commented this out for browser warnings (Dom Exley April 15th)
+/* const itemNametoUrlString = (itemName) => {
     let splitNameList = itemName.split(' ');
     let itemNameUrl = '';
 
@@ -78,7 +78,7 @@ const itemNametoUrlString = (itemName) => {
         }
     }
     return itemNameUrl
-}
+} */
 
 
 class ItemList extends Component{
@@ -116,7 +116,6 @@ class ItemList extends Component{
         }
         else if(diffOfNowFromStop < 0){
             preAuction = false;
-            console.log('auction is ongoign');
         }
         else if(diffOfNowFromStop >= 0){
             postAuction = true;
@@ -126,9 +125,9 @@ class ItemList extends Component{
             return(
                 <ul>
                 {this.props.items.map(item => (
-                    <li key={item.name}>
+                    <li key={item.id}>
                         <span>
-                            <img src={item.imageUrl} width="200px" height = "200px"/>
+                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                             <br />
                             {item.name}
                             <strong> Buy Now: </strong> {item.buyItNow}
@@ -144,10 +143,10 @@ class ItemList extends Component{
             return(
                 <ul>
                     {this.props.items.map(item => (
-                    <Link to={`item/${itemNametoUrlString(item.name)}`}>
+                    <Link to={`item/${item.id}`}>
                         <li key={item.name}>
                             <span>
-                                <img src={item.imageUrl} width="200px" height = "200px"/>
+                                <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                                 <br />
                                 {item.name}
                                 <strong> Buy Now: </strong> {item.buyItNow}

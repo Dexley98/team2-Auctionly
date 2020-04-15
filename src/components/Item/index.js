@@ -56,7 +56,7 @@ class ItemPage extends Component{
                 const itemObject = snapshot.val();
                 console.log(itemObject)
                 //console.log('item object ', itemObject["three"]);
-                const keyList = Object.keys(itemObject);
+                // const keyList = Object.keys(itemObject);
                 // console.log(itemObject)
                 //console.log('key ', keyList)
                 //console.log('item to assign to state ', itemObject[keyList[0]])
@@ -93,7 +93,7 @@ class ItemPage extends Component{
             // same thing as React.Fragment / different syntax. May not need but here for now.
             <>
             <div>
-                <img src={item.imageUrl} width="200px" height = "200px"/>
+                <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                 <h1>{item.name}</h1>
                 <p>{item.description}</p>
                 <p>Start Price: ${(item.startPrice/1).toFixed(2)}</p>
@@ -120,7 +120,7 @@ class ItemPage extends Component{
     handleBid = (event) => {
         event.preventDefault();
         let bid = Number(this.state.bidValue)
-        if(this.state.item["available"] == true)
+        if(this.state.item["available"] === true)
         {
             this.props.firebase.db.ref("items/"+ this.state.key + "/bidList").update({[this.props.firebase.auth.W]:bid})
         }
@@ -138,7 +138,7 @@ class ItemPage extends Component{
         }
         else
         {
-            if(this.state.item["available"] == true)
+            if(this.state.item["available"] === true)
             {
                 this.props.firebase.db.ref("items/"+ this.state.key + "/bidList").update({[this.props.firebase.auth.W]:buyout})
                 this.props.firebase.db.ref("items/"+ this.state.key).update({available:false})

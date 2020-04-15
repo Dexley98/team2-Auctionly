@@ -14,8 +14,6 @@ import { compose } from 'recompose';
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
 import * as ROLES from '../../../constants/roles';
-// Just in case you need to route to stuff.
-import * as ROUTES from '../../../constants/routes';
 
 // add table to output firebase
 
