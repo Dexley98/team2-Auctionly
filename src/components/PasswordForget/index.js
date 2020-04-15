@@ -33,9 +33,12 @@ class PasswordForgetFormBase extends Component {
             });
         event.preventDefault();
     };
+
+
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
+
     render() {
         const { email, error } = this.state;
         const isInvalid = email === '';

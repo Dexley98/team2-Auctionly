@@ -156,25 +156,6 @@ class ItemPage extends Component{
     }
 }
 
-
-// const urlStringToItemName = (param) => {
-//     //split url on - delim
-//     let splitUrlList = param.split("-");
-//     let itemNameString = '';
-
-//     // create name string to ref to db. if index is last in array don't add space.
-//     // if there are dashes in the name this WILL FUCK UP. Probably going to have to account for that in item upload.
-//     for(let i=0; i<splitUrlList.length; i++){
-//         if(i != splitUrlList.length - 1){
-//             itemNameString += `${splitUrlList[i]} `;
-//         }else{
-//             itemNameString += splitUrlList[i];
-//         }
-//     }
-//     // return string to name ref in db.
-//     return itemNameString;
-// };
-
 const condition = authUser => !!authUser;
 
 export default compose(
