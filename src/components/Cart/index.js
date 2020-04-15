@@ -124,7 +124,6 @@ const ItemList = ({ items, uid }) => (
                             <strong> Current leading bid: </strong> ${(item.highestBid / 1).toFixed(2)}<br />
                             <strong>{item.currentUser}</strong><br />
                             <strong> Description: </strong> {item.description}<br />
-                            <br></br>
                             {item.checkoutAvailable}</p>
                         </span>
                     </li>
