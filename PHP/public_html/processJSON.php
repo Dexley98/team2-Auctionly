@@ -34,8 +34,8 @@ $stringArray = explode("!", $item);
 
 
 $ARR = [
-    'success_url' => 'https://example.com/success',
-    'cancel_url' => 'https://example.com/cancel',
+    'success_url' => 'https://localhost:3006/home',
+    'cancel_url' => 'https://localhost:3006/home',
     'payment_method_types' => ['card'],
     'line_items' => [
       [
