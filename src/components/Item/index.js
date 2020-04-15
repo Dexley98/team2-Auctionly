@@ -102,8 +102,7 @@ class ItemPage extends Component{
                     <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                     <h1>{item.name}</h1>
                     <p>{item.description}</p>
-                    <p>Start Price: ${(item.startPrice/1).toFixed(2)}</p>
-                    <p> Highest Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
+                    <p> Current Minimum Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
                     <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
 
                     <form onSubmit={this.handleBid}>
