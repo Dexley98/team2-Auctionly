@@ -9,16 +9,6 @@ import * as ROLES from '../../constants/roles';
 
 import * as ROUTES from '../../constants/routes';
 
-const INITIAL_STATE = {
-    available: true,
-    name: '',
-    description: '',
-    startPrice: '',
-    buyItNow: '',
-    imageUrl: '',
-    bidList: {},
-
-};
 
 class EditItemForm extends Component {
     constructor(props) {
@@ -27,28 +17,78 @@ class EditItemForm extends Component {
             loading: false,
             item: {},
             key: "",
-            ...INITIAL_STATE,
+            available: true,
+            name: '',
+            description: '',
+            startPrice: '',
+            buyItNow: '',
+            imageUrl: '',
+            bidList: {},
         };
 
     }
 
     componentDidMount() {
+
         this.setState({ loading: true });
-        
-        this.props.firebase.db.ref('/items')
-            .orderByChild("itemName")
+        let dbItemKey = this.props.match.params[0];
+
+        this.props.firebase.db.ref(`/items/${dbItemKey}`)
             .on('value', snapshot => {
                 const itemObject = snapshot.val();
-                const keyList = Object.keys(itemObject);
-                
+                console.log(itemObject)
+                //console.log('item object ', itemObject["three"]);
+                //const keyList = Object.keys(itemObject);
+                // console.log(itemObject)
+                //console.log('key ', keyList)
+                //console.log('item to assign to state ', itemObject[keyList[0]])
                 this.setState({
-                    item: itemObject[keyList[0]],
-                    key: keyList[0],
+                    item: itemObject,
+                    key: dbItemKey,
                     loading: false
                 });
             })
 
     }
+
+    handleChange = e => {
+        const image = e.target.files[0];
+        this.setState(() => ({ image }));
+
+    };
+
+    handleUpload = () => {
+        const { image } = this.state;
+        const uploadTask = this.props.firebase.storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                // image upload progress function
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({ progress });
+            },
+            error => {
+                // Error function
+                console.log(error);
+            }
+            , () => {
+                // Get the URL function
+                this.props.firebase.storage
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.setState({
+                            url
+                        });
+
+                        this.state.imageUrl = url;
+                    });
+            }
+        );
+    };
 
     onChange = event => {
         this.setState({
@@ -58,65 +98,66 @@ class EditItemForm extends Component {
 
 
     onEditName = event => {
-
+        event.preventDefault();
         const { name } = this.state;
 
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).update({
                 name,
             })
-        event.preventDefault();
+        
     }
 
     onEditDescription = event => {
-
+        event.preventDefault();
         const { description } = this.state;
 
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).update({
                 description,
             })
-        event.preventDefault();
+
     }
 
     onEditStartPrice = event => {
-
+        event.preventDefault();
         const { startPrice } = this.state;
 
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).update({
                 startPrice,
             })
-        event.preventDefault();
+        
     }
 
     onEditBuyItNow = event => {
-
+        event.preventDefault();
         const { buyItNow } = this.state;
 
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).update({
                 buyItNow,
             })
-        event.preventDefault();
+
     }
 
     onEditImageUrl = event => {
-
+        event.preventDefault();
         const { imageUrl } = this.state;
 
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).update({
                 imageUrl,
             })
-        event.preventDefault();
+        
     }
 
     onRemoveItem = event => {
-
+        event.preventDefault();
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).remove()
-        event.preventDefault();
+
+        this.props.history.push(ROUTES.EDIT_ITEM)
     }
     render() {
         const item = this.state.item;
@@ -143,7 +184,7 @@ class EditItemForm extends Component {
                             </li>
                         </ul>
                     </nav>
-
+                   
                     <img src={item.imageUrl} width="200px" height="200px" />
                     <h1>{item.name}</h1>
                     <p>Item description: {item.description}</p>
@@ -195,12 +236,11 @@ class EditItemForm extends Component {
                     </form>
 
                     <form onSubmit={this.onEditImageUrl}>
-                        <input
-                            name="imageUrl"
-                            type="file"
-                            value={imageUrl}
-                            onChange={this.onChange}
-                        />
+                        <input type="file" onChange={this.handleChange} />
+                        {' '}
+                        <progress value={this.state.progress} max="100" className="progress" />
+                        <br />
+                        <button onClick={this.handleUpload} >Upload Picture </button> {'  '}
                         <button type="submit">Update</button>
                     </form>
                     <br></br>

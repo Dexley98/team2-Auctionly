@@ -16,6 +16,7 @@ const AdminPage = () => (
         <ViewWinnerLogRedirect />
         <ViewReportLogRedirect />
         <EditItemRedirect />
+        <SetAuctionlyTimerRedirect />
     </div>
 );
 
@@ -35,10 +36,10 @@ class ViewUsers extends Component {
         return (
             <form onSubmit={this.onSubmit}>
 
-                <button>
+                <button> 
                     View Users
                 </button>
-
+                
             </form>
         );
     }
@@ -136,6 +137,29 @@ class EditItem extends Component {
     }
 }
 
+class SetAuctionlyTimer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { error: null };
+    }
+    onSubmit = event => {
+        this.props.history.push(ROUTES.SET_DATE);
+        event.preventDefault();
+    };
+
+    render() {
+        return (
+            <form onSubmit={this.onSubmit}>
+
+                <button>
+                    Set Auction Time
+                </button>
+
+            </form>
+        );
+    }
+}
+
 const condition = authUser =>
     authUser && !!authUser.roles[ROLES.ADMIN];
 
@@ -163,6 +187,11 @@ const EditItemRedirect = compose(
     withRouter,
     withFirebase,
 )(EditItem);
+
+const SetAuctionlyTimerRedirect = compose(
+    withRouter,
+    withFirebase,
+)(SetAuctionlyTimer);
 
 export default compose(
     WithEmailVerification,

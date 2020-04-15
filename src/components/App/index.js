@@ -24,10 +24,11 @@ import PasswordForgetPage from '../PasswordForget';
 import AccountPage from '../Account';
 
 // Admin Page Components
-import { AdminPage, UsersPage, EditItemPage} from '../Admin';
+import { AdminPage, UsersPage, EditItemPage, setTime } from '../Admin';
 import AddItemForm from '../Admin/AddItemForm';
 import Report from '../Admin/Report';
 import WinnerLog from '../Admin/WinnerLog';
+
 
 // Auction Management Page Components
 import HomePage from '../Home';
@@ -61,6 +62,7 @@ const App = () => (
             <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
             <Route path={ROUTES.DYNAMIC_CART} component={CartPage} />
             <Route path={ROUTES.EDIT_ITEM_PAGE} component={EditItemForm} />
+            <Route path={ROUTES.SET_DATE} component={setTime} />
         </div>
 
     </Router>

@@ -32,17 +32,14 @@ class UsersPage extends Component {
                 loading: false,
             });
         });
+
+
     }
     render() {
         const { users, loading } = this.state;
 
         return (
             <div>
-                <h1>USERS</h1>
-                <p>
-                    The Admin Page is accessible by every signed in admin user.
-                </p>
-
                 <nav>
                     <ul>
                         <li>
@@ -50,6 +47,8 @@ class UsersPage extends Component {
                         </li>
                     </ul>
                 </nav>
+
+                <h1>USERS</h1>
 
                 {loading && <div>Loading ...</div>}
 

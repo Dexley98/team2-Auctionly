@@ -25,8 +25,11 @@ const INITIAL_STATE = {
     description: '',
     startPrice: '',
     buyItNow: '',
-    imageUrl: '',
+    imageUrl:"",
     bidList: {},
+    image: null,
+    progress: 0,
+    url: '',
 
 };
 
@@ -37,32 +40,59 @@ class AddItemForm extends Component {
       this.state = { ...INITIAL_STATE };
     }
 
-    ////componentDidMount() {
-    ////    db.ref('/items').on('value', querySnapShot => {
-    ////        let items = querySnapShot.val() ? querySnapShot.val() : {};
-    ////        let itemsList = { ...items};
-    ////        this.setState({
-    ////            itemName,
-    ////            itemDescription,
-    ////            startPrice,
-    ////            buyPrice,
-    ////            itemImage,
-    ////        });
-    ////    });
-    ////}
+    handleChange = e => {
+            const image = e.target.files[0];
+            this.setState(() => ({ image }));
+        
+    };
+    handleUpload = () => {
+        const { image } = this.state;
+        const uploadTask = this.props.firebase.storage.ref(`images/${image.name}`).put(image);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                // image upload progress function
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({ progress });
+            },
+            error => {
+                // Error function
+                console.log(error);
+            }
+            , () => {
+                // Get the URL function
+                this.props.firebase.storage
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.setState({
+                            url                  
+                        });
 
-  onChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
+                        this.state.imageUrl = url;
+                    });
+            }
+        );
+    };
+
+
+
+    onChange = event => {
+
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    };
 
 
     onSubmit = event => {
-
+        event.preventDefault();
         const { available, name, description, startPrice, buyItNow, imageUrl } = this.state;
         const bidList = {};
-        bidList["Initial"] = 0;
+        bidList["Initial"] = '';
 
             this.props.firebase.db
                 .ref('/items').push({
@@ -73,26 +103,31 @@ class AddItemForm extends Component {
                     buyItNow,
                     imageUrl,
                     bidList,
+                    
                 })
                 .then(() => {
                     // after item is created reset state of form back to empty fields
-                    this.setState({ ...INITIAL_STATE });
+                    this.setState({
+                        ...INITIAL_STATE
+                    });
                 })
-        event.preventDefault();
-  }
-
+        
+    }
+   
   render() {
       const {
+
           name,
           description,
           startPrice,
           buyItNow,
-          imageUrl,
 
       } = this.state;
 
+
       return (
-          <form onSubmit={this.onSubmit}>
+          <div>
+
               <nav>
                   <ul>
                       <li>
@@ -101,58 +136,58 @@ class AddItemForm extends Component {
                   </ul>
               </nav>
 
-        <input
-               name="name"
-               placeholder="Item Name"
-               value={name}
-               onChange={this.onChange}
-               type="text"
-        />
-        
-        <br />
-        <input
-               name="description"
-               placeholder="Item Description"
-               value={description}
-               onChange={this.onChange}
-               type="text"
-        />
-        
-        <br />
-        <input
-               name="startPrice"
-               type="text"
-               placeholder="Starting Bid Price"
-               value={startPrice}
-               onChange={this.onChange}
-        />
-        
-        <br />
-        <input
-               name="buyItNow"
-               type="text"
-               placeholder="Buy It Now Price"
-               value={buyItNow}
-               onChange={this.onChange}
-        />
-         
-         <br/>
-        <br/>
-        <input
-               name="imageUrl"
-               type="file"
-               value={imageUrl}
-               onChange={this.onChange}
-        />
+              <img
+                  src={this.state.url || "https://via.placeholder.com/400x300"}
+                  alt="Uploaded Images"
+                  height="300"
+                  width="400"
+              />
+
               <br />
-              <button type="submit">Submit</button>
+
+              <input type="file" onChange={this.handleChange} />
+
+              <br />
+              <br />
+
+              <progress value={this.state.progress} max="100" className="progress" />
+
+              <br />
+
+              <button onClick={this.handleUpload} >Upload Picture </button>
+
+              <br />
+
+              <form onSubmit={this.onSubmit}>
+              
+                    <input name="name" placeholder="Item Name" value={name} onChange={this.onChange} type="text" />
+        
+                    <br />
+                    <input name="description" placeholder="Item Description" value={description} onChange={this.onChange} type="text" />
+        
+                    <br />
+                    <input name="startPrice" type="text" placeholder="Starting Bid Price" value={startPrice} onChange={this.onChange} />
+        
+                    <br />
+                    <input name="buyItNow" type="text" placeholder="Buy It Now Price" value={buyItNow} onChange={this.onChange} />
+                  
+                    <br />
+                    <br />
+
+                    <button type="submit" >Submit </button>
+                
+              </form>
 
               
-          </form>
+              
+          </div>
+
           
     );
   }
 }
+
+//<input type="text" name={imageUrl} value={this.state.url} onChange={this.onChange} />
 
 const condition = authUser =>
     authUser && !!authUser.roles[ROLES.ADMIN];

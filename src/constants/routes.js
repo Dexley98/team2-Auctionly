@@ -18,6 +18,7 @@ export const ADMIN_REPORT = '/admin/report';
 export const ADMIN_WINNER_LOG = '/admin/winnerlog';
 export const ADMIN_ADD_ITEM = '/admin/add-item';
 export const EDIT_ITEM = '/editItems'
+export const SET_DATE = '/admin/set-date'
 
 
 // Refactoring changes made here.

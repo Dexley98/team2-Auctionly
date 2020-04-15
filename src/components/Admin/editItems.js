@@ -9,7 +9,7 @@ import Firebase from 'firebase';
 import { withFirebase } from '../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 import * as ROLES from '../../constants/roles';
-
+import * as ROUTES from '../../constants/routes';
 
 class EditItemPage extends Component {
 
@@ -45,6 +45,14 @@ class EditItemPage extends Component {
         return (
             <React.Fragment>
                 <div>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
+                            </li>
+                        </ul>
+                    </nav>
+
                     <h1>Edit Auction Items</h1>
                     
                 </div>
@@ -54,27 +62,11 @@ class EditItemPage extends Component {
     }
 }
 
-// this function takes an item name from the item component and creates a url formatted like firstword-secondword-lastword
-const itemNametoUrlString = (itemName) => {
-    let splitNameList = itemName.split(' ');
-    let itemNameUrl = '';
-
-    for (let i = 0; i < splitNameList.length; i++) {
-        if (i == splitNameList.length - 1) {
-            itemNameUrl += splitNameList[i];
-        }
-        else {
-            itemNameUrl += `${splitNameList[i]}-`;
-        }
-    }
-    return itemNameUrl
-}
-
 
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
-            <Link to={`edit/${itemNametoUrlString(item.name)}`}>
+            <Link to={`edit/${item.id}`}>
                 <li key={item.name}>
                     <span>
                         <img src={item.imageUrl} width="200px" height="200px" />
