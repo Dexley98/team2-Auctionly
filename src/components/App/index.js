@@ -10,7 +10,7 @@
 
 import React from 'react';
 import {
-    BrowserRouter as Router, Route, Switch,
+    BrowserRouter as Router, Route
 } from 'react-router-dom';
 
 /************** Start Utility Components ******************/
@@ -43,21 +43,20 @@ const App = () => (
             <Navigation />
 
             <hr />
-	    <ul>
-            <li><Route exact path={ROUTES.LANDING} component={LandingPage} /></li>
-            <li><Route path={ROUTES.SIGN_UP} component={SignUpPage} /></li>
-            <li><Route path={ROUTES.SIGN_IN} component={SignInPage} /></li>
-            <li><Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} /></li>
-            <li><Route path={ROUTES.HOME} component={HomePage} /></li>
-            <li><Route path={ROUTES.ACCOUNT} component={AccountPage} /></li>
-            <li><Route exact path={ROUTES.ADMIN} component={AdminPage} /></li>
-            <li><Route path={ROUTES.ADMIN_ADD_ITEM} component={AddItemForm} /></li>
-            <li><Route path={ROUTES.ADMIN_REPORT} component={Report} /></li>
-            <li><Route path={ROUTES.ADMIN_WINNER_LOG} component={WinnerLog} /></li>
-            <li><Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/></li>
-            <li><Route path={ROUTES.DYNAMIC_CART} component={CartPage}/></li>
-	    </ul>
-	</div>
+
+            <Route exact path={ROUTES.LANDING} component={LandingPage} />
+            <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+            <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+            <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+            <Route path={ROUTES.HOME} component={HomePage} />
+            <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+            <Route exact path={ROUTES.ADMIN} component={AdminPage} />
+            <Route path={ROUTES.ADMIN_ADD_ITEM} component={AddItemForm} />
+            <Route path={ROUTES.ADMIN_REPORT} component={Report} />
+            <Route path={ROUTES.ADMIN_WINNER_LOG} component={WinnerLog} />
+            <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
+            <Route path={ROUTES.DYNAMIC_CART} component={CartPage}/>
+        </div>
 
     </Router>
     

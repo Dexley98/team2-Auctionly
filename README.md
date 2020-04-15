@@ -1,3 +1,18 @@
+## STEPS TO RUN:
+
+download the branch
+
+run npm i within root directory
+
+run composer install within PHP/public_html
+
+run the command "PHP -S localhost:8000" within PHP/public_html
+
+run npm start within root directory with the port set to 3006 (on Ubuntu, i used "export PORT=3006")
+
+everything should work fine :)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
