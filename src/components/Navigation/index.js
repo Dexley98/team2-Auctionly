@@ -21,34 +21,37 @@ const Navigation = () => (
 );
 
 const NavigationAuth = ({ authUser }) => (
-    <ul>
-        <li>
-            <Link to={ROUTES.HOME}>Home</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        <li>
-            <Link to={`../Cart/${authUser.uid}`}>Cart</Link>
-        </li>
-        {!!authUser.roles[ROLES.ADMIN] && (
+    <nav className="nav-bar-wrapper">
+        <ul className="nav-list-authorized">
             <li>
-                <Link to={ROUTES.ADMIN}>Admin</Link>
+                <Link to={ROUTES.HOME}>Home</Link>
             </li>
-        )}
-        <li>
-            <SignOutButton />
-
-        </li>
-    </ul>
+            <li>
+                <Link to={ROUTES.ACCOUNT}>Account</Link>
+            </li>
+            <li>
+                <Link to={`../Cart/${authUser.uid}`}>Cart</Link>
+            </li>
+            {!!authUser.roles[ROLES.ADMIN] && (
+                <li>
+                    <Link to={ROUTES.ADMIN}>Admin</Link>
+                </li>
+            )}
+            <li>
+                <SignOutButton />
+            </li>
+        </ul>
+    </nav>
 );
 
 const NavigationNonAuth = () => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-    </ul>
+    <nav className="nav-bar-wrapper">
+        <ul className="nav-list-non-authorized">
+            <li>
+                <Link to={ROUTES.LANDING}>Landing</Link>
+            </li>
+        </ul>
+    </nav>
 );
 
 export default Navigation;

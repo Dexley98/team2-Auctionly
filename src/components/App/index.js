@@ -38,8 +38,6 @@ import { WithAuthentication } from '../Session';
 
 const App = () => (
     <Router>
-        <div>
-
             <Route exact path={ROUTES.LANDING} component={LandingPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -54,8 +52,6 @@ const App = () => (
             <Route path={ROUTES.ADMIN_WINNER_LOG} component={WinnerLog} />
             <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
             <Route path={ROUTES.DYNAMIC_CART} component={CartPage}/>
-        </div>
-
     </Router>
     
 );

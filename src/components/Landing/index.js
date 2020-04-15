@@ -6,7 +6,7 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
 const LandingPage = () => (
-    <div>
+    <div className="landing-wrapper">
         <h1> Welcome to Auctionly </h1>  
         <SignInWithGoogle />
     </div>
@@ -17,6 +17,7 @@ class RedirectToSignIn extends Component {
         super(props);
         this.state = { error: null };
     }
+    
     onSubmit = event => {
         this.props.history.push(ROUTES.SIGN_IN);
         event.preventDefault();
@@ -27,16 +28,13 @@ class RedirectToSignIn extends Component {
         //const isInvalid = password === '' || email === '';
 
         return (
-            <form onSubmit={this.onSubmit}>
-
-                <button>
-                    Sign In
-                </button>
-
+            <form className="landing-form" onSubmit={this.onSubmit}>
+                <button>Sign In</button>
             </form>
         );
     }
 }
+
 const SignInWithGoogle = compose(
     withRouter,
     withFirebase,

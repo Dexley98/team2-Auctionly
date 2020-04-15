@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import routing from react router dom
 
 // added Nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
@@ -52,7 +51,7 @@ render(){
 
     return(
 
-        <React.Fragment>
+        <div className="home-wrapper">
             <Navigation />
             <hr />
         {auctionDataReceived && 
@@ -65,7 +64,7 @@ render(){
         {auctionDataReceived && 
             <ItemList items = {items} data={auctionData}></ItemList>
         }
-        </React.Fragment>
+        </div>
     )
 }
 }
@@ -216,16 +215,16 @@ class CountdownTimer extends Component{
             }
         
             timerComponents.push(
-                <span>
+                <span className={`timer-value-${Object.keys(this.state.timeLeft[interval])}`}>
                 {this.state.timeLeft[interval]} {interval}{" "}
                 </span>
             );
         });
 
         return (
-            <div>
-              <h1>{this.state.messages.timerMessage}</h1>
-              {timerComponents.length ? timerComponents : <span>{this.state.messages.endMessage}</span>}
+            <div className="timer-wrapper">
+              <h1 className="timer-message">{this.state.messages.timerMessage}</h1>
+              {timerComponents.length ? timerComponents : <span className="timer-end-message">{this.state.messages.endMessage}</span>}
             </div>
           );
     }
