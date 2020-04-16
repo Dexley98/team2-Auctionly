@@ -1,13 +1,47 @@
 .single-item-wrapper {
+        overflow: hidden ;
+        border-style: ridge ;
+        border-color: black ;
+}
+
+.single-item-wrapper .item-image-wrapper {
+        float: left;
+}
+
+.single-item-wrapper .item-info-wrapper {
+        float: right;
+        font-size: large;
+        font-color: white ;
+}
+
+.dynamic-item-wrapper {
+        overflow: hidden ;
+        border-style: ridge ;
+        border-color: black ;
+}
+
+.dynamic-item-wrapper .dynamic-item-image-wrapper .dynamic-item-image {
+        float: left ;
+}
+
+.dynamic-item-wrapper .dynamic-item-info-wrapper {
+        float: right ;
+        font-size: large ;
+	font-color: white ;
+}
+
+.cart-item-wrapper {
+	overflow: hidden ;
 	border-style: ridge ;
 	border-color: black ;
 }
 
-.single-item-wrapper .item-info-wrapper {
-	float: right ;
-	font-color: white ;
+.cart-item-wrapper .cart-item-image-wrapper .cart-item-image {
+	float: left ;
 }
 
-.single-item-wrapper .item-image-wrapper {
-	float: left ;
+.cart-item-wrapper .cart-item-info-wrapper {
+	float: right ;
+	font-size: large;
+	font-color: white ;
 }
