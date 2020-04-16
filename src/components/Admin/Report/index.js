@@ -10,13 +10,12 @@
 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-
-// added Nav Dom Exley 04/15/2020
-import Navigation from '../../Navigation';
+import { Link } from 'react-router-dom';
 
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
 import * as ROLES from '../../../constants/roles';
+import * as ROUTES from '../../../constants/routes';
 
 // add table to output firebase
 
@@ -32,7 +31,13 @@ class WinnerLog extends Component {
   render(){
     return(
       <div>
-        <Navigation />
+        <nav>
+          <ul>
+              <li>
+                  <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
+              </li>
+          </ul>
+        </nav>
         <hr />
         <h1>
           This is the Winner Log Page.
