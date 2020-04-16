@@ -178,7 +178,7 @@ class setTime extends Component {
 
         return (
 
-            <div className="auction-timer-wrapper">
+            <div className="auction-time-wrapper">
 
                 <nav className="back-to-admin-nav">
                     <ul>
@@ -188,229 +188,182 @@ class setTime extends Component {
                     </ul>
                 </nav>
 
-            <div className="auction-timer-content">
-                <form className="auction-start-form" onSubmit={this.onSubmitStartDate}>
+                <div className="auction-start-time-form-wrapper">
+                    <form className="auction-start-time-form" onSubmit={this.onSubmitStartDate}>
+                        
+                        
+                        <h1> Set Auction Start Time </h1>
+                    
+                            <h3>Current Start Time: <br/>
+                            {auctionStartMonth + " / " + auctionStartDate + " / " + auctionStartYear
+                                + " at " + auctionStartHour + ":" + auctionStartMinute
+                            } 
+                            </h3>
+                            <br />
                     
                     
-                    <h1> Set Auction Start Time </h1>
-                
-                        <h3>Current Start Time: <br/>
-                        {auctionStartMonth + " / " + auctionStartDate + " / " + auctionStartYear
-                            + " at " + auctionStartHour + ":" + auctionStartMinute
-                        } 
-                        </h3>
-                        <br />
-                
-                
-                        <input
-                            name="month"
-                            placeholder="Month"
-                            value={startMonth}
-                            onChange={this.onChange}
-                            type="number"
-                            min="1"
-                            max="12"
-                            style={{ width: "250px" }}
-                        />
-                
-                        <br />
-                        <br />
-                
-                        <input
-                            name="date"
-                            placeholder="Day"
-                            value={startDate}
-                            onChange={this.onChange}
-                            type="number"
-                            min="1"
-                            max="31"
-                            style={{ width: "250px" }}
-                        />
-                
-                    <br />
-                    <br />
+                            <input
+                                name="month"
+                                placeholder="Month"
+                                required
+                                value={startMonth}
+                                onChange={this.onChange}
+                                type="number"
+                                min="1"
+                                max="12"
+                                style={{ width: "250px" }}
                     
-                    <input
-                        name="month"
-                        placeholder="Month"
-                        required
-                        value={startMonth}
-                        onChange={this.onChange}
-                        type="number"
-                        min="1"
-                        max="12"
-                        style={{ width: "250px" }}
-
-                    />
-                    <br />
-                    <br />
-                    <input
-                        name="date"
-                        placeholder="Day"
-                        value={startDate}
-                        onChange={this.onChange}
-                        type="number"
-                        min="1"
-                        max="31"
-                        style={{ width: "250px" }}
-                        required
-                    />
+                            />
+                    
+                            <br />
+                            <br />
+                    
+                            <input
+                                name="date"
+                                placeholder="Day"
+                                value={startDate}
+                                onChange={this.onChange}
+                                type="number"
+                                min="1"
+                                max="31"
+                                style={{ width: "250px" }}
+                                required
+                            />
+                    
                         <br />
                         <br />
-                    <button type="submit">Submit</button>
-                
-                
-                </form>
-                
-                    <br />
-                
-                <form className="auction-stop-time" onSubmit={this.onSubmitEndDate}>
-                
-                    <h1> Set Auction End Time </h1>
-                
-                        <h3>Current End Time: <br />
-                            {auctionEndMonth + " / " + auctionEndDate + " / " + auctionEndYear
-                                + " at " + auctionEndHour + ":" + auctionEndMinute
-                            }
-                        </h3>
-                
-                    <br />
-                
-                        <input
-                            name="month"
-                            placeholder="Month"
-                            value={endMonth}
-                            onChange={this.onChange}
-                            type="number"
-                            min="1"
-                            max="12"
-                            style={{ width: "250px" }}
-                        />
-                    <br />
-                    <br />
                         
                         <input
-                            name="date"
-                            placeholder="Day"
-                            value={endDate}
-                            onChange={this.onChange}
-                            type="number"
-                            min="1"
-                            max="31"
-                            style={{ width: "250px" }}
+                                name="year"
+                                type="number"
+                                placeholder="Year"
+                                value={startYear}
+                                onChange={this.onChange}
+                                min="2020"
+                                max="2030"
+                                style={{ width: "250px" }}
+                                required
                         />
-                
-                <input
-                        name="year"
-                        type="number"
-                        placeholder="Year"
-                        value={startYear}
-                        onChange={this.onChange}
-                        min="2020"
-                        max="2030"
-                        style={{ width: "250px" }}
-                        required
-                />
-                <br />
-                <br />
-                <input
-                        name="hour"
-                        type="number"
-                        placeholder="Hour(0-23)"
-                        value={startHour}
-                        onChange={this.onChange}
-                        min="0"
-                        max="23"
-                        style={{ width: "250px" }}
-                        required
-                    />
-                <br />
-                <br />
-                <input
-                        name="minute"
-                        type="number"
-                        placeholder="Minute(0-59)"
-                        value={startMinute}
-                        onChange={this.onChange}
-                        min="0"
-                        max="59"
-                        style={{ width: "250px" }}
-                        required
-                />
-                    <br />
-                    <br />
-                    <input
-                        name="month"
-                        placeholder="Month"
-                        value={endMonth}
-                        onChange={this.onChange}
-                        type="number"
-                        min="1"
-                        max="12"
-                        style={{ width: "250px" }}
-                        required
-                    />
-                    <br />
-                    <br />
-                    <input
-                        name="date"
-                        placeholder="Day"
-                        value={endDate}
-                        onChange={this.onChange}
-                        type="number"
-                        min="1"
-                        max="31"
-                        style={{ width: "250px" }}
-                        required
-                    />
+                        <br />
+                        <br />
+                        <input
+                                name="hour"
+                                type="number"
+                                placeholder="Hour(0-23)"
+                                value={startHour}
+                                onChange={this.onChange}
+                                min="0"
+                                max="23"
+                                style={{ width: "250px" }}
+                                required
+                            />
+                        <br />
+                        <br />
+                        <input
+                                name="minute"
+                                type="number"
+                                placeholder="Minute(0-59)"
+                                value={startMinute}
+                                onChange={this.onChange}
+                                min="0"
+                                max="59"
+                                style={{ width: "250px" }}
+                                required
+                        />
+                            <br />
+                            <br />
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
 
                 <br />
-                <br />
-                <input
-                        name="year"
-                        type="number"
-                        placeholder="Year"
-                        value={endYear}
-                        onChange={this.onChange}
-                        min="2020"
-                        max="2030"
-                        style={{ width: "250px" }}
-                        required
-                />
-                <br />
-                <br />
-                <input
-                        name="hour"
-                        type="number"
-                        placeholder="Hour(0-23)"
-                        value={endHour}
-                        onChange={this.onChange}
-                        min="0"
-                        max="23"
-                        style={{ width: "250px" }}
-                        required
-                />
-                <br />
-                <br />
-                <input
-                        name="minute"
-                        type="number"
-                        placeholder="Minute(0-59)"
-                        value={endMinute}
-                        onChange={this.onChange}
-                        min="0"
-                        max="59"
-                        style={{ width: "250px"}}
-                        required
-                />
-                <br/>
-                <br />
-                <button type="submit">Submit</button>
 
-
-                </form>
+                <div className="auction-end-time-form-wrapper">
+                    <form className="auction-end-time-form" onSubmit={this.onSubmitEndDate}>
+                    
+                        <h1> Set Auction End Time </h1>
+                    
+                            <h3>Current End Time: <br />
+                                {auctionEndMonth + " / " + auctionEndDate + " / " + auctionEndYear
+                                    + " at " + auctionEndHour + ":" + auctionEndMinute
+                                }
+                            </h3>
+                    
+                        <br />
+                    
+                            <input
+                                name="month"
+                                placeholder="Month"
+                                value={endMonth}
+                                onChange={this.onChange}
+                                type="number"
+                                min="1"
+                                max="12"
+                                style={{ width: "250px" }}
+                                required
+                            />
+                        <br />
+                        <br />
+                            
+                            <input
+                                name="date"
+                                placeholder="Day"
+                                value={endDate}
+                                onChange={this.onChange}
+                                type="number"
+                                min="1"
+                                max="31"
+                                style={{ width: "250px" }}
+                                required
+                            />
+                    
+                        <br />
+                        <br />
+                        <input
+                                name="year"
+                                type="number"
+                                placeholder="Year"
+                                value={endYear}
+                                onChange={this.onChange}
+                                min="2020"
+                                max="2030"
+                                style={{ width: "250px" }}
+                                required
+                        />
+                        <br />
+                        <br />
+                        <input
+                                name="hour"
+                                type="number"
+                                placeholder="Hour(0-23)"
+                                value={endHour}
+                                onChange={this.onChange}
+                                min="0"
+                                max="23"
+                                style={{ width: "250px" }}
+                                required
+                        />
+                        <br />
+                        <br />
+                        <input
+                                name="minute"
+                                type="number"
+                                placeholder="Minute(0-59)"
+                                value={endMinute}
+                                onChange={this.onChange}
+                                min="0"
+                                max="59"
+                                style={{ width: "250px"}}
+                                required
+                        />
+                        <br/>
+                        <br />
+                        <button type="submit">Submit</button>
+                    
+                    
+                    </form>
+                </div>
             </div>
-        </div>
         );
     }
 }
