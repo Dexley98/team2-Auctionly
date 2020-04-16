@@ -2,6 +2,7 @@
         overflow: hidden ;
         border-style: ridge ;
         border-color: black ;
+	max-width: 600px ;
 }
 
 .single-item-wrapper .item-image-wrapper {

@@ -1,5 +1,4 @@
 .nav-bar-wrapper {
-	position: fixed;
 	top: 0;
 	left: 5px;
 	width:100%;
@@ -18,4 +17,8 @@ li {
 	float: left;
 	padding: 5px;
 	font-size: large;
+}
+
+SignOutButton {
+	float: right ;
 }

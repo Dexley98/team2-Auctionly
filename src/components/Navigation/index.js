@@ -38,8 +38,7 @@ const NavigationAuth = ({ authUser }) => (
                 </li>
             )}
         </ul>
-	<br />
-	<SignOutButton />
+	 <SignOutButton />
     </nav>
 );
 
