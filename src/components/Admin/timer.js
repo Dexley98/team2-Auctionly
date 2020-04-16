@@ -231,38 +231,29 @@ class setTime extends Component {
                     <br />
                     
                     <input
-                            name="year"
-                            type="number"
-                            placeholder="Year"
-                            value={startYear}
-                            onChange={this.onChange}
-                            min="2020"
-                            max="2030"
-                            style={{ width: "250px" }}
+                        name="month"
+                        placeholder="Month"
+                        required
+                        value={startMonth}
+                        onChange={this.onChange}
+                        type="number"
+                        min="1"
+                        max="12"
+                        style={{ width: "250px" }}
+
                     />
                     <br />
                     <br />
                     <input
-                            name="hour"
-                            type="number"
-                            placeholder="hour"
-                            value={startHour}
-                            onChange={this.onChange}
-                            min="0"
-                            max="23"
-                            style={{ width: "250px" }}
-                        />
-                    <br />
-                    <br />
-                    <input
-                            name="minute"
-                            type="number"
-                            placeholder="Minute"
-                            value={startMinute}
-                            onChange={this.onChange}
-                            min="0"
-                            max="59"
-                            style={{ width: "250px" }}
+                        name="date"
+                        placeholder="Day"
+                        value={startDate}
+                        onChange={this.onChange}
+                        type="number"
+                        min="1"
+                        max="31"
+                        style={{ width: "250px" }}
+                        required
                     />
                         <br />
                         <br />
@@ -309,50 +300,117 @@ class setTime extends Component {
                             style={{ width: "250px" }}
                         />
                 
+                <input
+                        name="year"
+                        type="number"
+                        placeholder="Year"
+                        value={startYear}
+                        onChange={this.onChange}
+                        min="2020"
+                        max="2030"
+                        style={{ width: "250px" }}
+                        required
+                />
+                <br />
+                <br />
+                <input
+                        name="hour"
+                        type="number"
+                        placeholder="Hour(0-23)"
+                        value={startHour}
+                        onChange={this.onChange}
+                        min="0"
+                        max="23"
+                        style={{ width: "250px" }}
+                        required
+                    />
+                <br />
+                <br />
+                <input
+                        name="minute"
+                        type="number"
+                        placeholder="Minute(0-59)"
+                        value={startMinute}
+                        onChange={this.onChange}
+                        min="0"
+                        max="59"
+                        style={{ width: "250px" }}
+                        required
+                />
                     <br />
                     <br />
                     <input
-                            name="year"
-                            type="number"
-                            placeholder="Year"
-                            value={endYear}
-                            onChange={this.onChange}
-                            min="2020"
-                            max="2030"
-                            style={{ width: "250px" }}
+                        name="month"
+                        placeholder="Month"
+                        value={endMonth}
+                        onChange={this.onChange}
+                        type="number"
+                        min="1"
+                        max="12"
+                        style={{ width: "250px" }}
+                        required
                     />
                     <br />
                     <br />
                     <input
-                            name="hour"
-                            type="number"
-                            placeholder="hour"
-                            value={endHour}
-                            onChange={this.onChange}
-                            min="0"
-                            max="23"
-                            style={{ width: "250px" }}
+                        name="date"
+                        placeholder="Day"
+                        value={endDate}
+                        onChange={this.onChange}
+                        type="number"
+                        min="1"
+                        max="31"
+                        style={{ width: "250px" }}
+                        required
                     />
-                    <br />
-                    <br />
-                    <input
-                            name="minute"
-                            type="number"
-                            placeholder="Minute"
-                            value={endMinute}
-                            onChange={this.onChange}
-                            min="0"
-                            max="59"
-                            style={{ width: "250px"}}
-                    />
-                    <br/>
-                    <br />
-                    <button type="submit">Submit</button>
-                
-                
-                    </form>
+
+                <br />
+                <br />
+                <input
+                        name="year"
+                        type="number"
+                        placeholder="Year"
+                        value={endYear}
+                        onChange={this.onChange}
+                        min="2020"
+                        max="2030"
+                        style={{ width: "250px" }}
+                        required
+                />
+                <br />
+                <br />
+                <input
+                        name="hour"
+                        type="number"
+                        placeholder="Hour(0-23)"
+                        value={endHour}
+                        onChange={this.onChange}
+                        min="0"
+                        max="23"
+                        style={{ width: "250px" }}
+                        required
+                />
+                <br />
+                <br />
+                <input
+                        name="minute"
+                        type="number"
+                        placeholder="Minute(0-59)"
+                        value={endMinute}
+                        onChange={this.onChange}
+                        min="0"
+                        max="59"
+                        style={{ width: "250px"}}
+                        required
+                />
+                <br/>
+                <br />
+                <button type="submit">Submit</button>
+
+
+                </form>
             </div>
-            </div>
+        </div>
         );
     }
 }
