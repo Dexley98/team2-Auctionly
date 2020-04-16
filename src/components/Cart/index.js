@@ -1,8 +1,19 @@
+
 import React, { Component } from 'react';
+
+// add nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
+
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
-import { renderIntoDocument, act } from 'react-dom/test-utils';
-import CheckoutButton from '../Checkout/CheckoutButton.js'
+
+// commented these out for warning in browser
+//import { renderIntoDocument, act } from 'react-dom/test-utils';
+//import CheckoutButton from '../Checkout/CheckoutButton.js'
+
+// commented these out for warning in browser
+//import { renderIntoDocument, act } from 'react-dom/test-utils';
+//import CheckoutButton from '../Checkout/CheckoutButton.js'
 
 
 
@@ -40,85 +51,114 @@ class CartPage extends Component{
 
 
     render(){
-        if(this.state.loading == false)
+        if(this.state.loading === false)
         {
             let itemList = this.state.item;
             let activeBidList = [];
             let uid = this.props.firebase.auth.W;
+            let key = ""
             let keyList = this.state.keys;
             let x = 0;
-            for (x in keyList) {
-                if (itemList[keyList[x]]["bidList"][uid]) {
+            for(x in keyList){
+                if(itemList[keyList[x]]["bidList"][this.props.firebase.auth.W]){
                     console.log(keyList[x] + " exists!")
-                    activeBidList.push(itemList[keyList[x]])               }
+                    activeBidList.push(itemList[keyList[x]])
+            
+                }
             }
 
 
             x=0
             for(x in activeBidList)
             {
-                let highestBid = 0
+                let highestBid = 0;
                 let currentUser = false;
-                let bidList = activeBidList[x]["bidList"]
-                let y = 0
+                let bidList = activeBidList[x]["bidList"];
+                let y = 0;
                 for(y in bidList)
                 {
                     if(bidList[y] > highestBid)
                     {
                         highestBid = bidList[y]
-                        if(y==uid)
+                        if(y===uid)
                         {
                             currentUser = " You have the current highest bid! ";
                         }
                         else
                         {
-                            currentUser = " "
+                            currentUser = " ";
                         }
                     }
                 }
                 activeBidList[x]["currentUser"] = currentUser;
                 activeBidList[x]["highestBid"] = highestBid;
-                if((activeBidList[x]["available"] == false) && (activeBidList[x]["currentUser"] == " You have the current highest bid! "))
+                if((activeBidList[x]["available"] === false) && (activeBidList[x]["currentUser"] === " You have the current highest bid! "))
                 {
-                    activeBidList[x]["checkoutAvailable"] = <CheckoutButton name={activeBidList[x]["name"]} amount={highestBid*100}></CheckoutButton>;
+                    console.log(activeBidList[x]);
+                    activeBidList[x]["checkoutAvailable"] =  true;
+
                 }
             }
-            // console.log(highestBid + " " + currentUser)
-            // console.log(activeBidList)
 
-            for(x in keyList)
-            return(
-                <div>
-                    <ItemList items={activeBidList} uid={uid}></ItemList>
-                </div>
-            )
+            for(x in keyList) {
+                console.log(keyList[x]);
+                return(
+                    <div>
+                        <Navigation />
+                        <hr />
+                        <ItemList items={activeBidList} uid={uid}></ItemList>
+                    </div>
+                )
+            }
         }
         else
         {
             return(
-                <h2>
-                loading...
-                </h2>
+                <div>
+                    <Navigation />
+                    <hr />
+                    <h2>
+                    loading...
+                    </h2>
+                </div>
             )
         }
-        // console.log(item)
-        // if(item["one"]["bidList"][this.props.firebase.auth.W]){
-        //     console.log("exists")
-        // }
-        // <ActiveBidList items = {items}></ActiveBidList>
         
     }
 
     
 }
+const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
 
-const ItemList = ({ items, uid }) => (
+
+const handleClick = (stripe, item) => {
+    // console.log(item)
+    let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
+    fetch('http://localhost:8000/processJSON.php', {
+        headers: {
+          // Accept: 'application/json',
+          'Content-Type': 'text/plain',
+        },
+        // credentials: "include",
+        method: 'POST',
+        body: string
+      })
+      .then(response => {
+        response.text().then(text=> {
+            console.log(text.trim())
+            stripe.redirectToCheckout({
+                sessionId: text.trim()
+                })
+        })
+        });
+      }
+
+const ItemList = ({ items, uid, itemKey}) => (
     <ul>
         {items.map(item => (
-                // <Link to={`item/${itemNametoUrlString(item.name)}`}>
                     <li key={item.name}>
                         <span>
-                            <img src={item.imageUrl} width="200px" height = "200px"/>
+                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
                             <br />
                             {item.name}
                             <strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}
@@ -127,11 +167,12 @@ const ItemList = ({ items, uid }) => (
                             <br /> 
                             {item.description}
                             <br></br>
-                            {item.checkoutAvailable}
+                            {item.checkoutAvailable === true && 
+                                <button onClick = { ()=> handleClick(stripe, item)}>Checkout</button>
+                            }
                     
                         </span>
                     </li>
-                // </Link>
         ))}
     </ul>
 );

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+// add nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
+
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
@@ -56,14 +60,15 @@ class ItemPage extends Component{
                 const itemObject = snapshot.val();
                 console.log(itemObject)
                 //console.log('item object ', itemObject["three"]);
-                const keyList = Object.keys(itemObject);
+                // const keyList = Object.keys(itemObject);
                 // console.log(itemObject)
                 //console.log('key ', keyList)
                 //console.log('item to assign to state ', itemObject[keyList[0]])
                 this.setState({
                     item: itemObject,
                     key: dbItemKey,
-                    loading: false
+                    loading: false,
+                    highestBid: (itemObject.startPrice)
                 });
             })
         //console.log('state.item ',this.state.item);
@@ -75,36 +80,40 @@ class ItemPage extends Component{
     render(){
         const item = this.state.item;
         const bidList = this.state.item['bidList']
-        let x = 0
+        let x
         for(x in bidList){
             if(bidList[x] > this.state.highestBid)
             {
+                console.log("BIDLIST")
+                console.log(bidList[x])
                 this.setState({highestBid:bidList[x]})
                 // highestBid = bidList[x]
                 this.setState({highestBidder : x}) 
+
             }
         }
         // this.setState({highestBid:highestBidd})
         return(
             // same thing as React.Fragment / different syntax. May not need but here for now.
-            <>
             <div>
-                <img src={item.imageUrl} width="200px" height = "200px"/>
-                <h1>{item.name}</h1>
-                <p>{item.description}</p>
-                <p>Start Price: ${(item.startPrice/1).toFixed(2)}</p>
-                <p> Highest Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
-                <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
+                <Navigation />
+                <hr />
+                <div>
+                    <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
+                    <h1>{item.name}</h1>
+                    <p>{item.description}</p>
+                    <p> Current Minimum Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
+                    <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
 
-                <form onSubmit={this.handleBid}>
-                $<input type="number" step="5" min={this.state.highestBid + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
-                </form>
+                    <form onSubmit={this.handleBid}>
+                    $<input type="number" step="5" min={Number(this.state.highestBid) + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
+                    </form>
 
-                <form onSubmit={this.handleBuyout}>
-                <input type ="submit" value="Buyout"/>
-                </form>
+                    <form onSubmit={this.handleBuyout}>
+                    <input type ="submit" value="Buyout"/>
+                    </form>
+                </div>
             </div>
-            </>
         )
     }
 
@@ -116,7 +125,7 @@ class ItemPage extends Component{
     handleBid = (event) => {
         event.preventDefault();
         let bid = Number(this.state.bidValue)
-        if(this.state.item["available"] == true)
+        if(this.state.item["available"] === true)
         {
             this.props.firebase.db.ref("items/"+ this.state.key + "/bidList").update({[this.props.firebase.auth.W]:bid})
         }
@@ -134,7 +143,7 @@ class ItemPage extends Component{
         }
         else
         {
-            if(this.state.item["available"] == true)
+            if(this.state.item["available"] === true)
             {
                 this.props.firebase.db.ref("items/"+ this.state.key + "/bidList").update({[this.props.firebase.auth.W]:buyout})
                 this.props.firebase.db.ref("items/"+ this.state.key).update({available:false})
@@ -145,25 +154,6 @@ class ItemPage extends Component{
         }
     }
 }
-
-
-// const urlStringToItemName = (param) => {
-//     //split url on - delim
-//     let splitUrlList = param.split("-");
-//     let itemNameString = '';
-
-//     // create name string to ref to db. if index is last in array don't add space.
-//     // if there are dashes in the name this WILL FUCK UP. Probably going to have to account for that in item upload.
-//     for(let i=0; i<splitUrlList.length; i++){
-//         if(i != splitUrlList.length - 1){
-//             itemNameString += `${splitUrlList[i]} `;
-//         }else{
-//             itemNameString += splitUrlList[i];
-//         }
-//     }
-//     // return string to name ref in db.
-//     return itemNameString;
-// };
 
 const condition = authUser => !!authUser;
 

@@ -10,11 +10,8 @@
 
 import React from 'react';
 import {
-    BrowserRouter as Router, Route, Switch,
+    BrowserRouter as Router, Route
 } from 'react-router-dom';
-
-/************** Start Utility Components ******************/
-import Navigation from '../Navigation';
 
 /************** Start Page Components *********************/
 import LandingPage from '../Landing';
@@ -24,11 +21,11 @@ import PasswordForgetPage from '../PasswordForget';
 import AccountPage from '../Account';
 
 // Admin Page Components
+import PasswordRedirect from '../PasswordRedirect'
 import { AdminPage, UsersPage, EditItemPage, setTime } from '../Admin';
 import AddItemForm from '../Admin/AddItemForm';
 import Report from '../Admin/Report';
 import WinnerLog from '../Admin/WinnerLog';
-
 
 // Auction Management Page Components
 import HomePage from '../Home';
@@ -43,16 +40,15 @@ import { WithAuthentication } from '../Session';
 const App = () => (
     <Router>
         <div>
-            <Navigation />
-
-            <hr />
 
             <Route exact path={ROUTES.LANDING} component={LandingPage} />
             <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
             <Route path={ROUTES.SIGN_IN} component={SignInPage} />
             <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+            {/* These Don't need nav bar. */}
             <Route path={ROUTES.HOME} component={HomePage} />
             <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+            <Route path={ROUTES.ACCOUNT_PW_CHANGED} component={PasswordRedirect} />
             <Route exact path={ROUTES.ADMIN} component={AdminPage} />
             <Route path={ROUTES.USERS} component={UsersPage} />
             <Route path={ROUTES.ADMIN_ADD_ITEM} component={AddItemForm} />

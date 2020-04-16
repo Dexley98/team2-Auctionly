@@ -24,6 +24,7 @@ class EditItemForm extends Component {
             buyItNow: '',
             imageUrl: '',
             bidList: {},
+            image: null,
         };
 
     }
@@ -59,35 +60,41 @@ class EditItemForm extends Component {
 
     handleUpload = () => {
         const { image } = this.state;
-        const uploadTask = this.props.firebase.storage.ref(`images/${image.name}`).put(image);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                // image upload progress function
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress });
-            },
-            error => {
-                // Error function
-                console.log(error);
-            }
-            , () => {
-                // Get the URL function
-                this.props.firebase.storage
-                    .ref("images")
-                    .child(image.name)
-                    .getDownloadURL()
-                    .then(url => {
-                        this.setState({
-                            url
-                        });
 
-                        this.state.imageUrl = url;
-                    });
-            }
-        );
+        if (this.state.image === null) {
+            alert("No image has been selected")
+        }
+        else {
+            const uploadTask = this.props.firebase.storage.ref(`images/${image.name}`).put(image);
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    // image upload progress function
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    this.setState({ progress });
+                },
+                error => {
+                    // Error function
+                    console.log(error);
+                }
+                , () => {
+                    // Get the URL function
+                    this.props.firebase.storage
+                        .ref("images")
+                        .child(image.name)
+                        .getDownloadURL()
+                        .then(url => {
+                            this.setState({
+                                url
+                            });
+
+                            this.state.imageUrl = url;
+                        });
+                }
+            );
+        }
     };
 
     onChange = event => {
