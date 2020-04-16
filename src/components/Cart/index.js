@@ -107,7 +107,7 @@ class CartPage extends Component{
                 return(
                     <div className="cart-page-wrapper">
                         <Navigation />
-                        <hr />
+                        {/* <hr /> */}
                         <CartItemList items={activeBidList} uid={uid}></CartItemList>
                     </div>
                 )

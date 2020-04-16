@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import './index.css' ;
+import SignOutButton from '../SignOut';
 // added Nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
 
@@ -55,7 +56,7 @@ render(){
 
         <div className="home-wrapper">
             <Navigation />
-            <hr />
+            {/* <hr /> */}
         {auctionDataReceived && 
             <CountdownTimer data = {auctionData}/>
         }
@@ -64,6 +65,7 @@ render(){
         {auctionDataReceived && 
             <ItemList items = {items} data={auctionData}></ItemList>
         }
+        <SignOutButton />
         </div>
     )
 }

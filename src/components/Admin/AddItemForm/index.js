@@ -132,9 +132,9 @@ class AddItemForm extends Component {
 
 
       return (
-          <div className="add-item-wrapper">
+          <div>
 
-              <nav className="back-to-admin-nav">
+              <nav>
                   <ul>
                       <li>
                           <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
@@ -142,53 +142,48 @@ class AddItemForm extends Component {
                   </ul>
               </nav>
 
-              <div className="add-item-content">
-                  <div className="add-item-image-upload">
-                      <img
-                          src={this.state.url || "https://via.placeholder.com/400x300"}
-                          alt="Uploaded Images"
-                          height="300"
-                          width="400"
-                      />
-                      
-                      <br />
-                      
-                      <input type="file" onChange={this.handleChange} />
-                      
-                      <br />
-                      <br />
-                      
-                      <progress value={this.state.progress} max="100" className="progress" />
-                      
-                      <br />
-                      
-                      <button onClick={this.handleUpload} >Upload Picture </button>
-                      
-                      <br />
-                  </div>
+              <img
+                  src={this.state.url || "https://via.placeholder.com/400x300"}
+                  alt="Uploaded Images"
+                  height="300"
+                  width="400"
+                  style={{padding:"10px"}}
+              />
+
+              <br />
+
+              <input type="file" onChange={this.handleChange} />
+
+              <br />
+              <br />
+
+              <progress value={this.state.progress} max="100" className="progress" />
+
+              <br />
+
+              <button onClick={this.handleUpload} >Upload Picture </button>
+
+              <br />
+
+              <form onSubmit={this.onSubmit}>
+              
+                    <input name="name" placeholder="Item Name" value={name} onChange={this.onChange} type="text" />
+        
+                    <br />
+                    <input name="description" placeholder="Item Description" value={description} onChange={this.onChange} type="text" />
+        
+                    <br />
+                    <input name="startPrice" type="text" placeholder="Starting Bid Price" value={startPrice} onChange={this.onChange} />
+        
+                    <br />
+                    <input name="buyItNow" type="text" placeholder="Buy It Now Price" value={buyItNow} onChange={this.onChange} />
                   
-                  <div className="add-item-form">
-                      <form onSubmit={this.onSubmit}>
-                      
-                            <input name="name" placeholder="Item Name" value={name} onChange={this.onChange} type="text" />
-                      
-                            <br />
-                            <input name="description" placeholder="Item Description" value={description} onChange={this.onChange} type="text" />
-                      
-                            <br />
-                            <input name="startPrice" type="text" placeholder="Starting Bid Price" value={startPrice} onChange={this.onChange} />
-                      
-                            <br />
-                            <input name="buyItNow" type="text" placeholder="Buy It Now Price" value={buyItNow} onChange={this.onChange} />
-                          
-                            <br />
-                            <br />
-                      
-                            <button type="submit" >Submit </button>
-                        
-                      </form>
-                  </div>
-              </div>
+                    <br />
+                    <br />
+
+                    <button type="submit" >Submit </button>
+                
+              </form>
 
               
               

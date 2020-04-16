@@ -181,86 +181,78 @@ class EditItemForm extends Component {
         return (
             // same thing as React.Fragment / different syntax. May not need but here for now.
             <>
-                <div className="dynamic-edit-item-wrapper">
-                    <nav className="back-to-main-edit">
+                <div>
+                    <h1> Edit Item </h1>
+
+                    <nav>
                         <ul>
                             <li>
-                                <Link to={ROUTES.EDIT_ITEM}>Back to Main Item Edit Page</Link>
+                                <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
                             </li>
                         </ul>
                     </nav>
+                   
+                    <img src={item.imageUrl} width="200px" height="200px" />
+                    <h1>{item.name}</h1>
+                    <p>Item description: {item.description}</p>
+                    <p>Start Price: ${(item.startPrice / 1).toFixed(2)}</p>
+                    <p>Buy it Now Price: ${(item.buyItNow / 1).toFixed(2)}</p>
 
-                    <div className="dynamic-edit-item-content">
-                        <h1> Edit Item </h1>
-                        
-                        
-                        
-                        <div className="dynamic-edit-item-info">
-                            <img src={item.imageUrl} width="200px" height="200px" />
-                            <h1>{item.name}</h1>
-                            <p>Item description: {item.description}</p>
-                            <p>Start Price: ${(item.startPrice / 1).toFixed(2)}</p>
-                            <p>Buy it Now Price: ${(item.buyItNow / 1).toFixed(2)}</p>
-                        </div>
-                        
-                        <div className="dynamic-edit-item-forms">
-                            <form classname="dynamic-edit-item-name-form" onSubmit={this.onEditName}>
-                                <input
-                                    name="name"
-                                    placeholder="Item Name"
-                                    value={name}
-                                    onChange={this.onChange}
-                                    type="text"
-                                />
-                                <button type="submit">Update</button>
-                            </form>
-                            
-                            <form classname="dynamic-edit-item-description-form" onSubmit={this.onEditDescription}>
-                                <input
-                                    name="description"
-                                    placeholder="Description"
-                                    value={description}
-                                    onChange={this.onChange}
-                                    type="text"
-                                />
-                                <button type="submit">Update</button>
-                            </form>
-                            
-                            <form classname="dynamic-edit-item-start-price-form"onSubmit={this.onEditStartPrice}>
-                                <input
-                                    name="startPrice"
-                                    placeholder="Start Price"
-                                    value={startPrice}
-                                    onChange={this.onChange}
-                                    type="text"
-                                />
-                                <button type="submit">Update</button>
-                            </form>
-                            
-                            <form classname="dynamic-edit-item-buy-it-now-form" onSubmit={this.onEditBuyItNow}>
-                                <input
-                                    name="buyItNow"
-                                    placeholder="Buy it now price"
-                                    value={buyItNow}
-                                    onChange={this.onChange}
-                                    type="text"
-                                />
-                                <button type="submit">Update</button>
-                            </form>
-                            
-                            <form classname="dynamic-edit-item-image-form" onSubmit={this.onEditImageUrl}>
-                                <input type="file" onChange={this.handleChange} />
-                                {' '}
-                                <progress value={this.state.progress} max="100" className="progress" />
-                                <br />
-                                <button onClick={this.handleUpload} >Upload Picture </button> {'  '}
-                                <button type="submit">Update</button>
-                            </form>
-                            <br></br>
-                            
-                            <button className="dynamic-edit-item-remove-button" onClick={this.onRemoveItem}>Remove Item</button>
-                        </div>
-                    </div>
+                    <form onSubmit={this.onEditName}>
+                        <input
+                            name="name"
+                            placeholder="Item Name"
+                            value={name}
+                            onChange={this.onChange}
+                            type="text"
+                        />
+                        <button type="submit">Update</button>
+                    </form>
+
+                    <form onSubmit={this.onEditDescription}>
+                        <input
+                            name="description"
+                            placeholder="Description"
+                            value={description}
+                            onChange={this.onChange}
+                            type="text"
+                        />
+                        <button type="submit">Update</button>
+                    </form>
+
+                    <form onSubmit={this.onEditStartPrice}>
+                        <input
+                            name="startPrice"
+                            placeholder="Start Price"
+                            value={startPrice}
+                            onChange={this.onChange}
+                            type="text"
+                        />
+                        <button type="submit">Update</button>
+                    </form>
+
+                    <form onSubmit={this.onEditBuyItNow}>
+                        <input
+                            name="buyItNow"
+                            placeholder="Buy it now price"
+                            value={buyItNow}
+                            onChange={this.onChange}
+                            type="text"
+                        />
+                        <button type="submit">Update</button>
+                    </form>
+
+                    <form onSubmit={this.onEditImageUrl}>
+                        <input type="file" onChange={this.handleChange} />
+                        {' '}
+                        <progress value={this.state.progress} max="100" className="progress" />
+                        <br />
+                        <button onClick={this.handleUpload} >Upload Picture </button> {'  '}
+                        <button type="submit">Update</button>
+                    </form>
+                    <br></br>
+
+                    <button onClick={this.onRemoveItem}>Remove Item</button>
                 </div>
             </>
         )

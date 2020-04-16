@@ -1,0 +1,19 @@
+.back-to-admin-nav {
+	text-align: center
+}
+
+li {
+	font-size: large;
+}
+
+.add-item-wrapper .add-item-content .add-item-image-upload {
+	overflow: hidden ;
+}
+
+.add-item-wrapper .add-item-content .add-item-image-upload {
+	float: left ;
+}
+
+.add-item-wrapper .add-item-content .add-item-form {
+	float: right ;
+}

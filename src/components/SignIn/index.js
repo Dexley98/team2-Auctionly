@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
+// for formating of higher order components
 import { compose } from 'recompose';
 
 import { SignUpLink } from '../SignUp';
@@ -10,9 +11,11 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 import GoogleButton from 'react-google-button'
+import PropTypes from 'prop-types';
+import './index.scss'
 
 const SignInPage = () => (
-    <div className="sign-in-wrapper">
+    <div>
         <h1> Sign In</h1>
         <SignInForm />
         <PasswordForgetLink />
@@ -20,6 +23,30 @@ const SignInPage = () => (
         <SignInWithGoogle />
     </div>
 );
+
+
+const propTypes = {
+    children: PropTypes.node.isRequired,
+    contentCenter: PropTypes.bool
+};
+
+const defaultProps = {
+    contentCenter: false
+};
+
+const Layout = ({ children, contentCenter }) => {
+    return (
+        <section>
+            <header>
+                <h1> or </h1>
+            </header>
+            <main className={contentCenter ? 'content-center' : ''}>{children}</main>
+        </section>
+    );
+};
+
+Layout.propTypes = propTypes;
+Layout.defaultProps = defaultProps;
 
 // use this to reset state after successful sign in
 const INITIAL_STATE = {
@@ -29,9 +56,14 @@ const INITIAL_STATE = {
     error: null,
 };
 
-const ERROR_CODE_ACCOUNT_EXISTS = "auth/account-exists-with-different-credential";
+const ERROR_CODE_ACCOUNT_EXISTS =
+    'auth/account-exists-with-different-credential';
 
-const ERROR_MSG_ACCOUNT_EXISTS = " An account with an E-Mail address to this social account already exists.";
+const ERROR_MSG_ACCOUNT_EXISTS = `
+  An account with an E-Mail address to
+  this social account already exists. Try to login from
+  this account instead and associate your social accounts on
+  your personal account page.`;
 
 
 class SignInWithGoogleBase extends Component {
@@ -42,8 +74,6 @@ class SignInWithGoogleBase extends Component {
 
     onSubmit = event => {
 
-        event.preventDefault();
-
         const roles = {};
         roles[ROLES.USER] = ROLES.USER;
 
@@ -51,18 +81,13 @@ class SignInWithGoogleBase extends Component {
             .doSignInWithGoogle()
             .then(socialAuthUser => {
                 // Create a user in your Firebase Realtime Database too
-                console.log('This is the socialAuther', socialAuthUser)
-                console.log('IsNewUser', socialAuthUser.additionalUserInfo.isNewUser)
-                if (socialAuthUser.additionalUserInfo.isNewUser === true)
-                {
-                        return this.props.firebase
-                        .user(socialAuthUser.user.uid)
-                        .set({
-                            username: socialAuthUser.user.displayName,
-                            email: socialAuthUser.user.email,
-                            roles,
-                        });
-                }
+                return this.props.firebase
+                    .user(socialAuthUser.user.uid)
+                    .set({
+                        username: socialAuthUser.user.displayName,
+                        email: socialAuthUser.user.email,
+                        roles,
+                    });
             })
             .then(() => {
                 this.setState({ error: null });
@@ -75,13 +100,18 @@ class SignInWithGoogleBase extends Component {
                 this.setState({ error });
             });
 
-        
+        event.preventDefault();
     };
-
+//    <form onSubmit={this.onSubmit}>
+//    <Layout contentCenter={true}>
+//        <button type="submit">Sign In with Google</button>
+//        {error && <p>{error.message}</p>}
+//    </Layout>
+//</form>
     render() {
         const { error } = this.state;
         return (
-
+            <Layout contentCenter={true}>
             <form onClick={this.onSubmit}>
                     <GoogleButton
 
@@ -90,6 +120,7 @@ class SignInWithGoogleBase extends Component {
 
                     {error && <p>{error.message}</p>}
                 </form>
+            </Layout>
         );
         
     }
@@ -127,7 +158,7 @@ class SignInFromBase extends Component {
         const isInvalid = password === '' || email === '';
  
         return (
-            <form className="sign-in-form" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
                 <input
                     name="email"
                     value={email}

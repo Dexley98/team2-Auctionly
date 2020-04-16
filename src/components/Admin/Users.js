@@ -39,8 +39,8 @@ class UsersPage extends Component {
         const { users, loading } = this.state;
 
         return (
-            <div className="view-users-wrapper">
-                <nav className="back-to-admin-nav">
+            <div>
+                <nav>
                     <ul>
                         <li>
                             <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
@@ -48,13 +48,12 @@ class UsersPage extends Component {
                     </ul>
                 </nav>
 
-                <div className="view-users-content">
-                    <h1>USERS</h1>
-                    
-                    {loading && <div>Loading ...</div>}
-                    
-                    <UserList users={users} dbref={this.state.db} />
-                </div>
+                <h1>USERS</h1>
+
+                {loading && <div>Loading ...</div>}
+
+                <UserList users={users} dbref={this.state.db} />
+
                 
             </div>
         );
@@ -65,10 +64,10 @@ class UsersPage extends Component {
 
 
 const UserList = ({ users, dbref }) => (
-    <ul className="users-list-wrapper">
+    <ul style={{textAlign:"center"}}>
         {
             users.map(user => (
-                <li key={user.uid}>
+                <li key={user.uid} style={{backgroundColor:"black", width:"100%"}}>
                     <span>
                         <strong> Username:</strong> {user.username}
                     </span>

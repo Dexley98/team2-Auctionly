@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
+import SignOutButton from '../SignOut';
+
 
 // added Nav Dom Exley 04/15/2020
 import AdminNavigation from '../AdminNav';
@@ -11,19 +13,15 @@ import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
 
 const AdminPage = () => (
-    <div className="main-admin-page-wrapper">
+    <div>
         <AdminNavigation />
-        <div className="main-admin-content">
-            <h1> Admin Page </h1>
-            <div className="main-admin-links-wrapper">
-                <ViewUsersRedirect />
-                <AddAnItemRedirect />
-                <ViewWinnerLogRedirect />
-                <ViewReportLogRedirect />
-                <EditItemRedirect />
-                <SetAuctionlyTimerRedirect />
-            </div>
-        </div>
+        <h1 style={{textAlign:"center",padding:'10px'}}> Admin Page </h1>
+        <ViewUsersRedirect />
+        <AddAnItemRedirect />
+        <ViewWinnerLogRedirect />
+        <ViewReportLogRedirect />
+        <EditItemRedirect />
+        <SetAuctionlyTimerRedirect />
     </div>
 );
 
@@ -41,10 +39,12 @@ class ViewUsers extends Component {
 
     render() {
         return (
-            <form className="view-users-button-wrapper" onSubmit={this.onSubmit}>
-                <button className="view-users-button"> 
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
+
+                <button> 
                     View Users
                 </button>
+                
             </form>
         );
     }
@@ -62,10 +62,12 @@ class AddAnItem extends Component {
 
     render() {
         return (
-            <form className="add-item-button-wrapper" onSubmit={this.onSubmit}>
-                <button className="add-item-button">
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
+
+                <button>
                     Add an Item
                 </button>
+
             </form>
         );
     }
@@ -83,9 +85,9 @@ class ViewWinnerLog extends Component {
 
     render() {
         return (
-            <form className="winner-log-button-wrapper" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
-                <button className="winner-log-button">
+                <button>
                     View Winners Log
                 </button>
 
@@ -106,9 +108,9 @@ class ViewReportLog extends Component {
 
     render() {
         return (
-            <form className="view-report-button-wrapper" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
-                <button className="view-report-button">
+                <button>
                     View Report Log
                 </button>
 
@@ -129,9 +131,9 @@ class EditItem extends Component {
 
     render() {
         return (
-            <form className="edit-item-button-wrapper" onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
-                <button className="edit-item-button">
+                <button>
                     Edit Auction Items
                 </button>
 
@@ -152,13 +154,17 @@ class SetAuctionlyTimer extends Component {
 
     render() {
         return (
-            <form className="set-timer-button-wrapper" onSubmit={this.onSubmit}>
+            <>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
-                <button className="set-timer-button">
+                <button>
                     Set Auction Time
                 </button>
 
             </form>
+
+            <SignOutButton style={{width:"500px"}} />
+            </>
         );
     }
 }

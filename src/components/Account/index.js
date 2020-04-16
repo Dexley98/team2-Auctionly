@@ -1,5 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
+import './index.css' ;
 
 // add Nav from 04/15/2020
 import Navigation from '../Navigation';
@@ -16,7 +17,7 @@ const AccountPage = () => (
         {authUser => (
             <>
                 <Navigation />
-                <hr />
+                {/* <hr /> */}
                 <div className="account-page-wrapper">
                     <h1>Welcome {authUser.username}</h1>
                     <h2>{authUser.email}</h2>

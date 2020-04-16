@@ -1,0 +1,26 @@
+.admin-nav-bar-wrapper {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #5f439c ;
+	color: white;
+	border-radius:5px;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #5f439c ;
+	color: white;
+	border-radius:5px;
+}
+
+li {
+	float: left;
+	padding: 30px;
+	font-size: large;
+}
+
