@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 // added Nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
 
+import SingleItem from '../Item/SingleItem';
+
 import {Link} from 'react-router-dom'
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
@@ -109,42 +111,37 @@ class ItemList extends Component{
         }
         
         if(preAuction || postAuction){
+            return (
+                <div className="item-list-wrapper">
+                    {this.props.items.map( (item) => (
+                        <SingleItem
+                            itemId={item.id}
+                            imageUrl={item.imageUrl}
+                            itemName={item.name}
+                            buyItNow={item.buyItNow}
+                            startPrice={item.startPrice}
+                            itemDescription={item.description} 
+                        />))
+                    }
+                </div>
+            )  
+        }
+        else{
             return(
-                <ul>
-                {this.props.items.map(item => (
-                    <li key={item.id}>
-                        <span>
-                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                            <br />
-                            {item.name}
-                            <strong> Buy Now: </strong> {item.buyItNow}
-                            <strong> Starting Price: </strong> {item.startPrice}
-                            <br></br> {item.description}
-                    
-                        </span>
-                    </li>
-                ))}
-                </ul>
-            )
-        }else{
-            return(
-                <ul>
+                <div className="item-list-during-wrapper">
                     {this.props.items.map(item => (
                     <Link to={`item/${item.id}`}>
-                        <li key={item.name}>
-                            <span>
-                                <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                                <br />
-                                {item.name}
-                                <strong> Buy Now: </strong> {item.buyItNow}
-                                <strong> Starting Price: </strong> {item.startPrice}
-                                <br></br> {item.description}
-                        
-                            </span>
-                        </li>
-                    </Link>
-                    ))}
-                </ul>
+                       <SingleItem
+                            itemId={item.id}
+                            imageUrl={item.imageUrl}
+                            itemName={item.name}
+                            buyItNow={item.buyItNow}
+                            startPrice={item.startPrice}
+                            itemDescription={item.description} 
+                        /> 
+                    </Link>))
+                    }
+                </div>
             )
         }
     }
