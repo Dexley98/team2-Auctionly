@@ -12,7 +12,7 @@ export default class SingleItem extends Component {
             if(this.props.activeLink){
                 return(
                     <div id={this.props.itemId} className="single-item-wrapper">
-                        <Link to={`item/${this.props.itemId}`}>
+                        <Link className="single-item-link" to={`item/${this.props.itemId}`}>
                         <div className="item-image-wrapper">
                             <img className="item-image" src={this.props.imageUrl} width="200px" height = "200px" alt={this.props.itemName}/>
                         </div>
