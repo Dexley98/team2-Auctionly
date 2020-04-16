@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class SingleItem extends Component {
     constructor(props){
@@ -8,20 +9,42 @@ export default class SingleItem extends Component {
     
     render() {
         if(!this.props.cartItem){
-            return (
-                <div id={this.props.itemId} className="single-item-wrapper">
-                    <div className="item-image-wrapper">
-                        <img className="item-image" src={this.props.imageUrl} width="200px" height = "200px" alt={this.props.itemName}/>
+            if(this.props.activeLink){
+                return(
+                    <div id={this.props.itemId} className="single-item-wrapper">
+                        <Link to={`item/${this.props.itemId}`}>
+                        <div className="item-image-wrapper">
+                            <img className="item-image" src={this.props.imageUrl} width="200px" height = "200px" alt={this.props.itemName}/>
+                        </div>
+                        <div className="item-info-wrapper">
+                            <h2>{this.props.itemName}</h2>
+                            <p>Buy Now: ${parseInt(this.props.buyItNow, 10).toFixed(2)}</p>
+                            <p>Starting Price: ${parseInt(this.props.startPrice, 10).toFixed(2)}</p>
+                            <p>{this.props.itemDescription}</p>
+                        </div>
+                        </Link>
                     </div>
-                    <div className="item-info-wrapper">
-                        <h2>{this.props.itemName}</h2>
-                        <p>Buy Now: ${parseInt(this.props.buyItNow, 10).toFixed(2)}</p>
-                        <p>Starting Price: ${parseInt(this.props.startPrice, 10).toFixed(2)}</p>
-                        <p>{this.props.itemDescription}</p>
+                )
+            }
+            else{
+                return (
+                    <div id={this.props.itemId} className="single-item-wrapper">
+                        <div className="item-image-wrapper">
+                            <img className="item-image" src={this.props.imageUrl} width="200px" height = "200px" alt={this.props.itemName}/>
+                        </div>
+                        <div className="item-info-wrapper">
+                            <h2>{this.props.itemName}</h2>
+                            <p>Buy Now: ${parseInt(this.props.buyItNow, 10).toFixed(2)}</p>
+                            <p>Starting Price: ${parseInt(this.props.startPrice, 10).toFixed(2)}</p>
+                            <p>{this.props.itemDescription}</p>
+                        </div>
                     </div>
-                </div>
-            )
-        }else{
+                )
+            }
+            
+        }
+        // if this is a cart page item.
+        else{
             return(
                 <div className="cart-item-wrapper">
                     <div className="cart-item-image-wrapper">

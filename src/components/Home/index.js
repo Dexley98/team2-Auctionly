@@ -115,6 +115,7 @@ class ItemList extends Component{
                 <div className="item-list-wrapper">
                     {this.props.items.map( (item) => (
                         <SingleItem
+                            activeLink = {false}
                             itemId={item.id}
                             imageUrl={item.imageUrl}
                             itemName={item.name}
@@ -130,16 +131,15 @@ class ItemList extends Component{
             return(
                 <div className="item-list-wrapper">
                     {this.props.items.map(item => (
-                    <Link to={`item/${item.id}`}>
                        <SingleItem
+                            activeLink = {true}
                             itemId={item.id}
                             imageUrl={item.imageUrl}
                             itemName={item.name}
                             buyItNow={item.buyItNow}
                             startPrice={item.startPrice}
                             itemDescription={item.description} 
-                        /> 
-                    </Link>))
+                        />))
                     }
                 </div>
             )
