@@ -67,9 +67,10 @@ const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
             <Link to={`edit/${item.id}`}>
-                <li key={item.name}>
+                <li key={item.name} style={{width:"100%"}}>
                     <span>
-                        <img src={item.imageUrl} width="200px" height="200px" />
+                        <br />
+                        <img src={item.imageUrl} width="200px" height="200px"/>
                         <br />
                         {item.name}
                         <strong> Buy Now: </strong> {item.buyItNow}

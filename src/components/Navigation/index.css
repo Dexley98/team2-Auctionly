@@ -1,7 +1,7 @@
 .nav-bar-wrapper {
 	top: 0;
 	left: 5px;
-	width:99%;
+	width:100%;
 }
 
 ul {
@@ -9,13 +9,23 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #e3e3e3 ;
-    color: #5f439c
+    background-color: #5f439c ;
+	color: white;
+	border-radius:5px;
 }
 
+.nav-list-authorized{
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #5f439c ;
+	color: white;
+	border-radius:5px;
+}
 li {
 	float: left;
-	padding: 5px;
+	padding: 10px;
 	font-size: large;
 }
 

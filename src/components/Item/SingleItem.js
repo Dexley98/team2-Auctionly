@@ -12,8 +12,9 @@ export default class SingleItem extends Component {
         if(!this.props.cartItem && !this.props.dynamicItem){
             if(this.props.activeLink){
                 return(
+                    <Link className="single-item-link" to={`item/${this.props.itemId}`}>
                     <div id={this.props.itemId} className="single-item-wrapper">
-                        <Link className="single-item-link" to={`item/${this.props.itemId}`}>
+
                         <div className="item-image-wrapper">
                             <img className="item-image" src={this.props.imageUrl} width="200px" height = "200px" alt={this.props.itemName}/>
                         </div>
@@ -23,8 +24,8 @@ export default class SingleItem extends Component {
                             <p>Starting Price: ${parseInt(this.props.startPrice, 10).toFixed(2)}</p>
                             <p>{this.props.itemDescription}</p>
                         </div>
-                        </Link>
                     </div>
+                    </Link>
                 )
             }
             else{
@@ -86,7 +87,7 @@ export default class SingleItem extends Component {
                         }
                         <p>{this.props.itemDescription}</p>
                         {this.props.isCheckoutAvailable &&
-                            <button onClick = {this.props.checkoutHandlerFunction}>Checkout</button>
+                            <button onClick = {this.props.checkoutHandlerFunction} style={{width:"100%"}}>Checkout</button>
                         }
                     </div>
                 </div>

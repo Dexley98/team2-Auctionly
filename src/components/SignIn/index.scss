@@ -38,7 +38,8 @@ body {
 }
 
 a {
-    color: hotpink;
+    color: white;
+    // padding:7vw;
 }
 
 /* Bordered form */
@@ -59,13 +60,14 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: #4CAF50;
+    background-color: #5f4e9c;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: auto;
+    width: 20%
+
 }
 
     /* Add a hover effect for buttons */

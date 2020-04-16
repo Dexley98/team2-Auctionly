@@ -64,10 +64,10 @@ class UsersPage extends Component {
 
 
 const UserList = ({ users, dbref }) => (
-    <ul>
+    <ul style={{textAlign:"center"}}>
         {
             users.map(user => (
-                <li key={user.uid}>
+                <li key={user.uid} style={{backgroundColor:"black", width:"100%"}}>
                     <span>
                         <strong> Username:</strong> {user.username}
                     </span>

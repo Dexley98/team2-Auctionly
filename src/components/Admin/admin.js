@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
+import SignOutButton from '../SignOut';
+
 
 // added Nav Dom Exley 04/15/2020
 import AdminNavigation from '../AdminNav';
@@ -13,7 +15,7 @@ import * as ROUTES from '../../constants/routes';
 const AdminPage = () => (
     <div>
         <AdminNavigation />
-        <h1> Admin Page </h1>
+        <h1 style={{textAlign:"center",padding:'10px'}}> Admin Page </h1>
         <ViewUsersRedirect />
         <AddAnItemRedirect />
         <ViewWinnerLogRedirect />
@@ -37,7 +39,7 @@ class ViewUsers extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
                 <button> 
                     View Users
@@ -60,7 +62,7 @@ class AddAnItem extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
                 <button>
                     Add an Item
@@ -83,7 +85,7 @@ class ViewWinnerLog extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
                 <button>
                     View Winners Log
@@ -106,7 +108,7 @@ class ViewReportLog extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
                 <button>
                     View Report Log
@@ -129,7 +131,7 @@ class EditItem extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
                 <button>
                     Edit Auction Items
@@ -152,13 +154,17 @@ class SetAuctionlyTimer extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <>
+            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
 
                 <button>
                     Set Auction Time
                 </button>
 
             </form>
+
+            <SignOutButton style={{width:"500px"}} />
+            </>
         );
     }
 }

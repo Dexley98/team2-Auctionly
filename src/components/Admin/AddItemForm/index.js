@@ -147,6 +147,7 @@ class AddItemForm extends Component {
                   alt="Uploaded Images"
                   height="300"
                   width="400"
+                  style={{padding:"10px"}}
               />
 
               <br />
