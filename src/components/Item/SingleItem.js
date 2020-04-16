@@ -53,7 +53,7 @@ export default class SingleItem extends Component {
                     <div className="dynamic-item-info-wrapper">
                         <h2>{this.props.itemName}</h2>
                         <p>{this.props.itemDescription}</p>
-                        <p>Current Minium Bid: ${this.props.highestBid}</p>
+                        <p>Current Minimum Bid: ${this.props.highestBid}</p>
                         <p>Buy it now price: ${this.props.buyItNow}</p>
                     </div>
                     <div className="dynamic-item-bid-forms">
