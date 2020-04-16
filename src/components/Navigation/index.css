@@ -1,6 +1,23 @@
 
 ul {
-    list-style-type: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #e3e3e3 ;
+	color: #530690 ;
+}
+
+li {
+	float: left;
+	padding: 4px ;
+}
+
+div {
+	position: fixed;
+	top: 0;
+	left: 5px;
+	width: 100%;
 }
 
 header {
