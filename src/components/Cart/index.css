@@ -1,0 +1,13 @@
+.cart-item-list-wrapper {
+	border-style: ridge ;
+	border-color: black ;	
+}
+
+.cart-item-image-wrapper {
+	float: left ;
+}
+
+.cart-item-info-wrapper {
+	float: right ;
+	font-color: white;
+}
