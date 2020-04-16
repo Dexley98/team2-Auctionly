@@ -6,6 +6,8 @@ import { Link, BrowserRouter as Router, Route } from 'react-router-dom'
 import { compose } from 'recompose';
 import Firebase from 'firebase';
 
+import EditItemDiv from './EditItemDiv';
+
 import { withFirebase } from '../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 import * as ROLES from '../../constants/roles';
@@ -67,23 +69,18 @@ class EditItemPage extends Component {
 
 
 const ItemList = ({ items }) => (
-    <ul>
+    <div className="edit-items-item-list">
         {items.map(item => (
-            <Link to={`edit/${item.id}`}>
-                <li key={item.name}>
-                    <span>
-                        <img src={item.imageUrl} width="200px" height="200px" />
-                        <br />
-                        {item.name}
-                        <strong> Buy Now: </strong> {item.buyItNow}
-                        <strong> Starting Price: </strong> {item.startPrice}
-                        <br></br> {item.description}
-
-                    </span>
-                </li>
-            </Link>
+            <EditItemDiv
+                itemId={item.id}
+                imageUrl={item.imageUrl}
+                itemName={item.name}
+                buyItNow={item.buyItNow}
+                startPrice={item.startPrice}
+                itemDescription={item.description} 
+            />
         ))}
-    </ul>
+    </div>
 );
 
 
