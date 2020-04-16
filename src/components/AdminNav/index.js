@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './index.css';
 
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';

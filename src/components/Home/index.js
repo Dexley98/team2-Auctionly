@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './index.css' ;
 
 // added Nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';

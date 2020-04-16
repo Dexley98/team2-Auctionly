@@ -1,5 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
+import './index.css' ;
 
 // add Nav from 04/15/2020
 import Navigation from '../Navigation';

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './SingleItem.css' ;
 
 export default class SingleItem extends Component {
     constructor(props){
