@@ -11,7 +11,7 @@ import * as ROLES from '../../constants/roles';
 
 import GoogleButton from 'react-google-button'
 import PropTypes from 'prop-types';
-import './index.css'
+import './index.scss'
 
 const SignInPage = () => (
     <div className="sign-in-wrapper">
