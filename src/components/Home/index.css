@@ -1,0 +1,19 @@
+.item-list-wrapper {
+	padding: 5px;
+	filter: grayscale(75%) opacity(80%);
+}
+
+.item-list-during-wrapper {
+	padding: 5px;
+	border-style: none none solid none ;
+}
+
+.timer-wrapper {
+	overflow: hidden ;
+}
+
+.timer-wrapper .timer-message {
+	font-size: large ;
+	font-color: black ;
+	text-align: center ;
+}
