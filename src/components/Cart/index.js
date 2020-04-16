@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 // add nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
 
+import SingleItem from '../Item/SingleItem';
+
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
@@ -86,7 +88,7 @@ class CartPage extends Component{
                         }
                         else
                         {
-                            currentUser = " ";
+                            currentUser = undefined;
                         }
                     }
                 }
@@ -103,10 +105,10 @@ class CartPage extends Component{
             for(x in keyList) {
                 console.log(keyList[x]);
                 return(
-                    <div>
+                    <div className="cart-page-wrapper">
                         <Navigation />
                         <hr />
-                        <ItemList items={activeBidList} uid={uid}></ItemList>
+                        <CartItemList items={activeBidList} uid={uid}></CartItemList>
                     </div>
                 )
             }
@@ -114,7 +116,7 @@ class CartPage extends Component{
         else
         {
             return(
-                <div>
+                <div className="cart-page-wrapper">
                     <Navigation />
                     <hr />
                     <h2>
@@ -128,54 +130,61 @@ class CartPage extends Component{
 
     
 }
-const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
 
-
-const handleClick = (stripe, item) => {
-    // console.log(item)
-    let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
-    fetch('http://localhost:8000/processJSON.php', {
-        headers: {
-          // Accept: 'application/json',
-          'Content-Type': 'text/plain',
-        },
-        // credentials: "include",
-        method: 'POST',
-        body: string
-      })
-      .then(response => {
-        response.text().then(text=> {
-            console.log(text.trim())
-            stripe.redirectToCheckout({
-                sessionId: text.trim()
-                })
+class CartItemList extends Component{
+    constructor(props){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    
+    handleClick(stripe, item){
+        // console.log(item)
+        let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
+        fetch('http://localhost:8000/processJSON.php', {
+            headers: {
+              // Accept: 'application/json',
+              'Content-Type': 'text/plain',
+            },
+            // credentials: "include",
+            method: 'POST',
+            body: string
         })
-        });
-      }
+          .then(response => {
+            response.text().then(text=> {
+                console.log(text.trim())
+                stripe.redirectToCheckout({
+                    sessionId: text.trim()
+                    })
+            })
+          });
+    }
 
-const ItemList = ({ items, uid, itemKey}) => (
-    <ul>
-        {items.map(item => (
-                    <li key={item.name}>
-                        <span>
-                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                            <br />
-                            {item.name}
-                            <strong> Your bid: </strong> ${(item.bidList[uid] / 1).toFixed(2)}
-                            <strong> Current leading bid: </strong> ${(item.highestBid / 1).toFixed(2)}
-                            <strong>{item.currentUser}</strong>
-                            <br /> 
-                            {item.description}
-                            <br></br>
-                            {item.checkoutAvailable === true && 
-                                <button onClick = { ()=> handleClick(stripe, item)}>Checkout</button>
-                            }
-                    
-                        </span>
-                    </li>
-        ))}
-    </ul>
-);
+    
+    render(){
+        console.log(this.props.items)
+        const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN');
+        return(
+            <div className="cart-item-list-wrapper">
+                {this.props.items.map(item => (
+                    <SingleItem
+                    cartItem = {true}
+                    userBid = {item.bidList[this.props.uid]}
+                    highestBid = {item.highestBid}
+                    isLeadingBidMssg = {item.currentUser}
+                    itemId={item.id}
+                    imageUrl={item.imageUrl}
+                    itemName={item.name}
+                    buyItNow={item.buyItNow}
+                    startPrice={item.startPrice}
+                    itemDescription={item.description}
+                    isCheckoutAvailable = {item.checkoutAvailable}
+                    clickHandlerFunction = {() => this.handleClick(stripe, item)} 
+                    />
+                ))}
+            </div>
+        )
+    }
+}
 
 const condition = authUser => !!authUser;
 
