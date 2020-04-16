@@ -24,7 +24,10 @@
         border-color: black ;
         text-align:center;
 }
-
+.dynamic-item-bid-forms{
+        width:100%;
+        clear:left;
+}
 .dynamic-item-wrapper .dynamic-item-image-wrapper .dynamic-item-image {
         float: left ;
 }

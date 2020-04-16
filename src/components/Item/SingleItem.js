@@ -58,14 +58,18 @@ export default class SingleItem extends Component {
                         <p>Current Minimum Bid: ${this.props.highestBid}</p>
                         <p>Buy it now price: ${this.props.buyItNow}</p>
                     </div>
-                    <div className="dynamic-item-bid-forms">
-                        <form className="bid-form" onSubmit={this.props.handleBidFunction}>
-                            $<input type="number" step="5" min={Number(this.props.highestBid) + 5} id="bidInput" required onChange={this.props.bidChangeHandlerFunction}></input>
-                            <input type="submit" value="Bid"/> 
-                        </form>
+                    <br />
 
-                        <form className="buyout-form" onSubmit={this.props.handleBuyoutFunction}>
-                            <input type ="submit" value="Buyout"/>
+                    <div className="dynamic-item-bid-forms">
+                        <form className="bid-form" onSubmit={this.props.handleBidFunction}style={{textAlign:"center"}}>
+                            <br />
+                            <input type="number" step="5" min={Number(this.props.highestBid) + 5} id="bidInput" style={{textAlign:"center"}}placeholder="Amount, in $5 increments"required onChange={this.props.bidChangeHandlerFunction}></input>
+
+                            <input type="submit" value="Bid" style={{width:"14%",textAlign:"center"}}/> 
+                        </form>
+                        <br />
+                        <form className="buyout-form" onSubmit={this.props.handleBuyoutFunction} style={{textAlign:"center"}}>
+                            <input type ="submit" value="Buyout" style={{width: '14%',textAlign:"center"}}/>
                         </form>
                     </div>
                 </div>
