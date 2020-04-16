@@ -11,15 +11,19 @@ import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
 
 const AdminPage = () => (
-    <div>
+    <div className="main-admin-page-wrapper">
         <AdminNavigation />
-        <h1> Admin Page </h1>
-        <ViewUsersRedirect />
-        <AddAnItemRedirect />
-        <ViewWinnerLogRedirect />
-        <ViewReportLogRedirect />
-        <EditItemRedirect />
-        <SetAuctionlyTimerRedirect />
+        <div className="main-admin-content">
+            <h1> Admin Page </h1>
+            <div className="main-admin-links-wrapper">
+                <ViewUsersRedirect />
+                <AddAnItemRedirect />
+                <ViewWinnerLogRedirect />
+                <ViewReportLogRedirect />
+                <EditItemRedirect />
+                <SetAuctionlyTimerRedirect />
+            </div>
+        </div>
     </div>
 );
 
@@ -37,12 +41,10 @@ class ViewUsers extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-
-                <button> 
+            <form className="view-users-button-wrapper" onSubmit={this.onSubmit}>
+                <button className="view-users-button"> 
                     View Users
                 </button>
-                
             </form>
         );
     }
@@ -60,12 +62,10 @@ class AddAnItem extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-
-                <button>
+            <form className="add-item-button-wrapper" onSubmit={this.onSubmit}>
+                <button className="add-item-button">
                     Add an Item
                 </button>
-
             </form>
         );
     }
@@ -83,9 +83,9 @@ class ViewWinnerLog extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="winner-log-button-wrapper" onSubmit={this.onSubmit}>
 
-                <button>
+                <button className="winner-log-button">
                     View Winners Log
                 </button>
 
@@ -106,9 +106,9 @@ class ViewReportLog extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="view-report-button-wrapper" onSubmit={this.onSubmit}>
 
-                <button>
+                <button className="view-report-button">
                     View Report Log
                 </button>
 
@@ -129,9 +129,9 @@ class EditItem extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="edit-item-button-wrapper" onSubmit={this.onSubmit}>
 
-                <button>
+                <button className="edit-item-button">
                     Edit Auction Items
                 </button>
 
@@ -152,9 +152,9 @@ class SetAuctionlyTimer extends Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form className="set-timer-button-wrapper" onSubmit={this.onSubmit}>
 
-                <button>
+                <button className="set-timer-button">
                     Set Auction Time
                 </button>
 

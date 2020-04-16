@@ -44,8 +44,8 @@ class EditItemPage extends Component {
         
         return (
             <React.Fragment>
-                <div>
-                    <nav>
+                <div className="edit-items-wrapper">
+                    <nav className="back-to-admin-nav">
                         <ul>
                             <li>
                                 <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
@@ -53,10 +53,13 @@ class EditItemPage extends Component {
                         </ul>
                     </nav>
 
-                    <h1>Edit Auction Items</h1>
+                    <div className="edit-items-content">
+                        <h1>Edit Auction Items</h1>
+                        <ItemList items={items}></ItemList>
+                    </div>
                     
                 </div>
-                <ItemList items={items}></ItemList>
+                
             </React.Fragment>
         )
     }

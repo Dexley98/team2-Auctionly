@@ -30,8 +30,8 @@ class WinnerLog extends Component {
 
   render(){
     return(
-      <div>
-        <nav>
+      <div className="winner-log-wrapper">
+        <nav className="back-to-admin-nav">
           <ul>
               <li>
                   <Link to={ROUTES.ADMIN}>Go Back To Admin Page</Link>
@@ -39,9 +39,11 @@ class WinnerLog extends Component {
           </ul>
         </nav>
         <hr />
-        <h1>
-          This is the Winner Log Page.
-        </h1>
+        <div className="winner-log-content">
+          <h1>
+            This is the Winner Log Page.
+          </h1>
+        </div>
       </div>
     )
   }
