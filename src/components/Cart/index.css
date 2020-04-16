@@ -1,6 +1,7 @@
 .cart-item-list-wrapper {
 	border-style: ridge ;
-	border-color: black ;	
+	border-color: black ;
+	padding-top: 40px ;
 }
 
 .cart-item-image-wrapper {
@@ -9,5 +10,5 @@
 
 .cart-item-info-wrapper {
 	float: right ;
-	font-color: white;
+	font-color: white ;
 }
