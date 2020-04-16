@@ -5,9 +5,10 @@ import Navigation from '../Navigation';
 
 import SingleItem from '../Item/SingleItem';
 
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
+import { isCompositeComponent } from 'react-dom/test-utils';
 
 class HomePage extends Component{
 
@@ -19,56 +20,98 @@ class HomePage extends Component{
         };
     }
 
-componentDidMount() {
-    this.setState({ loading: true });
+    componentDidMount() {
+        this.setState({ loading: true });
 
-    this.props.firebase.items().on('value', snapshot => {
-        const itemsObject = snapshot.val();
-        console.log('items object ',itemsObject);
-        const itemsList = Object.keys(itemsObject).map(key => ({
-            ...itemsObject[key],
-            id: key,
-        }));
-        this.setState({
-            items: itemsList,
-            loading: false,
+        this.props.firebase.items().on('value', snapshot => {
+            const itemsObject = snapshot.val();
+            let itemsList = [];
+
+            Object.keys(itemsObject).map(key=>{
+                if(itemsObject[key].available === true){
+                    itemsList.push({
+                        ...itemsObject[key],
+                        id: key
+                    })
+                }
+                
+            })
+
+            this.setState({
+                items: itemsList,
+                loading: false,
+            });
         });
-    });
 
-    
-    this.props.firebase.auctionData().on('value', snapshot => {
-        const auctionDataObject = snapshot.val();
-        this.setState({
-            auctionData: auctionDataObject
+        
+        this.props.firebase.auctionData().on('value', snapshot => {
+            const auctionDataObject = snapshot.val();
+            this.setState({
+                auctionData: auctionDataObject
+            });
         });
-    });
 
-}
+    }
 
-render(){
-    const {items, auctionData} = this.state;
+    render(){
 
-    let auctionDataReceived;
-    auctionData === undefined ? auctionDataReceived = false : auctionDataReceived = true;
+        const {items, auctionData} = this.state;
+        let auctionDataReceived;
+        auctionData === undefined ? auctionDataReceived = false : auctionDataReceived = true;
 
-    return(
-
-        <div className="home-wrapper">
-            <Navigation />
-            <hr />
-        {auctionDataReceived && 
-            <CountdownTimer data = {auctionData}/>
+        if(auctionDataReceived){
+            standAloneTimer(auctionData, this.props.firebase, items)
         }
-        <h1>Home Page</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
-        {auctionDataReceived && 
-            <ItemList items = {items} data={auctionData}></ItemList>
+
+        if(items.length == 0){
+            return(
+                <div className="home-wrapper">
+                    <Navigation />
+                    <hr />
+                    {auctionDataReceived &&
+                        < CountdownTimer data= {auctionData} />
+                    }
+                    <h1>Auctionly Home</h1>
+                    <p>Thanks for showing your support and participating in the silent auction! We hope to see you again soon!</p>
+                </div>
+            )
         }
-        </div>
-    )
-}
+        else{
+            return(
+
+                <div className="home-wrapper">
+                    <Navigation />
+                    <hr />
+                {auctionDataReceived && 
+                    <CountdownTimer data = {auctionData}/>
+                }
+                <h1>Auctionly Home</h1>
+                {auctionDataReceived && 
+                    <ItemList items = {items} data={auctionData}></ItemList>
+                }
+                </div>
+            )
+        }
+        
+    }
 }
 
+function standAloneTimer(auctionData, firebase, items){
+    let timerId = setInterval( () => {
+        let currentDate = new Date();  
+        let stopDate = new Date(createDateString(auctionData.stopDate));
+        console.log(currentDate - stopDate);
+        if( currentDate - stopDate >= 0){
+            items.map( (index) => {
+                console.log(index)
+                firebase.db.ref(`items/${index.id}/`).update({
+                    available: false
+                });
+            });
+            clearInterval(timerId)
+        }
+    }, 1000)
+}
 
 class ItemList extends Component{
     constructor(props){
@@ -76,10 +119,6 @@ class ItemList extends Component{
         this.state = {
             timerCount: 0
         }
-    }
-
-    componentDidMount(){
-        this.forceUpdate();
     }
 
     componentDidUpdate(){
@@ -203,7 +242,12 @@ class CountdownTimer extends Component{
         return (
             <div className="timer-wrapper">
               <h1 className="timer-message">{this.state.messages.timerMessage}</h1>
-              {timerComponents.length ? timerComponents : <span className="timer-end-message">{this.state.messages.endMessage}</span>}
+              {timerComponents.length ? timerComponents : 
+                <span className="timer-end-message">
+                    {this.state.messages.endMessage}
+                    <Redirect to="/home" />
+                </span>
+              }
             </div>
           );
     }
@@ -237,7 +281,7 @@ function calculateTimeLeft(auctionTimes){
   if(difference <= 0){
       difference = +new Date(stopDateString) - currentDate;
       timerMessage = "Auction will End in: ";
-      endMessage = "End of Auction ";
+      endMessage = "Thanks for participating! The auction is now over. ";
   }
 
   let timeLeft = {};
