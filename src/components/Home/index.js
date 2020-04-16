@@ -74,6 +74,7 @@ class HomePage extends Component{
                     }
                     <h1>Auctionly Home</h1>
                     <p>Thanks for showing your support and participating in the silent auction! We hope to see you again soon!</p>
+                    <SignOutButton />
                 </div>
             )
         }
@@ -90,6 +91,7 @@ class HomePage extends Component{
                 {auctionDataReceived && 
                     <ItemList items = {items} data={auctionData}></ItemList>
                 }
+                <SignOutButton />
                 </div>
             )
         }
