@@ -204,12 +204,14 @@ class setTime extends Component {
                     <input
                         name="month"
                         placeholder="Month"
+                        required
                         value={startMonth}
                         onChange={this.onChange}
                         type="number"
                         min="1"
                         max="12"
                         style={{ width: "250px" }}
+
                     />
 
                     <br />
@@ -224,6 +226,7 @@ class setTime extends Component {
                         min="1"
                         max="31"
                         style={{ width: "250px" }}
+                        required
                     />
 
                 <br />
@@ -238,30 +241,33 @@ class setTime extends Component {
                         min="2020"
                         max="2030"
                         style={{ width: "250px" }}
+                        required
                 />
                 <br />
                 <br />
                 <input
                         name="hour"
                         type="number"
-                        placeholder="hour"
+                        placeholder="Hour(0-23)"
                         value={startHour}
                         onChange={this.onChange}
                         min="0"
                         max="23"
                         style={{ width: "250px" }}
+                        required
                     />
                 <br />
                 <br />
                 <input
                         name="minute"
                         type="number"
-                        placeholder="Minute"
+                        placeholder="Minute(0-59)"
                         value={startMinute}
                         onChange={this.onChange}
                         min="0"
                         max="59"
                         style={{ width: "250px" }}
+                        required
                 />
                     <br />
                     <br />
@@ -293,6 +299,7 @@ class setTime extends Component {
                         min="1"
                         max="12"
                         style={{ width: "250px" }}
+                        required
                     />
                 <br />
                 <br />
@@ -306,6 +313,7 @@ class setTime extends Component {
                         min="1"
                         max="31"
                         style={{ width: "250px" }}
+                        required
                     />
 
                 <br />
@@ -319,30 +327,33 @@ class setTime extends Component {
                         min="2020"
                         max="2030"
                         style={{ width: "250px" }}
+                        required
                 />
                 <br />
                 <br />
                 <input
                         name="hour"
                         type="number"
-                        placeholder="hour"
+                        placeholder="Hour(0-23)"
                         value={endHour}
                         onChange={this.onChange}
                         min="0"
                         max="23"
                         style={{ width: "250px" }}
+                        required
                 />
                 <br />
                 <br />
                 <input
                         name="minute"
                         type="number"
-                        placeholder="Minute"
+                        placeholder="Minute(0-59)"
                         value={endMinute}
                         onChange={this.onChange}
                         min="0"
                         max="59"
                         style={{ width: "250px"}}
+                        required
                 />
                 <br/>
                 <br />
