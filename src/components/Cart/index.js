@@ -178,7 +178,7 @@ class CartItemList extends Component{
                     startPrice={item.startPrice}
                     itemDescription={item.description}
                     isCheckoutAvailable = {item.checkoutAvailable}
-                    clickHandlerFunction = {() => this.handleClick(stripe, item)} 
+                    checkoutHandlerFunction = {() => this.handleClick(stripe, item)} 
                     />
                 ))}
             </div>

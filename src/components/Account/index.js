@@ -17,13 +17,9 @@ const AccountPage = () => (
             <>
                 <Navigation />
                 <hr />
-                <div>
+                <div className="account-page-wrapper">
                     <h1>Welcome {authUser.username}</h1>
                     <h2>{authUser.email}</h2>
-                    <br>
-                    </br>
-                    <br>
-                    </br>
                     <p>Reset password:</p>
                     <PasswordChangeForm />
                 </div>

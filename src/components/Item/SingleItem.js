@@ -8,7 +8,7 @@ export default class SingleItem extends Component {
     }
     
     render() {
-        if(!this.props.cartItem){
+        if(!this.props.cartItem && !this.props.dynamicItem){
             if(this.props.activeLink){
                 return(
                     <div id={this.props.itemId} className="single-item-wrapper">
@@ -43,6 +43,32 @@ export default class SingleItem extends Component {
             }
             
         }
+        // dynamic item 
+        else if(!this.props.cartItem && this.props.dynamicItem){
+            return(
+                <div className="dynamic-item-wrapper">
+                    <div className="dynamic-item-image-wrapper">
+                        <img className="dynamic-item-image" src={this.props.imageUrl} width="200px" height="200px" alt={this.props.itemName} />
+                    </div>
+                    <div className="dynamic-item-info-wrapper">
+                        <h2>{this.props.itemName}</h2>
+                        <p>{this.props.itemDescription}</p>
+                        <p>Current Minium Bid: ${this.props.highestBid}</p>
+                        <p>Buy it now price: ${this.props.buyItNow}</p>
+                    </div>
+                    <div className="dynamic-item-bid-forms">
+                        <form className="bid-form" onSubmit={this.props.handleBidFunction}>
+                            $<input type="number" step="5" min={Number(this.props.highestBid) + 5} id="bidInput" onChange={this.props.bidChangeHandlerFunction}></input>
+                            <input type="submit" value="Bid"/> 
+                        </form>
+
+                        <form className="buyout-form" onSubmit={this.props.handleBuyoutFunction}>
+                            <input type ="submit" value="Buyout"/>
+                        </form>
+                    </div>
+                </div>
+            )
+        }
         // if this is a cart page item.
         else{
             return(
@@ -59,7 +85,7 @@ export default class SingleItem extends Component {
                         }
                         <p>{this.props.itemDescription}</p>
                         {this.props.isCheckoutAvailable &&
-                            <button onClick = {this.props.clickHandlerFunction}>Checkout</button>
+                            <button onClick = {this.props.checkoutHandlerFunction}>Checkout</button>
                         }
                     </div>
                 </div>

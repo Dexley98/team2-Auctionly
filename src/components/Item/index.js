@@ -6,6 +6,8 @@ import Navigation from '../Navigation';
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
+import SingleItem from '../Item/SingleItem.js';
+
 
 
 class ItemPage extends Component{
@@ -21,6 +23,9 @@ class ItemPage extends Component{
             highestBidder: ""
         };
         
+        this.myChangeHandler = this.myChangeHandler.bind(this);
+        this.handleBid = this.handleBid.bind(this);
+        this.handleBuyout = this.handleBuyout.bind(this);
     }
 
     componentDidMount(){
@@ -98,21 +103,17 @@ class ItemPage extends Component{
             <div>
                 <Navigation />
                 <hr />
-                <div>
-                    <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                    <h1>{item.name}</h1>
-                    <p>{item.description}</p>
-                    <p> Current Minimum Bid: ${(this.state.highestBid/1).toFixed(2)}</p>
-                    <p>Buy it Now Price: ${(item.buyItNow/1).toFixed(2)}</p>
-
-                    <form onSubmit={this.handleBid}>
-                    $<input type="number" step="5" min={Number(this.state.highestBid) + 5} id="bidInput" onChange={this.myChangeHandler}></input><input type="submit" value="Bid"/> 
-                    </form>
-
-                    <form onSubmit={this.handleBuyout}>
-                    <input type ="submit" value="Buyout"/>
-                    </form>
-                </div>
+                <SingleItem 
+                    dynamicItem = {true}
+                    highestBid = {this.state.highestBid}
+                    imageUrl={item.imageUrl}
+                    itemName={item.name}
+                    buyItNow={item.buyItNow}
+                    itemDescription={item.description}
+                    handleBidFunction = {this.handleBid}
+                    bidChangeHandlerFunction = {this.myChangeHandler}
+                    handleBuyoutFunction = {this.handleBuyout} 
+                />
             </div>
         )
     }
@@ -161,3 +162,5 @@ export default compose(
     WithEmailVerification,
     WithAuthorization(condition),
 )(ItemPage);
+
+
