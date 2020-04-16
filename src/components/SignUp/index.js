@@ -121,6 +121,7 @@ class SignUpFormBase extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="Full Name"
+                    pattern="[a-z A-Z]+"
                 />
                 <br />
                 <input
@@ -129,6 +130,9 @@ class SignUpFormBase extends Component {
                     onChange={this.onChange}
                     type="text"
                     placeholder="Phone Number"
+                    pattern="[0-9]+"
+                    maxLength="10"
+                    minLength="10"
                 />
                 <br />
                 <input
