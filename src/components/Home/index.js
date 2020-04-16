@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 // added Nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
 
+import SingleItem from '../Item/SingleItem';
+
 import {Link} from 'react-router-dom'
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
@@ -109,23 +111,9 @@ class ItemList extends Component{
         }
         
         if(preAuction || postAuction){
-            return(
-                <ul>
-                {this.props.items.map(item => (
-                    <li key={item.id}>
-                        <span>
-                            <img src={item.imageUrl} width="200px" height = "200px" alt={item.name}/>
-                            <br />
-                            {item.name}
-                            <strong> Buy Now: </strong> {item.buyItNow}
-                            <strong> Starting Price: </strong> {item.startPrice}
-                            <br></br> {item.description}
-                    
-                        </span>
-                    </li>
-                ))}
-                </ul>
-            )
+            {this.props.items.map(item => (
+                <SingleItem itemId={item.id} imageUrl={item.imageUrl} itemName={item.itemName} buyItNow={item.buyItNow} startPrice={item.startPrice} itemDescription={item.description} />
+            ))}
         }else{
             return(
                 <ul>
