@@ -28,7 +28,6 @@ const AdminNavigationAuth = ({ authUser }) => (
                 <Link to={ROUTES.ACCOUNT}>Account</Link>
             </li>
         </ul>
-	<br />
 	<SignOutButton />
     </nav>
 );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
+import './timer.css';
 
 import { withFirebase } from '../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../Session';
@@ -178,7 +179,7 @@ class setTime extends Component {
 
         return (
 
-            <div>
+            <div className="nav-bar">
 
                 <nav>
                     <ul>
@@ -187,8 +188,9 @@ class setTime extends Component {
                         </li>
                     </ul>
                 </nav>
-
-            <form onSubmit={this.onSubmitStartDate}>
+	    </div>
+	    <div className="forms">
+            <form name="startDate" onSubmit={this.onSubmitStartDate}>
                 
                 
                 <h1> Set Auction Start Time </h1>
@@ -272,7 +274,7 @@ class setTime extends Component {
 
                 <br />
 
-            <form onSubmit={this.onSubmitEndDate}>
+            <form name="endDate" onSubmit={this.onSubmitEndDate}>
 
                 <h1> Set Auction End Time </h1>
 

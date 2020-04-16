@@ -1,3 +1,8 @@
+.home-wrapper {
+	overflow: hidden;
+	text-align: center ;
+}
+
 .item-list-wrapper {
 	padding: 5px;
 	filter: grayscale(75%) opacity(80%);

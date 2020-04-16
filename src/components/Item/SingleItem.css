@@ -1,8 +1,10 @@
 .single-item-wrapper {
         overflow: hidden ;
         border-style: ridge ;
+	border-width: 2px;
         border-color: black ;
 	max-width: 600px ;
+	align: center ;
 }
 
 .single-item-wrapper .item-image-wrapper {

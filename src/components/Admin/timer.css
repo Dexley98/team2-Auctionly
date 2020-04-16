@@ -1,0 +1,16 @@
+.nav-bar {
+	text-align: center ;
+	color: black ;
+}
+
+.forms {
+        overflow: hidden ;
+}
+
+.forms .startDate {
+	float: left ;
+}
+
+.forms .endDate {
+	float: right ;
+}
