@@ -58,7 +58,7 @@ export default class SingleItem extends Component {
                     </div>
                     <div className="dynamic-item-bid-forms">
                         <form className="bid-form" onSubmit={this.props.handleBidFunction}>
-                            $<input type="number" step="5" min={Number(this.props.highestBid) + 5} id="bidInput" onChange={this.props.bidChangeHandlerFunction}></input>
+                            $<input type="number" step="5" min={Number(this.props.highestBid) + 5} id="bidInput" required onChange={this.props.bidChangeHandlerFunction}></input>
                             <input type="submit" value="Bid"/> 
                         </form>
 
