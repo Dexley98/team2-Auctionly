@@ -57,10 +57,8 @@ render(){
         {auctionDataReceived && 
             <CountdownTimer data = {auctionData}/>
         }
-        <div>
-            <h1>Home Page</h1>
-            <p>The Home Page is accessible by every signed in user.</p>
-        </div>
+        <h1>Home Page</h1>
+        <p>The Home Page is accessible by every signed in user.</p>
         {auctionDataReceived && 
             <ItemList items = {items} data={auctionData}></ItemList>
         }
@@ -68,22 +66,6 @@ render(){
     )
 }
 }
-
-// Commented this out for browser warnings (Dom Exley April 15th)
-/* const itemNametoUrlString = (itemName) => {
-    let splitNameList = itemName.split(' ');
-    let itemNameUrl = '';
-
-    for(let i=0; i<splitNameList.length; i++){
-        if( i == splitNameList.length - 1){
-            itemNameUrl += splitNameList[i];
-        }
-        else{
-            itemNameUrl += `${splitNameList[i]}-`;
-        }
-    }
-    return itemNameUrl
-} */
 
 
 class ItemList extends Component{
@@ -215,8 +197,8 @@ class CountdownTimer extends Component{
             }
         
             timerComponents.push(
-                <span className={`timer-value-${Object.keys(this.state.timeLeft[interval])}`}>
-                {this.state.timeLeft[interval]} {interval}{" "}
+                <span className={`timer-value-${interval}`}>
+                    {this.state.timeLeft[interval]} {interval}{" "}
                 </span>
             );
         });

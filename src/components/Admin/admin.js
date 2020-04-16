@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { withRouter } from 'react-router-dom';
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
+
+// added Nav Dom Exley 04/15/2020
+import Navigation from '../Navigation';
 
 import { withFirebase } from '../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../Session';
@@ -10,6 +12,7 @@ import * as ROUTES from '../../constants/routes';
 
 const AdminPage = () => (
     <div>
+        <Navigation />
         <h1> Admin Page </h1>
         <ViewUsersRedirect />
         <AddAnItemRedirect />
