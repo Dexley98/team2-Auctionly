@@ -1,0 +1,13 @@
+.single-item-wrapper {
+	border-style: ridge ;
+	border-color: black ;
+}
+
+.single-item-wrapper .item-info-wrapper {
+	float: right ;
+	font-color: white ;
+}
+
+.single-item-wrapper .item-image-wrapper {
+	float: left ;
+}
