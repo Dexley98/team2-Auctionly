@@ -10,8 +10,6 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 import GoogleButton from 'react-google-button'
-import PropTypes from 'prop-types';
-import './index.scss'
 
 const SignInPage = () => (
     <div className="sign-in-wrapper">
@@ -22,30 +20,6 @@ const SignInPage = () => (
         <SignInWithGoogle />
     </div>
 );
-
-
-const propTypes = {
-    children: PropTypes.node.isRequired,
-    contentCenter: PropTypes.bool
-};
-
-const defaultProps = {
-    contentCenter: false
-};
-
-const Layout = ({ children, contentCenter }) => {
-    return (
-        <section>
-            <header>
-                <h1> or </h1>
-            </header>
-            <main className={contentCenter ? 'content-center' : ''}>{children}</main>
-        </section>
-    );
-};
-
-Layout.propTypes = propTypes;
-Layout.defaultProps = defaultProps;
 
 // use this to reset state after successful sign in
 const INITIAL_STATE = {
@@ -77,13 +51,18 @@ class SignInWithGoogleBase extends Component {
             .doSignInWithGoogle()
             .then(socialAuthUser => {
                 // Create a user in your Firebase Realtime Database too
-                return this.props.firebase
-                    .user(socialAuthUser.user.uid)
-                    .set({
-                        username: socialAuthUser.user.displayName,
-                        email: socialAuthUser.user.email,
-                        roles
-                    });
+                console.log('This is the socialAuther', socialAuthUser)
+                console.log('IsNewUser', socialAuthUser.additionalUserInfo.isNewUser)
+                if (socialAuthUser.additionalUserInfo.isNewUser === true)
+                {
+                        return this.props.firebase
+                        .user(socialAuthUser.user.uid)
+                        .set({
+                            username: socialAuthUser.user.displayName,
+                            email: socialAuthUser.user.email,
+                            roles,
+                        });
+                }
             })
             .then(() => {
                 this.setState({ error: null });
@@ -102,12 +81,15 @@ class SignInWithGoogleBase extends Component {
     render() {
         const { error } = this.state;
         return (
-            <Layout contentCenter={true}>
-                <form onClick={this.onSubmit}>
-                    <GoogleButton onClick={() => { }}/>
+
+            <form onClick={this.onSubmit}>
+                    <GoogleButton
+
+                    onClick={() => { }}
+                    />
+
                     {error && <p>{error.message}</p>}
                 </form>
-            </Layout>
         );
         
     }

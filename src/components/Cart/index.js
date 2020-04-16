@@ -130,6 +130,30 @@ class CartPage extends Component{
 
     
 }
+const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
+
+
+const handleClick = (stripe, item) => {
+    // console.log(item)
+    let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
+    fetch('http://localhost:8000/processJSON.php', {
+        headers: {
+          // Accept: 'application/json',
+          'Content-Type': 'text/plain',
+        },
+        // credentials: "include",
+        method: 'POST',
+        body: string
+      })
+      .then(response => {
+        response.text().then(text=> {
+            console.log(text.trim())
+            stripe.redirectToCheckout({
+                sessionId: text.trim()
+                })
+        })
+        });
+      }
 
 class CartItemList extends Component{
     constructor(props){
