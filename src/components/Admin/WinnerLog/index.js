@@ -17,7 +17,7 @@ class WinnersPageForm extends Component
         this.state = {
             loading: false,
             items: {},
-	    reportList: [] ,
+	    winnerList: [] ,
 	    highestBid: '',
 	    highestBidder: "",
 	    db: this.props.firebase.db
@@ -56,17 +56,19 @@ class WinnersPageForm extends Component
         })
 	}
     render(){
+	    const {users} = this.state ;
         	let itemList = this.state.item ;
 		let adminList = [];
 		let x = 0 ;
 		let keyList = this.state.keys;
-		let userList = this.state.users;
+		let userList = users;
+	    	let reportList = [];
 
 		for(x in keyList)
 			{
 	                if(itemList[keyList[x]]["bidList"] != null)
 				{
-				console.log(keyList[x] + " exists!")
+//				console.log(keyList[x] + " exists!")
 				adminList.push(itemList[keyList[x]])
 	                	}
 			}
@@ -77,36 +79,35 @@ class WinnersPageForm extends Component
 			let bids = adminList[z]["bidList"]
 			let x = 0;
 			let uid = "";
-			let highestBid = 0;
-			let reportList = [['item'] , ['highest_bid'] , ['user'] , ['email'] , ['phone_number']];
-			let y = 1;
+			let highestBid = 0 ;
+                        reportList["item"] = adminList[z]["name"];
 
 			for(x in bids)
 				{
 					if(bids[x] > highestBid )
 						{
 						highestBid = bids[x] ;
-						reportList[y]["highest_bid"] = bids[x];
-						reportList[y]["item"] = adminList[z]["name"];
+						reportList["highestbid"] = bids[x];
 						let i =0 ;
 						for(i in userList)
 							{
 							if(userList[i])
 								{
-								reportList[y]["username"] = "" ;
-        	                                        	reportList[y]["email"] = "" ;
-                	                                	reportList[y]["phone_number"] = 0 ; 
+								reportList["username"] = "" ;
+        	                                        	reportList["email"] = "" ;
+                	                                	reportList["phone_number"] = 0 ; 
 								}
 							else
 								{
-								reportList[y]["user"] = userList[i]["username"] ;
-								reportList[y]["email"] = userList[i]["email"];
-								reportList[y]["phone_number"] = userList[i]["phoneNumber"];
+								reportList["user"] = userList[i]["username"] ;
+								reportList["email"] = userList[i]["email"];
+								reportList["phone_number"] = userList[i]["phoneNumber"];
 								}
 							}
 						}
 				}
-			y++;
+console.log(userList);
+				console.log(reportList);
 			}
         return(
             <>
@@ -123,26 +124,44 @@ class WinnersPageForm extends Component
 		</div>
             </>
 		)
-	}
+console.log(reportList);
+    	}
 }
 
+/*
 function myfunc(repoList)
 	{
 		return(
 			"<tr><td>"+repoList.item+"</td><td>"+repoList.highest_bid+"</td><td>"+repoList.user+"</td><td>"+repoList.email+"</td><td>"+repoList.phone_number+"</td></tr>"
 		) ;
 	}
+*/
 
 class WinnerList extends Component {
 	constructor(props){
 		super(props);
-		this.state = {
-			reports: ""
-		}
+		/*this.state = {
+			winList: ""
+		}*/
+		this.tableFormat = this.tableFormat.bind(this);
+	}
+	tableFormat(){
+console.log(this.props.reportList);
+		this.props.winners.map(reportList => {
+			return(
+				<tr>
+				<td>{reportList.item}</td>
+				<td>{reportList.highest_bid}</td>
+				<td>{reportList.user}</td>
+				<td>{reportList.email}</td>
+				<td>{reportList.phone_number}</td>
+				</tr>
+			)})
 	}
 	render(){
 		return(
-		        <table>
+		<table>
+			<thead>
                         <tr>
                                 <th>Item</th>
                                 <th>Bid</th>
@@ -150,14 +169,18 @@ class WinnerList extends Component {
                                 <th>Email</th>
                                 <th>Phone</th>
                         </tr>
-                        </table>
+			</thead>
+			<tbody>
+				{this.tableFormat()}
+			</tbody>
+		</table>
 		)
 	}
 }
 
 /*
 const WinnerList = ({reportList}) => (
-	reportList.map(myfunc)
+	this.winners.map(myfunc)
 );
 */
     
