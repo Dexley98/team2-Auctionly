@@ -159,7 +159,7 @@ class WinnerList extends Component {
 				{this.props.winners.map(item => (
 				<tr>
 					<td>{item.name}</td>
-					<td>{item.highestbid}</td>
+					<td>$ {item.highestbid}</td>
 					<td>{item.username}</td>
 					<td>{item.email}</td>
 					<td>{item.phone_number}</td>
