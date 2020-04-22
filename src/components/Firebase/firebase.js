@@ -34,6 +34,8 @@ class Firebase {
         this.storage = app.storage();
         this.emailAuthProvider = app.auth.EmailAuthProvider;
         this.googleProvider = new app.auth.GoogleAuthProvider();
+        this.func = app.functions()
+
     }
 
     // Auth Api
@@ -76,6 +78,8 @@ class Firebase {
     // *** Item API ***
     item = uid => this.db.ref(`items/${uid}`);
     items = () => this.db.ref('items');
+    func = () => this.functions();
+
 
     // *** Auction Data API ***
 
