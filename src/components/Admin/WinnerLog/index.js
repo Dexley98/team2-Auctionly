@@ -7,7 +7,7 @@ import { WithAuthorization, WithEmailVerification } from '../../Session';
 import * as ROLES from '../../../constants/roles';
 
 import * as ROUTES from '../../../constants/routes';
-
+import './index.css'
 
 class WinnersPageForm extends Component 
 {
@@ -139,7 +139,7 @@ class WinnerList extends Component {
 	}
 	render(){
 		return(
-		<table>
+		<table class="center">
 			<thead>
                         <tr>
                                 <th>Item</th>
