@@ -34,9 +34,11 @@ class CartPage extends Component{
         
     }
     
-    
     componentDidMount(){
         this.setState({ loading: true });
+        // const funcArg = this.props.firebase.functions()
+        // let a = this.props.firebase.func
+        // console.log(a)
         // let dbItemKey = urlStringToItemName(this.props.match.params[0]);
         this.props.firebase.items()
         .on('value', snapshot =>{
@@ -50,12 +52,12 @@ class CartPage extends Component{
             });
         });
 }
-
-
     render(){
         if(this.state.loading === false)
         {
             let itemList = this.state.item;
+            let funcArg = this.props.firebase.func;
+            // console.log(funcArg)
             let activeBidList = [];
             let uid = this.props.firebase.auth.W;
             let key = ""
@@ -108,7 +110,7 @@ class CartPage extends Component{
                     <div className="cart-page-wrapper">
                         <Navigation />
                         {/* <hr /> */}
-                        <CartItemList items={activeBidList} uid={uid}></CartItemList>
+                        <CartItemList items={activeBidList} uid={uid} function={funcArg}></CartItemList>
                     </div>
                 )
             }
@@ -130,57 +132,26 @@ class CartPage extends Component{
 
     
 }
-const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN')
-
-
-const handleClick = (stripe, item) => {
-    // console.log(item)
-    let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
-    fetch('http://localhost:8000/processJSON.php', {
-        headers: {
-          // Accept: 'application/json',
-          'Content-Type': 'text/plain',
-        },
-        // credentials: "include",
-        method: 'POST',
-        body: string
-      })
-      .then(response => {
-        response.text().then(text=> {
-            console.log(text.trim())
-            stripe.redirectToCheckout({
-                sessionId: text.trim()
-                })
-        })
-        });
-      }
 
 class CartItemList extends Component{
     constructor(props){
         super(props);
+        // let functions = CartPage.props
         this.handleClick = this.handleClick.bind(this);
     }
     
     handleClick(stripe, item){
-        // console.log(item)
-        let string = item.name + '!' + item.highestBid + '!' + item.description + '!' + item.imageUrl
-        fetch('http://localhost:8000/processJSON.php', {
-            headers: {
-              // Accept: 'application/json',
-              'Content-Type': 'text/plain',
-            },
-            // credentials: "include",
-            method: 'POST',
-            body: string
-        })
-          .then(response => {
-            response.text().then(text=> {
-                console.log(text.trim())
-                stripe.redirectToCheckout({
-                    sessionId: text.trim()
-                    })
+        console.log(this.props.function)
+        const itemString = item.name + '!' + item.highestBid + '!' + item.description + "!" + item.imageUrl
+
+        var addMessage = this.props.function.httpsCallable('checkout');
+        addMessage({text: itemString}).then(function(result) {
+            // Read result of the Cloud Function.
+            stripe.redirectToCheckout({
+                sessionId: result.data
             })
-          });
+            // ...
+        });
     }
 
     
