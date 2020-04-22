@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 
 
-var stripe = require('stripe')('sk_test_3ylFfZ8lM7Yv36r1FUXZlsoG00pWujDn1A');
+var stripe = require('stripe')(functions.config().stripe.private_key);
 
 
 exports.checkout = functions.https.onCall( async(data, context) => {

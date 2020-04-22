@@ -9,6 +9,10 @@ import SingleItem from '../Item/SingleItem';
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
+const fbFunctions = require('firebase-functions');
+
+const stripe_public_key = fbFunctions.config().stripe.public_key;
+
 // commented these out for warning in browser
 //import { renderIntoDocument, act } from 'react-dom/test-utils';
 //import CheckoutButton from '../Checkout/CheckoutButton.js'
@@ -157,7 +161,7 @@ class CartItemList extends Component{
     
     render(){
         console.log(this.props.items)
-        const stripe = window.Stripe('pk_test_rpJFYMoN3dlgpDND53RFbjz800n6Rl2nMN');
+        const stripe = window.Stripe(stripe_public_key);
         return(
             <div className="cart-item-list-wrapper">
                 {this.props.items.map(item => (
