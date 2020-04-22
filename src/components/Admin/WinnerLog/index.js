@@ -104,6 +104,11 @@ class WinnersPageForm extends Component
 							}
 							}
 						}
+					else if(highestBid == 0)
+                                                {
+                                                reportList[z]["highestbid"] = "0" ;
+                                                reportList[z]["username"] = "NO BIDS";
+                                                }
 				}
 			}
         return(
