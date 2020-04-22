@@ -9,9 +9,6 @@ import SingleItem from '../Item/SingleItem';
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
 
-const fbFunctions = require('firebase-functions');
-
-const stripe_public_key = fbFunctions.config().stripe.public_key;
 
 // commented these out for warning in browser
 //import { renderIntoDocument, act } from 'react-dom/test-utils';
@@ -161,7 +158,13 @@ class CartItemList extends Component{
     
     render(){
         console.log(this.props.items)
-        const stripe = window.Stripe(stripe_public_key);
+        let getStripePubKey = this.props.function.httpsCallable('getStripePubKey');
+
+        let stripe = undefined;
+        getStripePubKey().then( (result) =>{
+            stripe = window.Stripe(result.data);
+        })
+
         return(
             <div className="cart-item-list-wrapper">
                 {this.props.items.map(item => (

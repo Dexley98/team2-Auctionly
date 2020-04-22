@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 
 
 var stripe = require('stripe')(functions.config().stripe.private_key);
+var stripe_public_key = functions.config().stripe.public_key;
 
 
 exports.checkout = functions.https.onCall( async(data, context) => {
@@ -23,6 +24,10 @@ exports.checkout = functions.https.onCall( async(data, context) => {
     
       return session.id;
 
+});
+
+exports.getStripePubKey = functions.https.onCall( async(data, contextx) => {
+  return stripe_public_key
 });
 
 
