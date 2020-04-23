@@ -1,3 +1,7 @@
+/*********************************************************************
+  This page shows admins allow items by clicking on an item it will 
+   kick code for editing items at /components/EditItem/index.js
+**********************************************************************/
 import React, { Component } from 'react';
 
 //import routing from react router dom
