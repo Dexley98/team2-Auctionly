@@ -55,6 +55,7 @@ class WinnersPageForm extends Component
             });
         })
 	}
+	
     render(){
 	    const {users} = this.state ;
         let itemList = this.state.item ;
@@ -64,9 +65,10 @@ class WinnersPageForm extends Component
 		let userList = users;
 		console.log(userList)
 	    let reportList = [];
-
-		for(x in keyList)
+// runs through each item in the item list
+	    for(x in keyList)
 			{
+// if any bids have been made on an item then that item will be pushed to a seperate list				
 	                if(itemList[keyList[x]]["bidList"] != null)
 					{
 						adminList.push(itemList[keyList[x]])
@@ -75,6 +77,7 @@ class WinnersPageForm extends Component
 
 		let z = 0 ;
 		reportList = []
+// for every item in the new list the bids are check to find which bid is the highest	    
 		for(z in adminList)
 			{
 			let bids = adminList[z]["bidList"]
@@ -86,6 +89,7 @@ class WinnersPageForm extends Component
 
 			for(x in bids)
 				{
+// once the highest bid is found that entry is made into a new list that will be passed into a new render					
 					if(bids[x] > highestBid )
 						{
 						highestBid = bids[x] ;
@@ -104,6 +108,7 @@ class WinnersPageForm extends Component
 							}
 							}
 						}
+// if the highest bid is 0 then that means no auctioner bid so blank info is added to notify the admins of that					
 					else if(highestBid == 0)
                                                 {
                                                 reportList[z]["highestbid"] = "0" ;
@@ -136,7 +141,6 @@ class WinnerList extends Component {
 		this.tableFormat = this.tableFormat.bind(this);
 	}
 	tableFormat(){
-		console.log(this.props.winners);
 		return(
 			this.props.winners.map(item => {
 			})
@@ -156,9 +160,11 @@ class WinnerList extends Component {
 			</thead>
 			<tbody>
 				{/* {this.tableFormat()} */}
+// walks through every item in the passed list print relevant info out to the Winner Log Screen in Admin			
 				{this.props.winners.map(item => (
 				<tr>
-					<td>{item.name}</td>
+//in order the info presented is the item Name, highest Bid, user's name, user's email, and user's phone number			
+					<td>{item.name}</td> 
 					<td>$ {item.highestbid}</td>
 					<td>{item.username}</td>
 					<td>{item.email}</td>
@@ -171,11 +177,6 @@ class WinnerList extends Component {
 	}
 }
 
-/*
-const WinnerList = ({reportList}) => (
-	this.winners.map(myfunc)
-);
-*/
     
     const condition = authUser =>
         authUser && !!authUser.roles[ROLES.ADMIN];
