@@ -1,3 +1,7 @@
+/*********************************************************************
+                            Landing page
+ *********************************************************************/
+
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -18,14 +22,13 @@ class RedirectToSignIn extends Component {
         this.state = { error: null };
     }
     
+    //redirect users to sign in page through a button
     onSubmit = event => {
         this.props.history.push(ROUTES.SIGN_IN);
         event.preventDefault();
     };
 
     render() {
-        //const { email, password, error } = this.state;
-        //const isInvalid = password === '' || email === '';
 
         return (
             <form className="landing-form" onSubmit={this.onSubmit}>
