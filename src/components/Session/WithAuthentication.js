@@ -1,3 +1,6 @@
+/*****************************************************************
+            Store the authUser status while logged in
+ ****************************************************************/
 import React from 'react';
 
 import AuthUserContext from './context';
