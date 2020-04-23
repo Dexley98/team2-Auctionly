@@ -1,3 +1,11 @@
+/****************************************************
+         
+         Rest password if user forgot them
+         sends the request to firebase 
+         users then receive an email 
+         to rest the password 
+
+ ****************************************************/
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +29,7 @@ class PasswordForgetFormBase extends Component {
         super(props);
         this.state = { ...INITIAL_STATE };
     }
+    //sends request to firebase to rest password through an email
     onSubmit = event => {
         const { email } = this.state;
         this.props.firebase
