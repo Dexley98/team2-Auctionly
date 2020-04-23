@@ -1,3 +1,6 @@
+/*******************************************************************
+           Send Email verification to user after sign up
+ *******************************************************************/
 import React from 'react';
 
 import AuthUserContext from './context';
@@ -16,7 +19,8 @@ const withEmailVerification = Component => {
             super(props);
             this.state = { isSent: false };
         }
-
+        
+        //send email verification
         onSendEmailVerification = () => {
             this.props.firebase
                 .doSendEmailVerification()
@@ -27,6 +31,7 @@ const withEmailVerification = Component => {
             return (
                 <AuthUserContext.Consumer>
                     {authUser =>
+                        //checks if user needs to be verified
                         needsEmailVerification(authUser) ? (
                             <div>
                                 {this.state.isSent ? (
