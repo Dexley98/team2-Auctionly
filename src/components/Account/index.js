@@ -1,3 +1,8 @@
+/***********************************************************
+               Account Page
+               Shows Username, email and phonenumber
+               Change password
+ **********************************************************/
 import React from 'react';
 import { compose } from 'recompose';
 import './index.css' ;
