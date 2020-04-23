@@ -78,7 +78,6 @@ class EditItemForm extends Component {
                 },
                 error => {
                     // Error function
-                    console.log(error);
                 }
                 , () => {
                     // Get the URL function
