@@ -1,3 +1,7 @@
+/**********************************************************************
+                   Redirect user to sign in page after
+                   password change from the account page 
+**********************************************************************/
 import React, {Component} from 'react';
 import { compose } from 'recompose';
 
@@ -14,7 +18,6 @@ export class PasswordRedirect extends Component {
 
     componentDidMount(){
         setTimeout(() =>{
-            console.log('redirecting...')
             this.props.firebase.doSignOut();
         }, 3000)
     }
