@@ -5,7 +5,7 @@
  * Description: Renamed to index.js 
  * Moved to /components/Admin/AddItemForm/index.js 
  * changed db reference to this.props.firebase.db (could move in an api to firebase.js)
- * 
+ *                    Allow Admins to add items to the Database
  **************************************************************************************/
 
 import React, { Component } from 'react';
@@ -28,7 +28,6 @@ const INITIAL_STATE = {
     imageUrl:"",
     bidList: {},
     image: null,
-    //progress: 0,
     url: '',
 
 };
@@ -47,7 +46,7 @@ class AddItemForm extends Component {
     };
     handleUpload = () => {
         const { image } = this.state;
-
+        //kicks if admin tries to upload an image without selecting an image
         if (this.state.image === null) {
             alert("No image has been selected")
         }
@@ -99,7 +98,7 @@ class AddItemForm extends Component {
         const { available, name, description, startPrice, buyItNow, imageUrl } = this.state;
         const bidList = {};
         bidList["Initial"] = '';
-
+            //push items to the database 
             this.props.firebase.db
                 .ref('/items').push({
                     available,
@@ -194,8 +193,7 @@ class AddItemForm extends Component {
   }
 }
 
-//<input type="text" name={imageUrl} value={this.state.url} onChange={this.onChange} />
-
+//gives access to admin role only
 const condition = authUser =>
     authUser && !!authUser.roles[ROLES.ADMIN];
 
