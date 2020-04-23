@@ -5,6 +5,9 @@ var stripe = require('stripe')(functions.config().stripe.private_key);
 var stripe_public_key = functions.config().stripe.public_key;
 
 
+var firebaseConfig = functions.config().reactapp;
+
+
 exports.checkout = functions.https.onCall( async(data, context) => {
     const input = data.text.split("!")
 
@@ -33,4 +36,9 @@ exports.getStripePubKey = functions.https.onCall( async(data, contextx) => {
 
 exports.helloWorld = functions.https.onCall((data, context) => {
   return "hello world!";
+});
+
+
+exports.getFirebaseConfig = functions.https.onCall((data, context) => {
+  return firebaseConfig;
 });
