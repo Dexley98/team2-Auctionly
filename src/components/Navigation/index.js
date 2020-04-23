@@ -1,3 +1,9 @@
+/*********************************************************************
+                   Navigation of the site
+		   keeps unathorized users at the landing page 
+		   stricts site navigation to authriozed users 
+		   based on their roles (user / admin)
+ *********************************************************************/
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +25,9 @@ const Navigation = () => (
         }
     </AuthUserContext.Consumer>
 );
+
+/*stricts site navigation to authriozed users 
+based on their roles (user / admin)*/
 
 const NavigationAuth = ({ authUser }) => (
     <nav className="nav-bar-wrapper">
@@ -42,6 +51,7 @@ const NavigationAuth = ({ authUser }) => (
     </nav>
 );
 
+//keeps unathorized users at the landing page 
 const NavigationNonAuth = () => (
     <nav className="nav-bar-wrapper">
         <ul className="nav-list-non-authorized">
