@@ -9,7 +9,6 @@ export const ACCOUNT_PW_CHANGED = '/account/password-changed'
 // Admin Routes
 export const ADMIN = '/admin';
 export const USERS = '/admin/users';
-export const ADMIN_REPORT = '/admin/report';
 export const ADMIN_WINNER_LOG = '/admin/winnerlog';
 export const ADMIN_ADD_ITEM = '/admin/add-item';
 export const EDIT_ITEM = '/admin/edit-items'

@@ -24,7 +24,6 @@ import AccountPage from '../Account';
 import PasswordRedirect from '../PasswordRedirect'
 import { AdminPage, UsersPage, EditItemPage, setTime } from '../Admin';
 import AddItemForm from '../Admin/AddItemForm';
-import Report from '../Admin/Report';
 import WinnerLog from '../Admin/WinnerLog';
 
 // Auction Management Page Components
@@ -51,7 +50,6 @@ const App = () => (
             <Route path={ROUTES.USERS} component={UsersPage} />
             <Route path={ROUTES.ADMIN_ADD_ITEM} component={AddItemForm} />
             <Route path={ROUTES.EDIT_ITEM} component={EditItemPage} />
-            <Route path={ROUTES.ADMIN_REPORT} component={Report} />
             <Route path={ROUTES.ADMIN_WINNER_LOG} component={WinnerLog} />
             <Route path={ROUTES.DYNAMIC_ITEMS} component={ItemPage}/>
             <Route path={ROUTES.DYNAMIC_CART} component={CartPage} />

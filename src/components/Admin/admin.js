@@ -19,7 +19,6 @@ const AdminPage = () => (
         <ViewUsersRedirect />
         <AddAnItemRedirect />
         <ViewWinnerLogRedirect />
-        <ViewReportLogRedirect />
         <EditItemRedirect />
         <SetAuctionlyTimerRedirect />
     </div>
@@ -96,29 +95,6 @@ class ViewWinnerLog extends Component {
     }
 }
 
-class ViewReportLog extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { error: null };
-    }
-    onSubmit = event => {
-        this.props.history.push(ROUTES.ADMIN_REPORT);
-        event.preventDefault();
-    };
-
-    render() {
-        return (
-            <form onSubmit={this.onSubmit} style={{textAlign:"center", padding:"3px"}}>
-
-                <button>
-                    View Report Log
-                </button>
-
-            </form>
-        );
-    }
-}
-
 class EditItem extends Component {
     constructor(props) {
         super(props);
@@ -186,11 +162,6 @@ const ViewWinnerLogRedirect = compose(
     withRouter,
     withFirebase,
 )(ViewWinnerLog);
-
-const ViewReportLogRedirect = compose(
-    withRouter,
-    withFirebase,
-)(ViewReportLog);
 
 const EditItemRedirect = compose(
     withRouter,
