@@ -1,3 +1,7 @@
+/******************************************************************
+                    Sign up using Email and Password 
+                    Provide Name and Phone number 
+ ******************************************************************/
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -36,6 +40,7 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   to sign in with one of them. Afterward, associate your accounts
   on your personal account page.`;
 
+//sign up using email and password 
 class SignUpFormBase extends Component {
     constructor(props) {
         super(props);
