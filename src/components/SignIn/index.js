@@ -80,7 +80,7 @@ class SignInWithGoogleBase extends Component {
         this.props.firebase
             .doSignInWithGoogle()
             .then(socialAuthUser => {
-                if (socialAuthUser.additionalUserinfo.isNewUser === true){
+                if (socialAuthUser.additionalUserInfo.isNewUser === true){
                     return this.props.firebase
                     .user(socialAuthUser.user.uid)
                     .set({
