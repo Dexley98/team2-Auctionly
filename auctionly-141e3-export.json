@@ -1,0 +1,47 @@
+{
+  "auctionData" : {
+    "startDate" : {
+      "date" : "22",
+      "month" : "4",
+      "time" : {
+        "hour" : "23",
+        "minute" : "00"
+      },
+      "year" : "2020"
+    },
+    "stopDate" : {
+      "date" : "23",
+      "month" : "4",
+      "time" : {
+        "hour" : "01",
+        "minute" : "00"
+      },
+      "year" : "2020"
+    }
+  },
+  "items" : {
+    "-M4zVK9Ext2gVV9n7Qjh" : {
+      "available" : false,
+      "bidList" : {
+        "AyHd8UAhnCYNSF8z0cgEt05DIiu1" : 130,
+        "Initial" : "",
+        "Ohv5dKaln5NZSc5a4TiIMo4p5tz1" : 450
+      },
+      "buyItNow" : "450",
+      "description" : "A beautiful brand new grill.",
+      "imageUrl" : "https://firebasestorage.googleapis.com/v0/b/auctionly-141e3.appspot.com/o/images%2FGrill.jfif?alt=media&token=4d032fed-717e-4d40-b5bf-ee65356673e5",
+      "name" : "Grill",
+      "startPrice" : "120"
+    }
+  },
+  "users" : {
+    "9nIwno5ykhWBGj72k46QQJkOWxj2" : {
+      "email" : "allthingspossibleauctionly@gmail.com",
+      "roles" : {
+        "ADMIN" : "ADMIN",
+        "USER" : "USER"
+      },
+      "username" : "All Things Possible"
+    }
+  }
+}
