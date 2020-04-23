@@ -9,7 +9,9 @@ export default class SingleItem extends Component {
     }
     
     render() {
+        // Single item render
         if(!this.props.cartItem && !this.props.dynamicItem){
+            //If the link is active, display page with an active link
             if(this.props.activeLink){
                 return(
                     <Link className="single-item-link" to={`item/${this.props.itemId}`}>
@@ -28,6 +30,7 @@ export default class SingleItem extends Component {
                     </Link>
                 )
             }
+            // Display page without link
             else{
                 return (
                     <div id={this.props.itemId} className="single-item-wrapper">
