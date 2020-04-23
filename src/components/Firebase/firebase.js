@@ -13,6 +13,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import 'firebase/storage';
 
+//graps firebase keys from an .env file
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -51,28 +52,30 @@ class Firebase {
     // Firebase API Endpont logs user in with provided email and password. 
     doSignInWithEmailAndPassword = (email, password) =>
         this.auth.signInWithEmailAndPassword(email, password);
-        
+    
+    //Firebase API Endpont sign in with Google
     doSignInWithGoogle = () =>
         this.auth.signInWithPopup(this.googleProvider);
-
+    
+    //Firebase API Endpont sends email verification after sign up using email and password
     doSendEmailVerification = () =>
         this.auth.currentUser.sendEmailVerification({
             url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
         });
-
+    
+    //Firebase API Endpont sign out
     doSignOut = () => this.auth.signOut();
 
+    //Firebase API Endpont send password change email when forgot
     doPasswordReset = email =>
         this.auth.sendPasswordResetEmail(email);
-
+    
+    //Firebase API Endpont rest password when logged in
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
 
     // *** User API ***
-
-
     user = uid => this.db.ref(`users/${uid}`);
-
     users = () => this.db.ref('users');
 
     // *** Item API ***
@@ -82,12 +85,9 @@ class Firebase {
 
 
     // *** Auction Data API ***
-
     auctionData = () => this.db.ref('auctionData');
    
     // *** Merge Auth and DB User API *** //
-
-
     onAuthUserListener = (next, fallback) =>
         this.auth.onAuthStateChanged(authUser => {
             if (authUser) {
