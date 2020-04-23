@@ -1,6 +1,6 @@
 /*********************************************************************
                    Navigation of the site
-		   keeps unathorized users at the landing page 
+		   keeps unathorized users outside of site 
 		   stricts site navigation to authriozed users 
 		   based on their roles (user / admin)
  *********************************************************************/
@@ -51,7 +51,7 @@ const NavigationAuth = ({ authUser }) => (
     </nav>
 );
 
-//keeps unathorized users at the landing page 
+//keeps unathorized users outside of site  
 const NavigationNonAuth = () => (
     <nav className="nav-bar-wrapper">
         <ul className="nav-list-non-authorized">
