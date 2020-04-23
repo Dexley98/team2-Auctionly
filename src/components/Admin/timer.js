@@ -1,3 +1,6 @@
+/************************************************************
+       Allow admins to set auction start and end time 
+************************************************************/
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
@@ -39,7 +42,8 @@ class setTime extends Component {
             auctionEndHour: '',
             auctionEndMinute: '',
         });
-
+        
+        //reads auction start date
         this.props.firebase.db
             .ref('/auctionData/startDate/')
             .on('value', snapshot => {
@@ -53,7 +57,7 @@ class setTime extends Component {
                     loading: true,
                 });
             });
-            
+        //read auction start time
         this.props.firebase.db
             .ref('/auctionData/startDate/time/')
             .on('value', snapshot => {
@@ -66,6 +70,7 @@ class setTime extends Component {
                     loading: false,
                 });
             });
+        //reads auction end date
         this.props.firebase.db
             .ref('/auctionData/stopDate/')
             .on('value', snapshot => {
@@ -80,6 +85,7 @@ class setTime extends Component {
                 });
 
             });
+        //reads auction end time 
         this.props.firebase.db
             .ref('/auctionData/stopDate/time/')
             .on('value', snapshot => {
@@ -101,12 +107,12 @@ class setTime extends Component {
         });
     };
 
-
+    //handel submission of start date and time
     onSubmitStartDate = event => {
         event.preventDefault();
 
         const { date, month, year, hour, minute } = this.state;
-  
+        //update start date
         this.props.firebase.db
             .ref('/auctionData/startDate').update({
                 date,
@@ -114,6 +120,7 @@ class setTime extends Component {
                 year,
             })
             .then(
+                    //update start time
                     this.props.firebase.db
                     .ref('/auctionData/startDate/time').update({
                         hour: hour,
@@ -121,7 +128,7 @@ class setTime extends Component {
                     })
             )
             .then(() => {
-                // after item is created reset state of form back to empty fields
+                // after date and time are updated reset state of form back to empty fields
                 this.setState({ ...INITIAL_STATE });
             })
 
@@ -131,7 +138,7 @@ class setTime extends Component {
         event.preventDefault();
 
         const { date, month, year, hour, minute } = this.state;
-
+        //update end date
         this.props.firebase.db
             .ref('/auctionData/stopDate').update({
                 date,
@@ -139,6 +146,7 @@ class setTime extends Component {
                 year,
             })
             .then(
+                //update end time
                 this.props.firebase.db
                     .ref('/auctionData/stopDate/time').update({
                         hour: hour,
@@ -146,7 +154,7 @@ class setTime extends Component {
                     })
             )
             .then(() => {
-                // after item is created reset state of form back to empty fields
+                // after date and time are updated reset state of form back to empty fields
                 this.setState({ ...INITIAL_STATE });
             })
     }
