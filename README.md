@@ -1,83 +1,67 @@
-## STEPS TO RUN:
+## Steps to Run Locally
+1. install the necessary packages using the command: 
+```
+npm install
+```
 
-download the branch
+2. Set up local host to work on the designated port 3006.
+```
+export PORT=3006
+```
 
-run npm i within root directory
-
-run composer install within PHP/public_html
-
-run the command "PHP -S localhost:8000" within PHP/public_html
-
-run npm start within root directory with the port set to 3006 (on Ubuntu, i used "export PORT=3006")
-
-everything should work fine :)
+3. Run the development server using the command: 
+```
+npm run start
+```
+  3.a. If this does not automatically open a tab in a browser navigate to the address: localhost:3006/
+  
+4. Your Done!
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Firebase:
+- This project relies on use of the firebase console. 
+The credentials are:
+**Username/email:** Allthingspossibleauctionly@gmail.com
+**password:** AllSpring2020
 
-## Available Scripts
+- This console allows to mointor pricing for firebase's Backend as a service. We have decided to use the realtime database and highly recommend the Blaze Pay as you go plan. Instructions for adding payment information and setting up budgets are available through firebase's console as well as the google developer platform.
 
-In the project directory, you can run:
+- In the event your database is wiped, please use the file **auctionly-141e3-export** located in this repositiory. Here are the instructions to restore the database. Please note, only the Allthingspossibleauctionly@gmail.com account will remain. 
+1. Navigate to the Database option in the project overview panel on the left hand side. 
+2. Select the 'Real Time Database' option. 
+3. Select the Three dots, select 'import JSON' and drop the file into the menu.
+4. Next, go to the authentication option in the project overview panel.
+5. Delete all users EXCEPT for the allthingspossibleauctionly account. 
+6. Your reset!
 
-### `yarn start`
+## Setting Up Stripe
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In order to use stripe, you must first change the program to 'live' mode from 'test' mode.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+In order to do this, first, log into the stripe console at https://dashboard.stripe.com/test/dashboard
 
-### `yarn test`
+At this site, activate your account using the link on the page, fill out all information requested.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After doing this, you will recieve a series of live API keys which will need to be inserted into the functions for the program to work.
 
-### `yarn build`
+You will need to install the firease CLI and then run:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    firebase login
+    log in using allthingpossibleauctionly@gmail.com
+    firebase init
+    select functions
+    use an existing project
+    select auctionly-141e3 (Auctionly)
+    select JavaScript
+    select No
+    select No
+    select No
+    select No
+    select Yes to install NPM packages
+    firebase functions:config:set stripe.public_key="PUBLIC KEY"
+    firebase functions:config:set stripe.private_key="PRIVATE KEY"
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+    firebase deploy --only functions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This will deploy the firebase functions for stripe to work with the correct API keys for it to work live!
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
