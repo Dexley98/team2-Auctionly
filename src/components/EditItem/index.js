@@ -1,4 +1,8 @@
-
+/**********************************************************
+             
+             Allow Admins to edit auction items
+             
+ *********************************************************/
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom'
@@ -32,17 +36,14 @@ class EditItemForm extends Component {
     componentDidMount() {
 
         this.setState({ loading: true });
+        
+        //stores the current key of the item 
         let dbItemKey = this.props.match.params[0];
-
+        //graps items from the database
         this.props.firebase.db.ref(`/items/${dbItemKey}`)
             .on('value', snapshot => {
                 const itemObject = snapshot.val();
                 console.log(itemObject)
-                //console.log('item object ', itemObject["three"]);
-                //const keyList = Object.keys(itemObject);
-                // console.log(itemObject)
-                //console.log('key ', keyList)
-                //console.log('item to assign to state ', itemObject[keyList[0]])
                 this.setState({
                     item: itemObject,
                     key: dbItemKey,
@@ -51,7 +52,8 @@ class EditItemForm extends Component {
             })
 
     }
-
+    
+    //upload image handler
     handleChange = e => {
         const image = e.target.files[0];
         this.setState(() => ({ image }));
@@ -103,7 +105,7 @@ class EditItemForm extends Component {
         });
     };
 
-
+    //edit name of the item
     onEditName = event => {
         event.preventDefault();
         const { name } = this.state;
@@ -111,10 +113,10 @@ class EditItemForm extends Component {
         this.props.firebase.db
             .ref(`items/${this.state.key}/`).update({
                 name,
-            })
-        
+            })       
     }
-
+    
+    //edit description of the item
     onEditDescription = event => {
         event.preventDefault();
         const { description } = this.state;
@@ -126,6 +128,7 @@ class EditItemForm extends Component {
 
     }
 
+    //edit start price of the item
     onEditStartPrice = event => {
         event.preventDefault();
         const { startPrice } = this.state;
@@ -134,9 +137,9 @@ class EditItemForm extends Component {
             .ref(`items/${this.state.key}/`).update({
                 startPrice,
             })
-        
     }
 
+    //edit Buy It Now price of the item
     onEditBuyItNow = event => {
         event.preventDefault();
         const { buyItNow } = this.state;
@@ -145,9 +148,9 @@ class EditItemForm extends Component {
             .ref(`items/${this.state.key}/`).update({
                 buyItNow,
             })
-
     }
 
+    //edit image Url of the item
     onEditImageUrl = event => {
         event.preventDefault();
         const { imageUrl } = this.state;
@@ -159,6 +162,7 @@ class EditItemForm extends Component {
         
     }
 
+    //remove the item for the auction
     onRemoveItem = event => {
         event.preventDefault();
         this.props.firebase.db
@@ -177,7 +181,6 @@ class EditItemForm extends Component {
 
         } = this.state;
         
-        // this.setState({highestBid:highestBidd})
         return (
             // same thing as React.Fragment / different syntax. May not need but here for now.
             <>
