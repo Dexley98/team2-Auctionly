@@ -5,10 +5,9 @@ import Navigation from '../Navigation';
 
 import SingleItem from '../Item/SingleItem';
 
-import {Link, Redirect} from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 import { compose } from 'recompose';
 import { WithAuthorization, WithEmailVerification } from '../Session';
-import { isCompositeComponent } from 'react-dom/test-utils';
 
 class HomePage extends Component{
 
@@ -47,7 +46,7 @@ class HomePage extends Component{
             });
         });
 
-        
+        // sets the state, graps auctionData (stop time and start time).        
         this.props.firebase.auctionData().on('value', snapshot => {
             const auctionDataObject = snapshot.val();
             this.setState({
@@ -63,6 +62,7 @@ class HomePage extends Component{
         let auctionDataReceived;
         auctionData === undefined ? auctionDataReceived = false : auctionDataReceived = true;
 
+        // since there is a delay in grabbing the auction data from firebase, this checks then starts the stand alone timer.
         if(auctionDataReceived){
             standAloneTimer(auctionData, this.props.firebase, items)
         }
@@ -104,6 +104,12 @@ class HomePage extends Component{
     }
 }
 
+/*
+ * This timer takes in auction data from firebase a reference to the firebase object, and the list of items.
+ * Dates are formatted created correctly then a difference is calculated. 
+ * If the auction is over, whatever items are still avaiailable are marked false.
+ * This runs every second.
+ */
 function standAloneTimer(auctionData, firebase, items){
     let timerId = setInterval( () => {
         let currentDate = new Date();  
@@ -146,6 +152,7 @@ class ItemList extends Component{
         let diffOfNowFromStart = currentDate - startDate;
         let diffOfNowFromStop = currentDate - stopDate;
 
+        // set various flags to determine what the state of the auction is.
         if(diffOfNowFromStart < 0){
             preAuction = true;
         }
@@ -156,7 +163,7 @@ class ItemList extends Component{
             postAuction = true;
         }
         
-        // If the auction is not active, disable to links
+        // If the auction is not active, disable the links
         if(preAuction || postAuction){
             return (
                 <div className="item-list-wrapper">
@@ -196,6 +203,11 @@ class ItemList extends Component{
     
 }
 
+
+/*
+ * This component does renders the countdown timer on the main home page.
+ * Has various state values that are initialized in the constructor but set in the calcuateTimeLeft function
+ */
 class CountdownTimer extends Component{
 
     constructor(props){
@@ -215,10 +227,16 @@ class CountdownTimer extends Component{
         
     }
 
+    // since this component is time sensitive it is set to update when it mounts.
     componentDidMount(){
         this.forceUpdate();
     }
 
+    /* on mount returnValues is populated with passed in auction data.
+     those values then set various state messages.
+     In the saddest turn of events, it was discovered this component does not 
+     successfully update on iPhone. No data can be found to remedy this issue on short notice. 
+     A component on this page does not update, or mount correctly is my only assumption. */
     componentDidUpdate(){
         setTimeout(() => {
             let returnValues = calculateTimeLeft(this.props.data);
@@ -236,6 +254,7 @@ class CountdownTimer extends Component{
         
         const timerComponents = [];
     
+        // take the keys of the state and for each one populate with correct values.
         Object.keys(this.state.timeLeft).forEach(interval => {
             if (!this.state.timeLeft[interval]) {
                 return;
@@ -254,7 +273,6 @@ class CountdownTimer extends Component{
               {timerComponents.length ? timerComponents : 
                 <span className="timer-end-message">
                     {this.state.messages.endMessage}
-                    <Redirect to="/home" />
                 </span>
               }
             </div>
@@ -263,6 +281,7 @@ class CountdownTimer extends Component{
     
 }
 
+// create a date string based on a date object that can be used in javaScript date function.
 function createDateString(dateObject){
     let date = dateObject
     let time = dateObject.time;
@@ -271,6 +290,11 @@ function createDateString(dateObject){
     return dateString;
 }
 
+/* 
+This function does the heavy lifting. 
+Essentially it creates dates with javaScript Date function and get the difference between 
+two different time values depending on what status the auction is in. 
+*/
 function calculateTimeLeft(auctionTimes){
   // I set this to show that actual data was passed to this. 
   let startDate = auctionTimes.startDate;

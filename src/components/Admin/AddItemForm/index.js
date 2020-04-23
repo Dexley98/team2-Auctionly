@@ -10,7 +10,7 @@
 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';

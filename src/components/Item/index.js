@@ -37,30 +37,15 @@ class ItemPage extends Component{
         let dbItemKey = this.props.match.params[0]; 
         
         /***************************************************************************************************
-         * There is quite a lot going on in here so I'll try and explain it the best I can. 
-         * I Only called this once
-         * Justification: You are supposed to call .once if you want expect this UI element to remain the same.
-         * Once a bidder goes to this page, they should not expect it to change. 
-         * Willing to change this as necessary / as the team sees fit. 
-         * I am leaving all the console logs in here so everyone can see my pain.
-         * 
          * Function Explanation
-         * So I added an index rule in the firebase database on item names. 
-         * We will probably have to change this once we get item upload functionality sorted out. 
-         * Basically I make a ref to the items collection, then I order it by name. 
-         * This makes sure that I get only the item in question. (dbItemName)
-         * I only get this item once, I explain why above. 
+         * added an index rule in the firebase database on item names. 
+         * make a ref to the items collection, then I order it by name. 
+         * This makes sure that I get only the item in question. (dbItemName) 
          * 
-         * This next part is hell. I get a snapshot of the returned item in the itemObject, fairly routine stuff.
-         * Object.keys returns an array of the enumerable object. I wish there was another way to do this since there is only one key.
-         * but whatever. 
+         * Object.keys returns an array of the enumerable object. 
          * 
-         * I have to take that key's first (and only) index and use it as the index on the itemObject to just get the item fields
-         * after that I just assign it to my state and move along my day.
-         * 
-         * This is rough, but I think it will scale. Sorry for the long comment. I just didn't know how this worked before. 
-         * I sure do now. 
-         * 
+         * I have to take that key's first (and only) index and use it as the index on the itemObject to get the item fields
+         * after it is assigned to the component state.
          * 
         *******************************************************************************************************/
         
