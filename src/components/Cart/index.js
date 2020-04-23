@@ -37,15 +37,10 @@ class CartPage extends Component{
     
     componentDidMount(){
         this.setState({ loading: true });
-        // const funcArg = this.props.firebase.functions()
-        // let a = this.props.firebase.func
-        // console.log(a)
-        // let dbItemKey = urlStringToItemName(this.props.match.params[0]);
         this.props.firebase.items()
         .on('value', snapshot =>{
             const itemObject = snapshot.val();
             const keyList = Object.keys(itemObject);
-            // console.log('item to assign to state ', itemObject[keyList[0]])
             this.setState({
                 item: itemObject,
                 keys: keyList,
@@ -54,25 +49,27 @@ class CartPage extends Component{
         });
 }
     render(){
+        
+        // Renders page if it's done loading
         if(this.state.loading === false)
         {
             let itemList = this.state.item;
             let funcArg = this.props.firebase.func;
-            // console.log(funcArg)
             let activeBidList = [];
             let uid = this.props.firebase.auth.W;
             let key = ""
             let keyList = this.state.keys;
             let x = 0;
+            // Construct list of items user has bid on
             for(x in keyList){
                 if(itemList[keyList[x]]["bidList"][this.props.firebase.auth.W]){
-                    console.log(keyList[x] + " exists!")
                     activeBidList.push(itemList[keyList[x]])
             
                 }
             }
 
 
+            // Determine if user has highest bid
             x=0
             for(x in activeBidList)
             {
@@ -97,25 +94,25 @@ class CartPage extends Component{
                 }
                 activeBidList[x]["currentUser"] = currentUser;
                 activeBidList[x]["highestBid"] = highestBid;
+                // Determine if checkout is available based on availability and the Current User
                 if((activeBidList[x]["available"] === false) && (activeBidList[x]["currentUser"] === " You have the current highest bid! "))
                 {
-                    console.log(activeBidList[x]);
                     activeBidList[x]["checkoutAvailable"] =  true;
 
                 }
             }
 
+            // print list of cart items, calling CartItemList
             for(x in keyList) {
-                console.log(keyList[x]);
                 return(
                     <div className="cart-page-wrapper">
                         <Navigation />
-                        {/* <hr /> */}
                         <CartItemList items={activeBidList} uid={uid} function={funcArg}></CartItemList>
                     </div>
                 )
             }
         }
+        // Page is not finished loading
         else
         {
             return(
@@ -134,17 +131,19 @@ class CartPage extends Component{
     
 }
 
+// Class to print list of items in cart
 class CartItemList extends Component{
     constructor(props){
         super(props);
         // let functions = CartPage.props
         this.handleClick = this.handleClick.bind(this);
     }
-    
+    // Function to handle checkout
     handleClick(stripe, item){
-        console.log(this.props.function)
+        // constructs formatted string to send to firebase functions
         const itemString = item.name + '!' + item.highestBid + '!' + item.description + "!" + item.imageUrl
 
+        // Calls firebase function to create checkout session
         var addMessage = this.props.function.httpsCallable('checkout');
         addMessage({text: itemString}).then(function(result) {
             // Read result of the Cloud Function.
@@ -157,7 +156,7 @@ class CartItemList extends Component{
 
     
     render(){
-        console.log(this.props.items)
+        // Grabs public key from firebase functions
         let getStripePubKey = this.props.function.httpsCallable('getStripePubKey');
 
         let stripe = undefined;
@@ -165,6 +164,7 @@ class CartItemList extends Component{
             stripe = window.Stripe(result.data);
         })
 
+        // Returns cart page, using SingleItem class
         return(
             <div className="cart-item-list-wrapper">
                 {this.props.items.map(item => (
