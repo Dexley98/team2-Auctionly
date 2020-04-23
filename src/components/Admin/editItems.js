@@ -27,10 +27,10 @@ class EditItemPage extends Component {
 
     componentDidMount() {
         this.setState({ loading: true });
-
+        
+        //reads items from the database
         this.props.firebase.items().on('value', snapshot => {
             const itemsObject = snapshot.val();
-            console.log('items object ', itemsObject);
             const itemsList = Object.keys(itemsObject).map(key => ({
                 ...itemsObject[key],
                 id: key,
@@ -66,7 +66,7 @@ class EditItemPage extends Component {
     }
 }
 
-
+//output all items
 const ItemList = ({ items }) => (
     <ul>
         {items.map(item => (
