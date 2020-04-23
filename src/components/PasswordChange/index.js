@@ -1,3 +1,6 @@
+/*********************************************************************
+                   Password change through firebase 
+ *********************************************************************/
 import React, { Component } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 
@@ -14,6 +17,7 @@ class PasswordChangeForm extends Component {
         super(props);
         this.state = { ...INITIAL_STATE };
     }
+    // send request to change password to firebase 
     onSubmit = event => {
         event.preventDefault();
         const { passwordOne } = this.state;
