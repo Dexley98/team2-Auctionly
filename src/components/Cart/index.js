@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 
-// add nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
 
 import SingleItem from '../Item/SingleItem';
