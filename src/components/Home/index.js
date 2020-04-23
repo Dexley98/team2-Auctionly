@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css' ;
 import SignOutButton from '../SignOut';
-// added Nav Dom Exley 04/15/2020
 import Navigation from '../Navigation';
 
 import SingleItem from '../Item/SingleItem';
@@ -23,11 +22,14 @@ class HomePage extends Component{
 
     componentDidMount() {
         this.setState({ loading: true });
-
+        // Database query to grab all items within the database
         this.props.firebase.items().on('value', snapshot => {
+            // Establishes an object to contain all the items
             const itemsObject = snapshot.val();
+            // List to hold items/keys of items
             let itemsList = [];
-
+            
+            // Iterates over the itemsObject, and pushed each item and its key onto the itemList
             Object.keys(itemsObject).map(key=>{
                 if(itemsObject[key].available === true){
                     itemsList.push({
@@ -37,7 +39,8 @@ class HomePage extends Component{
                 }
                 
             })
-
+            
+            // Sets the state, to store that itemList and whether or not the page is loading
             this.setState({
                 items: itemsList,
                 loading: false,
@@ -64,6 +67,7 @@ class HomePage extends Component{
             standAloneTimer(auctionData, this.props.firebase, items)
         }
 
+        // If there are no items present, display this page.
         if(items.length == 0){
             return(
                 <div className="home-wrapper">
@@ -78,6 +82,7 @@ class HomePage extends Component{
                 </div>
             )
         }
+        //If there are items present, display this page, including the items
         else{
             return(
 
@@ -103,10 +108,8 @@ function standAloneTimer(auctionData, firebase, items){
     let timerId = setInterval( () => {
         let currentDate = new Date();  
         let stopDate = new Date(createDateString(auctionData.stopDate));
-        console.log(currentDate - stopDate);
         if( currentDate - stopDate >= 0){
             items.map( (index) => {
-                console.log(index)
                 firebase.db.ref(`items/${index.id}/`).update({
                     available: false
                 });
@@ -116,6 +119,7 @@ function standAloneTimer(auctionData, firebase, items){
     }, 1000)
 }
 
+// ItemList class that constructs list of item objects
 class ItemList extends Component{
     constructor(props){
         super(props);
@@ -152,6 +156,7 @@ class ItemList extends Component{
             postAuction = true;
         }
         
+        // If the auction is not active, disable to links
         if(preAuction || postAuction){
             return (
                 <div className="item-list-wrapper">
@@ -169,6 +174,7 @@ class ItemList extends Component{
                 </div>
             )  
         }
+        // If Auction is currently live, make links active
         else{
             return(
                 <div className="item-list-wrapper">
@@ -227,7 +233,7 @@ class CountdownTimer extends Component{
     }
     
     render(){
-
+        
         const timerComponents = [];
     
         Object.keys(this.state.timeLeft).forEach(interval => {
@@ -303,6 +309,7 @@ function calculateTimeLeft(auctionTimes){
 
 const condition = authUser => !!authUser;
 
+// Render the home page for authorized users
 export default compose(
     WithEmailVerification,
     WithAuthorization(condition),
