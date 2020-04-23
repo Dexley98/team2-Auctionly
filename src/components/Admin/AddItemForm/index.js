@@ -1,16 +1,10 @@
 /***************************************************************************************
- * Title: Refactoring Changes. 
- * Date: 04/02/2020
- * Author: Dom Exley
- * Description: Renamed to index.js 
- * Moved to /components/Admin/AddItemForm/index.js 
- * changed db reference to this.props.firebase.db (could move in an api to firebase.js)
- *                    Allow Admins to add items to the Database
+                         Allow Admins to add items to the Database
  **************************************************************************************/
 
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
@@ -63,7 +57,6 @@ class AddItemForm extends Component {
                 },
                 error => {
                     // Error function
-                    console.log(error);
                 }
                 , () => {
                     // Get the URL function
@@ -76,7 +69,7 @@ class AddItemForm extends Component {
                                 url
                             });
 
-                            this.state.imageUrl = url;
+                            this.setState({imageUrl : url});
                         });
                 }
             );

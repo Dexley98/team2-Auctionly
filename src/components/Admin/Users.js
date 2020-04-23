@@ -1,3 +1,7 @@
+/***********************************************************
+            Allow admins to view users info
+            Admins can assign and unassign admins
+************************************************************/
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Link, BrowserRouter as Router, Route } from 'react-router-dom';
@@ -20,7 +24,7 @@ class UsersPage extends Component {
     }
     componentDidMount() {
         this.setState({ loading: true });
-
+        //reads users info from the database
         this.props.firebase.users().on('value', snapshot => {
             const usersObject = snapshot.val();
             const usersList = Object.keys(usersObject).map(key => ({
@@ -62,7 +66,7 @@ class UsersPage extends Component {
 }
 
 
-
+//output users info
 const UserList = ({ users, dbref }) => (
     <ul style={{textAlign:"center"}}>
         {

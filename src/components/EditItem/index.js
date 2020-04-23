@@ -43,7 +43,6 @@ class EditItemForm extends Component {
         this.props.firebase.db.ref(`/items/${dbItemKey}`)
             .on('value', snapshot => {
                 const itemObject = snapshot.val();
-                console.log(itemObject)
                 this.setState({
                     item: itemObject,
                     key: dbItemKey,
@@ -79,7 +78,6 @@ class EditItemForm extends Component {
                 },
                 error => {
                     // Error function
-                    console.log(error);
                 }
                 , () => {
                     // Get the URL function

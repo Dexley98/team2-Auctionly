@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-import { Link, BrowserRouter as Router, Route } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 import { withFirebase } from '../../Firebase';
 import { WithAuthorization, WithEmailVerification } from '../../Session';
@@ -63,7 +63,6 @@ class WinnersPageForm extends Component
 		let x = 0 ;
 		let keyList = this.state.keys;
 		let userList = users;
-		console.log(userList)
 	    let reportList = [];
 // runs through each item in the item list
 	    for(x in keyList)
@@ -82,10 +81,8 @@ class WinnersPageForm extends Component
 			{
 			let bids = adminList[z]["bidList"]
 			let x = 0;
-			let uid = "";
 			let highestBid = 0 ;
 			reportList.push(adminList[z]);
-			console.log(reportList)
 
 			for(x in bids)
 				{
@@ -93,14 +90,12 @@ class WinnersPageForm extends Component
 					if(bids[x] > highestBid )
 						{
 						highestBid = bids[x] ;
-						console.log("z " + z)
 						reportList[z]["highestbid"] = bids[x];
 						let i =0 ;
-						let userKeys = Object.keys(bids)
 						for(i in userList)
 							{								
-							if( userList[i]['uid'] == x){
-								if(bids[x] == reportList[z]["highestbid"]){
+							if( userList[i]['uid'] === x){
+								if(bids[x] === reportList[z]["highestbid"]){
 									reportList[z]["username"] = userList[i]["username"];
 									reportList[z]["email"] = userList[i]["email"];
 									reportList[z]["phone_number"] = userList[i]["phoneNumber"];
@@ -109,7 +104,7 @@ class WinnersPageForm extends Component
 							}
 						}
 // if the highest bid is 0 then that means no auctioner bid so blank info is added to notify the admins of that					
-					else if(highestBid == 0)
+					else if(highestBid === 0)
                                                 {
                                                 reportList[z]["highestbid"] = "0" ;
                                                 reportList[z]["username"] = "NO BIDS";
@@ -131,21 +126,11 @@ class WinnersPageForm extends Component
 		</div>
             </>
 		)
-		console.log(reportList);
     	}
 }
 
 class WinnerList extends Component {
-	constructor(props){
-		super(props);
-		this.tableFormat = this.tableFormat.bind(this);
-	}
-	tableFormat(){
-		return(
-			this.props.winners.map(item => {
-			})
-		)
-	}
+	
 	render(){
 		return(
 		<table class="center">
@@ -160,10 +145,10 @@ class WinnerList extends Component {
 			</thead>
 			<tbody>
 				{/* {this.tableFormat()} */}
-// walks through every item in the passed list print relevant info out to the Winner Log Screen in Admin			
+{/*walks through every item in the passed list print relevant info out to the Winner Log Screen in Admin*/}	
 				{this.props.winners.map(item => (
 				<tr>
-//in order the info presented is the item Name, highest Bid, user's name, user's email, and user's phone number			
+{/*in order the info presented is the item Name, highest Bid, user's name, user's email, and user's phone number*/}			
 					<td>{item.name}</td> 
 					<td>$ {item.highestbid}</td>
 					<td>{item.username}</td>

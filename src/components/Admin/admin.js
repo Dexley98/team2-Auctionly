@@ -1,3 +1,7 @@
+/**********************************************************************
+                       Display Navigation buttons 
+                       for admins functionalties
+ **********************************************************************/
 import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { withRouter, Redirect } from 'react-router-dom';
