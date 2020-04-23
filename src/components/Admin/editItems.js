@@ -44,7 +44,7 @@ class EditItemPage extends Component {
     }
 
     render() {
-        const { items, loading } = this.state;
+        const { items } = this.state;
         
         return (
             <React.Fragment>
