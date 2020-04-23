@@ -1,3 +1,6 @@
+/******************************************************************
+                    Sign out from the Auction
+ ******************************************************************/
 import React from 'react';
 import { withFirebase } from '../Firebase';
 
