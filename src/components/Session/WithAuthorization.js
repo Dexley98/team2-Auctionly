@@ -1,3 +1,6 @@
+/*******************************************************************
+         Check if the user is Authorized to access the site
+ *******************************************************************/
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
@@ -8,6 +11,7 @@ import * as ROUTES from '../../constants/routes';
 const WithAuthorization = condition => Component => {
     class WithAuthorization extends React.Component {
         componentDidMount() {
+            //redirect to sign in if user is not authorized
             this.listener = this.props.firebase.onAuthUserListener(
                 authUser => {
                     if (!condition(authUser)) {
