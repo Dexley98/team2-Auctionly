@@ -23,16 +23,19 @@ class ItemPage extends Component{
             highestBidder: ""
         };
         
+        
+        // Bind handlers for all of the buttons
         this.myChangeHandler = this.myChangeHandler.bind(this);
         this.handleBid = this.handleBid.bind(this);
         this.handleBuyout = this.handleBuyout.bind(this);
     }
 
     componentDidMount(){
+        // Page is loading
         this.setState({ loading: true });
-        let dbItemKey = this.props.match.params[0];
-        // console.log((this.props.match.params[0]))
-    
+        // Grabs the database of the item
+        let dbItemKey = this.props.match.params[0]; 
+        
         /***************************************************************************************************
          * There is quite a lot going on in here so I'll try and explain it the best I can. 
          * I Only called this once
@@ -60,15 +63,11 @@ class ItemPage extends Component{
          * 
          * 
         *******************************************************************************************************/
+        
+        // Grabs the information about the item requested
         this.props.firebase.db.ref(`/items/${dbItemKey}`)
             .on('value', snapshot => {
                 const itemObject = snapshot.val();
-                console.log(itemObject)
-                //console.log('item object ', itemObject["three"]);
-                // const keyList = Object.keys(itemObject);
-                // console.log(itemObject)
-                //console.log('key ', keyList)
-                //console.log('item to assign to state ', itemObject[keyList[0]])
                 this.setState({
                     item: itemObject,
                     key: dbItemKey,
@@ -76,30 +75,27 @@ class ItemPage extends Component{
                     highestBid: (itemObject.startPrice)
                 });
             })
-        //console.log('state.item ',this.state.item);
 
     }
     
 
     
     render(){
+        // Constructs a list of bids on an item
         const item = this.state.item;
         const bidList = this.state.item['bidList']
+        // Determines leading bid on an item
         let x
         for(x in bidList){
             if(bidList[x] > this.state.highestBid)
             {
-                console.log("BIDLIST")
-                console.log(bidList[x])
                 this.setState({highestBid:bidList[x]})
-                // highestBid = bidList[x]
                 this.setState({highestBidder : x}) 
 
             }
         }
-        // this.setState({highestBid:highestBidd})
+        // Calls the SingleItem function to display the item, passing it props
         return(
-            // same thing as React.Fragment / different syntax. May not need but here for now.
             <div>
                 <Navigation />
                 <hr />
@@ -118,11 +114,13 @@ class ItemPage extends Component{
         )
     }
 
+    // Listens for changes on the bidValue and updates the state to match it
     myChangeHandler = (event) => {
         this.setState({bidValue:event.target.value})
         
     }
 
+    // Function to place a bid on an item
     handleBid = (event) => {
         event.preventDefault();
         let bid = Number(this.state.bidValue)
@@ -135,6 +133,7 @@ class ItemPage extends Component{
         }
     }
 
+    // Buys out an object (by placing a bid and then making it unavailable
     handleBuyout = (event) => {
         event.preventDefault();
         let buyout = Number(this.state.item["buyItNow"])
