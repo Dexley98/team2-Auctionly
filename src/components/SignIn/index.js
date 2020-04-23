@@ -1,3 +1,9 @@
+/***************************************************
+          Handles sign in 
+        using Google Account 
+                or
+        Email and password
+***************************************************/
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -65,27 +71,32 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
   this account instead and associate your social accounts on
   your personal account page.`;
 
-
+//sign in with Google account
 class SignInWithGoogleBase extends Component {
     constructor(props) {
         super(props);
         this.state = { error: null };
     }
-
+    
+    //handler for Sign in with Google Account
     onSubmit = event => {
 
         const roles = {};
+        //assigns user role for every new user
         roles[ROLES.USER] = ROLES.USER;
-
+        
+        //handles sign in
         this.props.firebase
             .doSignInWithGoogle()
             .then(socialAuthUser => {
+                // if statement kicks when user sign in for the first time and record their info in the db
                 if (socialAuthUser.additionalUserInfo.isNewUser === true){
                     return this.props.firebase
                     .user(socialAuthUser.user.uid)
                     .set({
                         username: socialAuthUser.user.displayName,
                         email: socialAuthUser.user.email,
+                        phoneNumber: socialAuthUser.user.phoneNumber,
                         roles,
                     });
                 }  
@@ -127,13 +138,15 @@ class SignInWithGoogleBase extends Component {
     }
 }
 
+//function to sign in with existing account
 class SignInFromBase extends Component {
     constructor(props) {
         super(props);
 
         this.state = { ...INITIAL_STATE };
     }
-
+    
+    //handles sign in 
     onSubmit = event => {
         const { email, password } = this.state;
 
