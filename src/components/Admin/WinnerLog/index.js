@@ -63,7 +63,6 @@ class WinnersPageForm extends Component
 		let x = 0 ;
 		let keyList = this.state.keys;
 		let userList = users;
-		console.log(userList)
 	    let reportList = [];
 // runs through each item in the item list
 	    for(x in keyList)
@@ -84,7 +83,6 @@ class WinnersPageForm extends Component
 			let x = 0;
 			let highestBid = 0 ;
 			reportList.push(adminList[z]);
-			console.log(reportList)
 
 			for(x in bids)
 				{
@@ -92,7 +90,6 @@ class WinnersPageForm extends Component
 					if(bids[x] > highestBid )
 						{
 						highestBid = bids[x] ;
-						console.log("z " + z)
 						reportList[z]["highestbid"] = bids[x];
 						let i =0 ;
 						for(i in userList)
